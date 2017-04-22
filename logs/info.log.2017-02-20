@@ -1,0 +1,492 @@
+2017-02-20 13:24:03,584  INFO Api:48 - Starting Api on X-CDN-ZHENGJY with PID 11540 (D:\workspace1\aircar-api\target\classes started by zhengjy in D:\workspace1\aircar-api)
+2017-02-20 13:24:03,589  INFO Api:661 - No active profile set, falling back to default profiles: default
+2017-02-20 13:24:03,735  INFO AnnotationConfigEmbeddedWebApplicationContext:582 - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@58cbafc2: startup date [Mon Feb 20 13:24:03 CST 2017]; root of context hierarchy
+2017-02-20 13:24:04,471  INFO Version:30 - HV000001: Hibernate Validator 5.2.4.Final
+2017-02-20 13:24:06,910  INFO PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7d89cb7c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-20 13:24:08,549  INFO TomcatEmbeddedServletContainer:87 - Tomcat initialized with port(s): 8081 (http)
+2017-02-20 13:24:08,763  INFO ContextLoader:276 - Root WebApplicationContext: initialization completed in 5034 ms
+2017-02-20 13:24:09,221  INFO ServletRegistrationBean:190 - Mapping servlet: 'dispatcherServlet' to [/]
+2017-02-20 13:24:09,228  INFO FilterRegistrationBean:258 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-02-20 13:24:09,229  INFO FilterRegistrationBean:258 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-02-20 13:24:09,230  INFO FilterRegistrationBean:258 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-02-20 13:24:09,230  INFO FilterRegistrationBean:258 - Mapping filter: 'requestContextFilter' to: [/*]
+2017-02-20 13:24:09,785  INFO LocalContainerEntityManagerFactoryBean:336 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-02-20 13:24:09,815  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-02-20 13:24:10,006  INFO Version:37 - HHH000412: Hibernate Core {5.0.11.Final}
+2017-02-20 13:24:10,009  INFO Environment:213 - HHH000206: hibernate.properties not found
+2017-02-20 13:24:10,014  INFO Environment:317 - HHH000021: Bytecode provider name : javassist
+2017-02-20 13:24:10,093  INFO Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-02-20 13:24:11,019  INFO Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-02-20 13:24:12,641  INFO QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-02-20 13:24:14,019  WARN HqlSqlWalker:992 - [DEPRECATION] Encountered positional parameter near line 1, column 60 in HQL: [UPDATE com.zjwc.ucar.api.model.AirCar SET isUse=1 where id=?].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2017-02-20 13:24:14,031  WARN HqlSqlWalker:992 - [DEPRECATION] Encountered positional parameter near line 1, column 60 in HQL: [UPDATE com.zjwc.ucar.api.model.AirCar SET isUse=0 where id=?].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2017-02-20 13:24:14,382  WARN HqlSqlWalker:992 - [DEPRECATION] Encountered positional parameter near line 1, column 64 in HQL: [UPDATE com.zjwc.ucar.api.model.AirCoupon SET status=2 where id=?].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2017-02-20 13:24:16,720  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/car/parking],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.CarController.parkingCars(java.lang.Integer)
+2017-02-20 13:24:16,722  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/car/{id}],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.CarController.carById(java.lang.Integer)
+2017-02-20 13:24:16,725  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/list],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.list(javax.servlet.http.HttpServletRequest,org.springframework.data.domain.Pageable)
+2017-02-20 13:24:16,726  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/book],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.book(java.lang.Integer,java.lang.Integer,javax.servlet.http.HttpServletRequest)
+2017-02-20 13:24:16,727  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/openDoor],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.openCar(java.lang.Integer,javax.servlet.http.HttpServletRequest)
+2017-02-20 13:24:16,728  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/closeDoor],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.closeCar(java.lang.Integer,javax.servlet.http.HttpServletRequest)
+2017-02-20 13:24:16,729  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/returnCar],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.returnCar(java.lang.Integer,java.lang.Integer,javax.servlet.http.HttpServletRequest)
+2017-02-20 13:24:16,729  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/cancel],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.cancel(java.lang.Integer,javax.servlet.http.HttpServletRequest)
+2017-02-20 13:24:16,730  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/detail],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.detail(java.lang.Integer,javax.servlet.http.HttpServletRequest,org.springframework.data.domain.Pageable)
+2017-02-20 13:24:16,731  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/parking/list],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.ParkingController.list(java.lang.Integer)
+2017-02-20 13:24:16,733  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/passenger/reg],methods=[POST]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.PassengerController.reg(java.lang.String,java.lang.String,java.lang.Integer,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-02-20 13:24:16,734  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/passenger/login],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.PassengerController.login(java.lang.String,java.lang.String,java.lang.Integer,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-02-20 13:24:16,736  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/pay/createOrder],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.PayController.createOrder(java.lang.String,java.lang.Float,java.lang.Integer,java.lang.String,javax.servlet.http.HttpServletRequest)
+2017-02-20 13:24:16,737  INFO RequestMappingHandlerMapping:543 - Mapped "{[/v2/api-docs],methods=[GET]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String)
+2017-02-20 13:24:16,743  INFO RequestMappingHandlerMapping:543 - Mapped "{[/swagger-resources]}" onto org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2017-02-20 13:24:16,744  INFO RequestMappingHandlerMapping:543 - Mapped "{[/configuration/ui]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2017-02-20 13:24:16,746  INFO RequestMappingHandlerMapping:543 - Mapped "{[/configuration/security]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2017-02-20 13:24:16,750  INFO RequestMappingHandlerMapping:543 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-02-20 13:24:16,751  INFO RequestMappingHandlerMapping:543 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-02-20 13:24:17,611  INFO RequestMappingHandlerAdapter:534 - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@58cbafc2: startup date [Mon Feb 20 13:24:03 CST 2017]; root of context hierarchy
+2017-02-20 13:24:17,761  INFO SimpleUrlHandlerMapping:354 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-02-20 13:24:17,761  INFO SimpleUrlHandlerMapping:354 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-02-20 13:24:17,851  INFO ExceptionHandlerExceptionResolver:273 - Detected @ExceptionHandler methods in globalExceptionHandler
+2017-02-20 13:24:17,934  INFO SimpleUrlHandlerMapping:354 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-02-20 13:24:19,097  INFO AnnotationMBeanExporter:431 - Registering beans for JMX exposure on startup
+2017-02-20 13:24:19,122  INFO DocumentationPluginsBootstrapper:80 - Context refreshed
+2017-02-20 13:24:19,165  INFO DocumentationPluginsBootstrapper:83 - Found {0} custom documentation plugin(s)
+2017-02-20 13:24:19,179  INFO ApiListingReferenceScanner:53 - Scanning for api listing references
+2017-02-20 13:24:19,189  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method parkingCars was 车辆管理
+2017-02-20 13:24:19,193  INFO ApiListingReferenceScanner:72 - Request mapping: parkingCars belongs to groups: [[ResourceGroup{groupName='车辆管理', position=0, controller=com.zjwc.ucar.api.controller.CarController}]] 
+2017-02-20 13:24:19,195  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method carById was 车辆管理
+2017-02-20 13:24:19,196  INFO ApiListingReferenceScanner:72 - Request mapping: carById belongs to groups: [[ResourceGroup{groupName='车辆管理', position=0, controller=com.zjwc.ucar.api.controller.CarController}]] 
+2017-02-20 13:24:19,198  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method book was 订单管理
+2017-02-20 13:24:19,198  INFO ApiListingReferenceScanner:72 - Request mapping: book belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 13:24:19,199  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method cancel was 订单管理
+2017-02-20 13:24:19,199  INFO ApiListingReferenceScanner:72 - Request mapping: cancel belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 13:24:19,200  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method closeCar was 订单管理
+2017-02-20 13:24:19,200  INFO ApiListingReferenceScanner:72 - Request mapping: closeCar belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 13:24:19,201  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method detail was 订单管理
+2017-02-20 13:24:19,201  INFO ApiListingReferenceScanner:72 - Request mapping: detail belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 13:24:19,204  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 订单管理
+2017-02-20 13:24:19,205  INFO ApiListingReferenceScanner:72 - Request mapping: list belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 13:24:19,205  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method openCar was 订单管理
+2017-02-20 13:24:19,206  INFO ApiListingReferenceScanner:72 - Request mapping: openCar belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 13:24:19,207  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method returnCar was 订单管理
+2017-02-20 13:24:19,207  INFO ApiListingReferenceScanner:72 - Request mapping: returnCar belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 13:24:19,208  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 停车点管理
+2017-02-20 13:24:19,208  INFO ApiListingReferenceScanner:72 - Request mapping: list belongs to groups: [[ResourceGroup{groupName='停车点管理', position=0, controller=com.zjwc.ucar.api.controller.ParkingController}]] 
+2017-02-20 13:24:19,209  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method login was 乘客管理
+2017-02-20 13:24:19,210  INFO ApiListingReferenceScanner:72 - Request mapping: login belongs to groups: [[ResourceGroup{groupName='乘客管理', position=0, controller=com.zjwc.ucar.api.controller.PassengerController}]] 
+2017-02-20 13:24:19,210  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method reg was 乘客管理
+2017-02-20 13:24:19,211  INFO ApiListingReferenceScanner:72 - Request mapping: reg belongs to groups: [[ResourceGroup{groupName='乘客管理', position=0, controller=com.zjwc.ucar.api.controller.PassengerController}]] 
+2017-02-20 13:24:19,212  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method createOrder was 支付管理
+2017-02-20 13:24:19,212  INFO ApiListingReferenceScanner:72 - Request mapping: createOrder belongs to groups: [[ResourceGroup{groupName='支付管理', position=0, controller=com.zjwc.ucar.api.controller.PayController}]] 
+2017-02-20 13:24:19,227  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/支付管理 Description: 支付管理 Position: 0
+2017-02-20 13:24:19,230  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/订单管理 Description: 订单管理 Position: 0
+2017-02-20 13:24:19,231  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/乘客管理 Description: 乘客管理 Position: 0
+2017-02-20 13:24:19,232  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/停车点管理 Description: 停车点管理 Position: 0
+2017-02-20 13:24:19,232  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/车辆管理 Description: 车辆管理 Position: 0
+2017-02-20 13:24:19,325  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,326  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,339  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,339  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,350  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,350  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,351  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,351  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,353  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,354  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,403  INFO OperationsKeyGenerator:51 - Cache key generated: /api/passenger/login.com.zjwc.ucar.api.controller.PassengerController.login.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,404  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/passenger/login.com.zjwc.ucar.api.controller.PassengerController.login.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,430  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method login was 乘客管理
+2017-02-20 13:24:19,454  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method login was 乘客管理
+2017-02-20 13:24:19,469  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,469  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,470  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,470  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,470  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,471  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,471  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,472  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,472  INFO OperationsKeyGenerator:51 - Cache key generated: /api/passenger/reg.com.zjwc.ucar.api.controller.PassengerController.reg.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,472  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/passenger/reg.com.zjwc.ucar.api.controller.PassengerController.reg.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,476  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method reg was 乘客管理
+2017-02-20 13:24:19,477  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method reg was 乘客管理
+2017-02-20 13:24:19,485  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,485  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,486  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,486  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,486  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,487  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,487  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,487  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,488  INFO OperationsKeyGenerator:51 - Cache key generated: /api/parking/list.com.zjwc.ucar.api.controller.ParkingController.list.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,488  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/parking/list.com.zjwc.ucar.api.controller.ParkingController.list.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,490  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 停车点管理
+2017-02-20 13:24:19,493  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 停车点管理
+2017-02-20 13:24:19,495  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,495  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,496  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,496  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,497  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,497  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,499  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,499  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,500  INFO OperationsKeyGenerator:51 - Cache key generated: /api/pay/createOrder.com.zjwc.ucar.api.controller.PayController.createOrder.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,500  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/pay/createOrder.com.zjwc.ucar.api.controller.PayController.createOrder.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,504  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method createOrder was 支付管理
+2017-02-20 13:24:19,505  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method createOrder was 支付管理
+2017-02-20 13:24:19,508  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,508  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,509  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,509  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,510  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,510  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,511  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,511  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,512  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/book.com.zjwc.ucar.api.controller.OrderController.book.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,512  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/book.com.zjwc.ucar.api.controller.OrderController.book.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,515  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method book was 订单管理
+2017-02-20 13:24:19,518  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method book was 订单管理
+2017-02-20 13:24:19,521  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,521  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,522  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,522  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,522  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,523  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,523  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,523  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,524  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/cancel.com.zjwc.ucar.api.controller.OrderController.cancel.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,524  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/cancel.com.zjwc.ucar.api.controller.OrderController.cancel.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,526  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method cancel was 订单管理
+2017-02-20 13:24:19,528  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method cancel was 订单管理
+2017-02-20 13:24:19,529  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,530  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,530  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,530  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,530  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,531  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,531  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,531  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,532  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/closeDoor.com.zjwc.ucar.api.controller.OrderController.closeCar.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,532  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/closeDoor.com.zjwc.ucar.api.controller.OrderController.closeCar.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,534  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method closeCar was 订单管理
+2017-02-20 13:24:19,535  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method closeCar was 订单管理
+2017-02-20 13:24:19,538  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,538  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,539  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,539  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,540  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,540  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,540  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,540  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,541  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/detail.com.zjwc.ucar.api.controller.OrderController.detail.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,541  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/detail.com.zjwc.ucar.api.controller.OrderController.detail.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,543  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method detail was 订单管理
+2017-02-20 13:24:19,544  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method detail was 订单管理
+2017-02-20 13:24:19,546  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,547  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,547  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,547  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,547  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,548  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,548  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,548  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,549  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/list.com.zjwc.ucar.api.controller.OrderController.list.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,549  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/list.com.zjwc.ucar.api.controller.OrderController.list.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,550  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 订单管理
+2017-02-20 13:24:19,552  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 订单管理
+2017-02-20 13:24:19,553  INFO CachingOperationNameGenerator:40 - Generating unique operation named: listUsingGET_1
+2017-02-20 13:24:19,554  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,554  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,554  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,555  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,555  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,555  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,556  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,556  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,556  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/openDoor.com.zjwc.ucar.api.controller.OrderController.openCar.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,557  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/openDoor.com.zjwc.ucar.api.controller.OrderController.openCar.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,559  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method openCar was 订单管理
+2017-02-20 13:24:19,560  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method openCar was 订单管理
+2017-02-20 13:24:19,562  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,562  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,563  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,563  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,564  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,564  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,565  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,565  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,565  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/returnCar.com.zjwc.ucar.api.controller.OrderController.returnCar.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,566  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/returnCar.com.zjwc.ucar.api.controller.OrderController.returnCar.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,570  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method returnCar was 订单管理
+2017-02-20 13:24:19,572  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method returnCar was 订单管理
+2017-02-20 13:24:19,579  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,579  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,580  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,580  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,581  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,581  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,581  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,582  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,582  INFO OperationsKeyGenerator:51 - Cache key generated: /api/car/{id}.com.zjwc.ucar.api.controller.CarController.carById.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,582  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/car/{id}.com.zjwc.ucar.api.controller.CarController.carById.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,586  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method carById was 车辆管理
+2017-02-20 13:24:19,587  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method carById was 车辆管理
+2017-02-20 13:24:19,589  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,589  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 13:24:19,590  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 13:24:19,590  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 13:24:19,590  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,591  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,591  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,591  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 13:24:19,592  INFO OperationsKeyGenerator:51 - Cache key generated: /api/car/parking.com.zjwc.ucar.api.controller.CarController.parkingCars.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,592  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/car/parking.com.zjwc.ucar.api.controller.CarController.parkingCars.DefaultGenericTypeNamingStrategy
+2017-02-20 13:24:19,594  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method parkingCars was 车辆管理
+2017-02-20 13:24:19,596  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method parkingCars was 车辆管理
+2017-02-20 13:24:19,719  INFO TomcatEmbeddedServletContainer:185 - Tomcat started on port(s): 8081 (http)
+2017-02-20 13:24:19,727  INFO Api:57 - Started Api in 17.113 seconds (JVM running for 18.308)
+2017-02-20 20:28:59,185  INFO Api:48 - Starting Api on X-CDN-ZHENGJY with PID 7924 (D:\workspace1\aircar-api\target\classes started by zhengjy in D:\workspace1\aircar-api)
+2017-02-20 20:28:59,189  INFO Api:661 - No active profile set, falling back to default profiles: default
+2017-02-20 20:28:59,258  INFO AnnotationConfigEmbeddedWebApplicationContext:582 - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@58cbafc2: startup date [Mon Feb 20 20:28:59 CST 2017]; root of context hierarchy
+2017-02-20 20:28:59,779  INFO Version:30 - HV000001: Hibernate Validator 5.2.4.Final
+2017-02-20 20:29:01,786  INFO PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9131f8b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-02-20 20:29:02,999  INFO TomcatEmbeddedServletContainer:87 - Tomcat initialized with port(s): 8081 (http)
+2017-02-20 20:29:03,189  INFO ContextLoader:276 - Root WebApplicationContext: initialization completed in 3936 ms
+2017-02-20 20:29:03,481  INFO ServletRegistrationBean:190 - Mapping servlet: 'dispatcherServlet' to [/]
+2017-02-20 20:29:03,486  INFO FilterRegistrationBean:258 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-02-20 20:29:03,487  INFO FilterRegistrationBean:258 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-02-20 20:29:03,487  INFO FilterRegistrationBean:258 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-02-20 20:29:03,488  INFO FilterRegistrationBean:258 - Mapping filter: 'requestContextFilter' to: [/*]
+2017-02-20 20:29:03,949  INFO LocalContainerEntityManagerFactoryBean:336 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-02-20 20:29:03,971  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-02-20 20:29:04,127  INFO Version:37 - HHH000412: Hibernate Core {5.0.11.Final}
+2017-02-20 20:29:04,131  INFO Environment:213 - HHH000206: hibernate.properties not found
+2017-02-20 20:29:04,138  INFO Environment:317 - HHH000021: Bytecode provider name : javassist
+2017-02-20 20:29:04,195  INFO Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-02-20 20:29:04,952  INFO Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-02-20 20:29:06,500  INFO QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-02-20 20:29:07,570  WARN HqlSqlWalker:992 - [DEPRECATION] Encountered positional parameter near line 1, column 60 in HQL: [UPDATE com.zjwc.ucar.api.model.AirCar SET isUse=1 where id=?].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2017-02-20 20:29:07,583  WARN HqlSqlWalker:992 - [DEPRECATION] Encountered positional parameter near line 1, column 60 in HQL: [UPDATE com.zjwc.ucar.api.model.AirCar SET isUse=0 where id=?].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2017-02-20 20:29:07,788  WARN HqlSqlWalker:992 - [DEPRECATION] Encountered positional parameter near line 1, column 64 in HQL: [UPDATE com.zjwc.ucar.api.model.AirCoupon SET status=2 where id=?].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+2017-02-20 20:29:09,059  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/car/parking],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.CarController.parkingCars(java.lang.Integer)
+2017-02-20 20:29:09,061  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/car/{id}],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.CarController.carById(java.lang.Integer)
+2017-02-20 20:29:09,064  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/list],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.list(javax.servlet.http.HttpServletRequest,org.springframework.data.domain.Pageable)
+2017-02-20 20:29:09,067  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/detail],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.detail(java.lang.Integer,javax.servlet.http.HttpServletRequest,org.springframework.data.domain.Pageable)
+2017-02-20 20:29:09,068  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/book],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.book(java.lang.Integer,java.lang.Integer,javax.servlet.http.HttpServletRequest)
+2017-02-20 20:29:09,068  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/openDoor],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.openCar(java.lang.Integer,javax.servlet.http.HttpServletRequest)
+2017-02-20 20:29:09,069  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/closeDoor],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.closeCar(java.lang.Integer,javax.servlet.http.HttpServletRequest)
+2017-02-20 20:29:09,070  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/returnCar],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.returnCar(java.lang.Integer,java.lang.Integer,javax.servlet.http.HttpServletRequest)
+2017-02-20 20:29:09,071  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/order/cancel],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.OrderController.cancel(java.lang.Integer,javax.servlet.http.HttpServletRequest)
+2017-02-20 20:29:09,072  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/parking/list],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.ParkingController.list(java.lang.Integer)
+2017-02-20 20:29:09,073  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/passenger/reg],methods=[POST]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.PassengerController.reg(java.lang.String,java.lang.String,java.lang.Integer,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-02-20 20:29:09,074  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/passenger/login],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.PassengerController.login(java.lang.String,java.lang.String,java.lang.Integer,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-02-20 20:29:09,075  INFO RequestMappingHandlerMapping:543 - Mapped "{[/api/pay/createOrder],methods=[GET]}" onto public com.zjwc.ucar.api.vo.ResponseModel com.zjwc.ucar.api.controller.PayController.createOrder(java.lang.String,java.lang.Float,java.lang.Integer,java.lang.String,javax.servlet.http.HttpServletRequest)
+2017-02-20 20:29:09,077  INFO RequestMappingHandlerMapping:543 - Mapped "{[/v2/api-docs],methods=[GET]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String)
+2017-02-20 20:29:09,084  INFO RequestMappingHandlerMapping:543 - Mapped "{[/swagger-resources]}" onto org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2017-02-20 20:29:09,085  INFO RequestMappingHandlerMapping:543 - Mapped "{[/configuration/ui]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2017-02-20 20:29:09,087  INFO RequestMappingHandlerMapping:543 - Mapped "{[/configuration/security]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2017-02-20 20:29:09,092  INFO RequestMappingHandlerMapping:543 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-02-20 20:29:09,093  INFO RequestMappingHandlerMapping:543 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-02-20 20:29:09,563  INFO RequestMappingHandlerAdapter:534 - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@58cbafc2: startup date [Mon Feb 20 20:28:59 CST 2017]; root of context hierarchy
+2017-02-20 20:29:09,663  INFO SimpleUrlHandlerMapping:354 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-02-20 20:29:09,663  INFO SimpleUrlHandlerMapping:354 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-02-20 20:29:09,689  INFO ExceptionHandlerExceptionResolver:273 - Detected @ExceptionHandler methods in globalExceptionHandler
+2017-02-20 20:29:09,735  INFO SimpleUrlHandlerMapping:354 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-02-20 20:29:10,338  INFO AnnotationMBeanExporter:431 - Registering beans for JMX exposure on startup
+2017-02-20 20:29:10,356  INFO DocumentationPluginsBootstrapper:80 - Context refreshed
+2017-02-20 20:29:10,394  INFO DocumentationPluginsBootstrapper:83 - Found {0} custom documentation plugin(s)
+2017-02-20 20:29:10,404  INFO ApiListingReferenceScanner:53 - Scanning for api listing references
+2017-02-20 20:29:10,411  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method parkingCars was 车辆管理
+2017-02-20 20:29:10,415  INFO ApiListingReferenceScanner:72 - Request mapping: parkingCars belongs to groups: [[ResourceGroup{groupName='车辆管理', position=0, controller=com.zjwc.ucar.api.controller.CarController}]] 
+2017-02-20 20:29:10,417  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method carById was 车辆管理
+2017-02-20 20:29:10,417  INFO ApiListingReferenceScanner:72 - Request mapping: carById belongs to groups: [[ResourceGroup{groupName='车辆管理', position=0, controller=com.zjwc.ucar.api.controller.CarController}]] 
+2017-02-20 20:29:10,418  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method book was 订单管理
+2017-02-20 20:29:10,419  INFO ApiListingReferenceScanner:72 - Request mapping: book belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 20:29:10,419  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method cancel was 订单管理
+2017-02-20 20:29:10,420  INFO ApiListingReferenceScanner:72 - Request mapping: cancel belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 20:29:10,420  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method closeCar was 订单管理
+2017-02-20 20:29:10,421  INFO ApiListingReferenceScanner:72 - Request mapping: closeCar belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 20:29:10,421  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method detail was 订单管理
+2017-02-20 20:29:10,422  INFO ApiListingReferenceScanner:72 - Request mapping: detail belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 20:29:10,422  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 订单管理
+2017-02-20 20:29:10,423  INFO ApiListingReferenceScanner:72 - Request mapping: list belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 20:29:10,423  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method openCar was 订单管理
+2017-02-20 20:29:10,424  INFO ApiListingReferenceScanner:72 - Request mapping: openCar belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 20:29:10,424  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method returnCar was 订单管理
+2017-02-20 20:29:10,424  INFO ApiListingReferenceScanner:72 - Request mapping: returnCar belongs to groups: [[ResourceGroup{groupName='订单管理', position=0, controller=com.zjwc.ucar.api.controller.OrderController}]] 
+2017-02-20 20:29:10,425  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 停车点管理
+2017-02-20 20:29:10,425  INFO ApiListingReferenceScanner:72 - Request mapping: list belongs to groups: [[ResourceGroup{groupName='停车点管理', position=0, controller=com.zjwc.ucar.api.controller.ParkingController}]] 
+2017-02-20 20:29:10,426  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method login was 乘客管理
+2017-02-20 20:29:10,426  INFO ApiListingReferenceScanner:72 - Request mapping: login belongs to groups: [[ResourceGroup{groupName='乘客管理', position=0, controller=com.zjwc.ucar.api.controller.PassengerController}]] 
+2017-02-20 20:29:10,427  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method reg was 乘客管理
+2017-02-20 20:29:10,427  INFO ApiListingReferenceScanner:72 - Request mapping: reg belongs to groups: [[ResourceGroup{groupName='乘客管理', position=0, controller=com.zjwc.ucar.api.controller.PassengerController}]] 
+2017-02-20 20:29:10,428  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method createOrder was 支付管理
+2017-02-20 20:29:10,428  INFO ApiListingReferenceScanner:72 - Request mapping: createOrder belongs to groups: [[ResourceGroup{groupName='支付管理', position=0, controller=com.zjwc.ucar.api.controller.PayController}]] 
+2017-02-20 20:29:10,461  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/停车点管理 Description: 停车点管理 Position: 0
+2017-02-20 20:29:10,466  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/车辆管理 Description: 车辆管理 Position: 0
+2017-02-20 20:29:10,467  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/订单管理 Description: 订单管理 Position: 0
+2017-02-20 20:29:10,472  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/支付管理 Description: 支付管理 Position: 0
+2017-02-20 20:29:10,473  INFO ApiListingReferenceScanner:84 - Created resource listing Path: /default/乘客管理 Description: 乘客管理 Position: 0
+2017-02-20 20:29:10,501  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,501  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,513  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,513  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,527  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,527  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,528  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,528  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,530  INFO ModelPropertiesKeyGenerator:48 - Cache key generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,530  INFO CachingAspect:68 - Caching aspect applied for cache modelProperties with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,585  INFO OperationsKeyGenerator:51 - Cache key generated: /api/passenger/login.com.zjwc.ucar.api.controller.PassengerController.login.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,585  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/passenger/login.com.zjwc.ucar.api.controller.PassengerController.login.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,607  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method login was 乘客管理
+2017-02-20 20:29:10,630  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method login was 乘客管理
+2017-02-20 20:29:10,642  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,642  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,643  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,643  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,644  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,644  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,644  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,645  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,645  INFO OperationsKeyGenerator:51 - Cache key generated: /api/passenger/reg.com.zjwc.ucar.api.controller.PassengerController.reg.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,646  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/passenger/reg.com.zjwc.ucar.api.controller.PassengerController.reg.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,653  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method reg was 乘客管理
+2017-02-20 20:29:10,655  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method reg was 乘客管理
+2017-02-20 20:29:10,663  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,663  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,664  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,664  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,664  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,665  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,665  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,665  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,666  INFO OperationsKeyGenerator:51 - Cache key generated: /api/parking/list.com.zjwc.ucar.api.controller.ParkingController.list.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,666  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/parking/list.com.zjwc.ucar.api.controller.ParkingController.list.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,669  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 停车点管理
+2017-02-20 20:29:10,673  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 停车点管理
+2017-02-20 20:29:10,675  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,675  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,676  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,676  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,676  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,677  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,678  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,678  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,679  INFO OperationsKeyGenerator:51 - Cache key generated: /api/pay/createOrder.com.zjwc.ucar.api.controller.PayController.createOrder.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,679  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/pay/createOrder.com.zjwc.ucar.api.controller.PayController.createOrder.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,682  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method createOrder was 支付管理
+2017-02-20 20:29:10,684  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method createOrder was 支付管理
+2017-02-20 20:29:10,686  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,687  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,687  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,687  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,688  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,688  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,688  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,688  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,689  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/book.com.zjwc.ucar.api.controller.OrderController.book.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,689  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/book.com.zjwc.ucar.api.controller.OrderController.book.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,693  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method book was 订单管理
+2017-02-20 20:29:10,695  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method book was 订单管理
+2017-02-20 20:29:10,697  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,697  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,697  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,698  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,698  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,698  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,699  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,699  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,700  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/cancel.com.zjwc.ucar.api.controller.OrderController.cancel.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,700  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/cancel.com.zjwc.ucar.api.controller.OrderController.cancel.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,703  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method cancel was 订单管理
+2017-02-20 20:29:10,706  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method cancel was 订单管理
+2017-02-20 20:29:10,711  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,711  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,711  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,711  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,713  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,713  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,713  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,714  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,714  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/closeDoor.com.zjwc.ucar.api.controller.OrderController.closeCar.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,714  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/closeDoor.com.zjwc.ucar.api.controller.OrderController.closeCar.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,718  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method closeCar was 订单管理
+2017-02-20 20:29:10,719  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method closeCar was 订单管理
+2017-02-20 20:29:10,722  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,724  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,724  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,735  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,736  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,737  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,737  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,737  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,738  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/detail.com.zjwc.ucar.api.controller.OrderController.detail.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,739  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/detail.com.zjwc.ucar.api.controller.OrderController.detail.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,742  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method detail was 订单管理
+2017-02-20 20:29:10,745  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method detail was 订单管理
+2017-02-20 20:29:10,748  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,748  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,751  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,751  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,752  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,752  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,753  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,753  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,754  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/list.com.zjwc.ucar.api.controller.OrderController.list.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,754  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/list.com.zjwc.ucar.api.controller.OrderController.list.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,756  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 订单管理
+2017-02-20 20:29:10,758  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method list was 订单管理
+2017-02-20 20:29:10,763  INFO CachingOperationNameGenerator:40 - Generating unique operation named: listUsingGET_1
+2017-02-20 20:29:10,765  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,766  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,766  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,766  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,767  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,767  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,767  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,767  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,768  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/openDoor.com.zjwc.ucar.api.controller.OrderController.openCar.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,774  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/openDoor.com.zjwc.ucar.api.controller.OrderController.openCar.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,776  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method openCar was 订单管理
+2017-02-20 20:29:10,778  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method openCar was 订单管理
+2017-02-20 20:29:10,780  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,780  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,780  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,781  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,781  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,781  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,782  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,782  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,782  INFO OperationsKeyGenerator:51 - Cache key generated: /api/order/returnCar.com.zjwc.ucar.api.controller.OrderController.returnCar.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,782  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/order/returnCar.com.zjwc.ucar.api.controller.OrderController.returnCar.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,786  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method returnCar was 订单管理
+2017-02-20 20:29:10,787  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method returnCar was 订单管理
+2017-02-20 20:29:10,791  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,791  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,791  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,792  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,792  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,792  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,792  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,793  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,793  INFO OperationsKeyGenerator:51 - Cache key generated: /api/car/{id}.com.zjwc.ucar.api.controller.CarController.carById.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,793  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/car/{id}.com.zjwc.ucar.api.controller.CarController.carById.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,796  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method carById was 车辆管理
+2017-02-20 20:29:10,797  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method carById was 车辆管理
+2017-02-20 20:29:10,803  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,804  INFO CachingAspect:79 - Caching aspect applied for cache models with key java.lang.Void(true)
+2017-02-20 20:29:10,804  INFO ModelContextKeyGenerator:46 - Cache Key Generated: java.lang.Void(true)
+2017-02-20 20:29:10,804  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key java.lang.Void(true)
+2017-02-20 20:29:10,805  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,805  INFO CachingAspect:79 - Caching aspect applied for cache models with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,807  INFO ModelContextKeyGenerator:46 - Cache Key Generated: com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,807  INFO CachingAspect:79 - Caching aspect applied for cache modelDependencies with key com.zjwc.ucar.api.vo.ResponseModel(true)
+2017-02-20 20:29:10,810  INFO OperationsKeyGenerator:51 - Cache key generated: /api/car/parking.com.zjwc.ucar.api.controller.CarController.parkingCars.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,811  INFO CachingAspect:68 - Caching aspect applied for cache operations with key /api/car/parking.com.zjwc.ucar.api.controller.CarController.parkingCars.DefaultGenericTypeNamingStrategy
+2017-02-20 20:29:10,814  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method parkingCars was 车辆管理
+2017-02-20 20:29:10,816  INFO ClassOrApiAnnotationResourceGrouping:100 - Group for method parkingCars was 车辆管理
+2017-02-20 20:29:10,978  INFO TomcatEmbeddedServletContainer:185 - Tomcat started on port(s): 8081 (http)
+2017-02-20 20:29:10,989  INFO Api:57 - Started Api in 12.382 seconds (JVM running for 13.355)
+2017-02-20 20:31:13,617  INFO DispatcherServlet:489 - FrameworkServlet 'dispatcherServlet': initialization started
+2017-02-20 20:31:13,651  INFO DispatcherServlet:508 - FrameworkServlet 'dispatcherServlet': initialization completed in 33 ms

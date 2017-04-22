@@ -1,0 +1,11 @@
+package com.happycar.api.payment.alipay;
+
+public class AlipayConfig {
+	public static String input_charset = "utf-8";
+	public static String ali_public_key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDI6d306Q8fIfCOaTXyiUeJHkrIvYISRcc73s3vF1ZT7XN8RNPwJxo8pWaJMmvyTn9N4HQ632qJBVHf8sxHi/fEsraprwCtzvzQETrNRwVxLO5jVmRGi60j8Ue1efIlzPXV9je9mkjzOmdssymZkh2QhUrCmZYI/FCEa3/cNMW0QIDAQAB";
+	public static String partner = "2088421552797501";
+	public static String appid = "2016082601807699";
+	public static String seller = "zyxt@myriadautos.com";
+	public static String ali_private_key = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKRRyfYQSoZaAoixHuwzErgRaI+CY/YPpWeL/AoUN3aGLOBpL/KwwGTg2FL+6HYJckTopXqPCrlvM/TBFzRiQgE/n9eI44JpigkJcOFBW+FS9Uu9r1eTpFCFfqK1TMdn8eXQ5G1qiiwXhNRMRPVi/Xls+dqhVrqqzleZYK1iUWoTAgMBAAECgYBSLv397cP4Ukh2KXA33ot8OGi9bg+k38pwcZkLSXU7+Hu1eaabkT+ItNQ9HnURpEPcpycslyJcAHxR68k5T/OGcyDoHbkqSkwM4laRv77WFfFRXnrVGfMPpoOp0GtbghtCyCgz1+9QfUBg8y20lP54MLn9SwiFz8LeedXPk3X68QJBANFy6S+RQJtYwAnJiGVOAOJGBcsDjLQq6pOZN4feUOcx8tb9xJuSRJrGwTYaHluvmR8Mj5TyKTxNVfZXu3fUOaUCQQDI1yKP+2yP7XfvNbmP3qh3f+8F3ePL9pj2wmlBao7z6Wn1xQNvnQm871LWEoln+DigonjaxNA5B9KhTIHQtBdXAkB2K89E9z7sZvZyjzJVdd0pzTgXgrkwLcaL4DZkghpDVvscMbFr1OrAKMN6MuJN+JT736pi7v409604f+dVhHfBAkEAxgYpE+IJFphDyt4kClC1tq2zlQtFEdQg2hyx/0f7j08zpJoOWzxxX5JxEJXSWWsLGodXtgycab7m1RdEX+1RnQJBAIDr/PJfs2Ey4nhuE7TzZJCWfyskKTkOutdWFDKrL3zPntsOQOSe2Dtf+9Gsar8rYEk+/e0qIWzam2G16ymFNN0=";
+	public static String ali_call_back_url = "http://121.199.45.196:8081/api/alipay/notify";
+}
