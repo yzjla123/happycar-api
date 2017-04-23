@@ -24,9 +24,9 @@ public class HcSchool implements Serializable {
 
 	private String addr;
 
-	private String lat;
+	private Double lat;
 
-	private String lon;
+	private Double lon;
 
 	private String name;
 
@@ -64,22 +64,6 @@ public class HcSchool implements Serializable {
 		this.addr = addr;
 	}
 
-	public String getLat() {
-		return this.lat;
-	}
-
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-
-	public String getLon() {
-		return this.lon;
-	}
-
-	public void setLon(String lon) {
-		this.lon = lon;
-	}
-
 	public String getName() {
 		return this.name;
 	}
@@ -101,6 +85,30 @@ public class HcSchool implements Serializable {
 	}
 
 	public void setcoachNum(int coachNum) {
+		this.coachNum = coachNum;
+	}
+
+	public Double getLat() {
+		return lat;
+	}
+
+	public void setLat(Double lat) {
+		this.lat = lat;
+	}
+
+	public Double getLon() {
+		return lon;
+	}
+
+	public void setLon(Double lon) {
+		this.lon = lon;
+	}
+
+	public int getCoachNum() {
+		return coachNum;
+	}
+
+	public void setCoachNum(int coachNum) {
 		this.coachNum = coachNum;
 	}
 

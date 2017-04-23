@@ -13,7 +13,7 @@ public abstract class BeanUtils extends org.springframework.beans.BeanUtils {
     /** 
      * 功能 : 只复制source对象的非空属性到target对象上 
      * */  
-    public static void copyNotNullProperties(Object source, Object target) throws BeansException {    
+    public static void copyNotNullProperties(Object target,Object source) throws BeansException {    
       Assert.notNull(source, "Source must not be null");    
       Assert.notNull(target, "Target must not be null");    
       

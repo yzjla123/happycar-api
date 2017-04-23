@@ -48,13 +48,15 @@ public class HcBook implements Serializable {
 	private Integer star;
 
 	private Integer status;
+	
+	private Date date;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="update_time")
 	private Date updateTime;
 
-	@Column(name="weiyue_amount")
-	private Float weiyueAmount;
+	@Column(name="penalty_amount")
+	private Float penaltyAmount;
 	
 	@OneToOne
 	@JoinColumn(name="member_id",insertable=false,updatable=false)
@@ -125,12 +127,12 @@ public class HcBook implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public Float getWeiyueAmount() {
-		return this.weiyueAmount;
+	public Float getPenaltyAmount() {
+		return this.penaltyAmount;
 	}
 
-	public void setWeiyueAmount(Float weiyueAmount) {
-		this.weiyueAmount = weiyueAmount;
+	public void setPenaltyAmount(Float penaltyAmount) {
+		this.penaltyAmount = penaltyAmount;
 	}
 
 	public Integer getScheduleId() {
@@ -155,6 +157,14 @@ public class HcBook implements Serializable {
 
 	public void setSchedule(HcSchedule schedule) {
 		this.schedule = schedule;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }

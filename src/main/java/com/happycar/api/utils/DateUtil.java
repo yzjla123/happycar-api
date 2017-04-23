@@ -1,14 +1,28 @@
 package com.happycar.api.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtil {
+	public static final String YYYYMMDDHHMMSS = "yyyy-MM-dd HH:mm:ss";
+	public static final String YYYYMMDDHHMM = "yyyy-MM-dd HH:mm";
+	public static final String YYYYMMDD = "yyyy-MM-dd";
 	
 	public static String formatTime(Date time) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(time);
+	}	
+	
+	public static String formatTime(Date time,String pattern) {
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		return sdf.format(time);
+	}
+	
+	public static Date parseTime(String time,String pattern) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		return sdf.parse(time);
 	}
 	
 	public static Date[] getToday() {

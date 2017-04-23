@@ -7,7 +7,7 @@ import com.happycar.api.model.HcMember;
 
 public class BaseController {
 	
-	public HcMember getLoginPassenger(HttpServletRequest request){
+	public HcMember getLoginMember(HttpServletRequest request){
 		return (HcMember)request.getAttribute(Constant.KEY_LOGIN_PASSENGER);
 	}
 
