@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -19,6 +20,7 @@ import com.happycar.api.model.HcMember;
 import com.happycar.api.utils.BeanUtils;
 import com.happycar.api.utils.MessageUtil;
 import com.happycar.api.utils.RedisUtil;
+import com.happycar.api.utils.StringUtil;
 import com.happycar.api.utils.TokenProcessor;
 import com.happycar.api.vo.HcMemberVO;
 import com.happycar.api.vo.ResponseModel;
@@ -134,4 +136,27 @@ public class MemberController extends BaseController{
 		return model;
 	}
 
+	@ApiOperation(value = "发送验证码", httpMethod = "GET", notes = "发送验证码")
+	@RequestMapping(value = "/verifyCode", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "phone", value = "手机号", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	public ResponseModel verifyCode(String phone,
+			 HttpServletRequest request,
+			 HttpServletResponse response){
+		ResponseModel model = new ResponseModel();
+		String verifyCode = StringUtil.verifyCode();
+		System.out.println(verifyCode);
+		RedisUtil.setString(Constant.REDIS_VERIFY_CODE + phone,verifyCode,60);
+//		boolean ret = SMSUtil.send(phone, "您好,您的验证码是:"+verifyCode);
+//		if(ret){
+			MessageUtil.success("发送成功!", model);
+//		}else{
+//			MessageUtil.fail("发送失败,稍候再试!", model);
+//		}
+		return model;
+	}
 }
