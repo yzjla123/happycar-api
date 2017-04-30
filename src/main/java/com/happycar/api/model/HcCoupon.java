@@ -20,7 +20,6 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="hc_coupon")
 public class HcCoupon implements Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -56,6 +55,8 @@ public class HcCoupon implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name="valid_date")
 	private Date validDate;
+	
+	private Integer type;
 
 	public HcCoupon() {
 	}
@@ -154,6 +155,14 @@ public class HcCoupon implements Serializable {
 
 	public void setValidDate(Date validDate) {
 		this.validDate = validDate;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
 }

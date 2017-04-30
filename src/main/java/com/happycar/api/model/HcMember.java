@@ -36,6 +36,8 @@ public class HcMember implements Serializable {
 	private String addr;
 
 	private Integer progress;
+	
+	private Float amount;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="update_time")
@@ -141,6 +143,14 @@ public class HcMember implements Serializable {
 
 	public void setIsDeleted(Integer isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+
+	public Float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Float amount) {
+		this.amount = amount;
 	}
 
 }

@@ -43,15 +43,21 @@ public class CouponController extends BaseController{
 	@ApiOperation(value = "优惠券列表", httpMethod = "GET", notes = "优惠券列表")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "type", value = "类型 0:学费券", required = false, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "accessToken", value = "token", required = true, dataType = "String", paramType = "query"),
 	})
 	@ApiResponses(value={
 			@ApiResponse(code = 200, message = "")
 	})
-	public ResponseModel list(HttpServletRequest request){
+	public ResponseModel list(Integer type,HttpServletRequest request){
 		ResponseModel model = new ResponseModel();
 		HcMember member = getLoginMember(request);
-		List<HcCoupon> list = couponDao.findByMemberIdAndStatusAndValidDateGreaterThanAndIsDeleted(member.getId(), 1,new Date(), 0);	
+		List<HcCoupon> list = null;
+		if(type!=null){
+			list = couponDao.findByMemberIdAndStatusAndTypeAndValidDateGreaterThanAndIsDeletedOrderByValidDateAsc(member.getId(), 1,type,new Date(), 0);
+		}else{
+			list = couponDao.findByMemberIdAndStatusAndValidDateGreaterThanAndIsDeletedOrderByValidDateAsc(member.getId(), 1,new Date(), 0);	
+		}
 		List<HcCouponVO> coupons = new ArrayList<HcCouponVO>();
 		for (HcCoupon coupon : list) {
 			HcCouponVO couponVO = new HcCouponVO();

@@ -20,7 +20,8 @@ public interface CouponDao extends JpaRepository<HcCoupon, Integer>,JpaSpecifica
 	@Query(value="UPDATE HcCoupon SET status=2 where id=?")
 	public void setCouponUsed(Integer couponId);
 
-	public List<HcCoupon>  findByMemberIdAndStatusAndValidDateGreaterThanAndIsDeleted(int memberId, int status, Date validDate, int isDeleted);
+	public List<HcCoupon>  findByMemberIdAndStatusAndValidDateGreaterThanAndIsDeletedOrderByValidDateAsc(int memberId, int status, Date validDate, int isDeleted);
+	public List<HcCoupon>  findByMemberIdAndStatusAndTypeAndValidDateGreaterThanAndIsDeletedOrderByValidDateAsc(int memberId, int status,int type, Date validDate, int isDeleted);
 
 
 }

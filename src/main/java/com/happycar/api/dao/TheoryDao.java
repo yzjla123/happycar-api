@@ -18,8 +18,11 @@ public interface TheoryDao extends JpaRepository<HcTheory, Integer>,JpaSpecifica
 	@Query("update HcTheory set isDeleted=1 where id=?")
 	public int deleteById(Integer id);
 	
-	public List<HcTheory> findByUpdateTimeGreaterThan(Date updateTime);
+	public List<HcTheory> findBySubjectTypeAndUpdateTimeGreaterThanAndIsDeletedOrderBySeqAsc(int subjectType,Date updateTime,int isDeleted);
 	
-	public List<HcTheory> findByIsDeleted(int isDeleted);
+	public List<HcTheory> findBySubjectTypeAndIsDeletedOrderBySeqAsc(int subjectType,int isDeleted);
+
+	@Query("select max(updateTime) from HcTheory")
+	public Date findMaxUpdateTime();
 
 }

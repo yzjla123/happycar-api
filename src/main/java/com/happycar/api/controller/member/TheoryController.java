@@ -1,5 +1,6 @@
 package com.happycar.api.controller.member;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,7 @@ import com.happycar.api.dao.TheoryDao;
 import com.happycar.api.model.HcCoach;
 import com.happycar.api.model.HcTheory;
 import com.happycar.api.utils.BeanUtils;
+import com.happycar.api.utils.DateUtil;
 import com.happycar.api.utils.LocationUtils;
 import com.happycar.api.utils.MessageUtil;
 import com.happycar.api.vo.HcCoachVO;
@@ -43,23 +45,45 @@ public class TheoryController extends BaseController{
 	@ApiOperation(value = "理论列表", httpMethod = "GET", notes = "理论列表")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ApiImplicitParams(value = {
-			@ApiImplicitParam(name = "subjectType", value = "科目类型", required = true, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "lastUpdateTime", value = "最后更新时间", required = false, dataType = "String", paramType = "query"),
 	})
 	@ApiResponses(value={
 			@ApiResponse(code = 200, message = "")
 	})
-	public ResponseModel list(Integer subjectType,Date lastUpdateTime,HttpServletRequest request){
+	public ResponseModel list(Long lastUpdateTime,HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
-		List<HcTheory> list = null;
+		List<HcTheory> kemu1 = null;
+		List<HcTheory> kemu4 = null;
 		if(lastUpdateTime==null){
-			list = theoryDao.findByIsDeleted(0);
+			kemu1 = theoryDao.findBySubjectTypeAndIsDeletedOrderBySeqAsc(1, 0);
+			kemu4 = theoryDao.findBySubjectTypeAndIsDeletedOrderBySeqAsc(4, 0);
 		}else{
-			list = theoryDao.findByUpdateTimeGreaterThan(lastUpdateTime);
+			kemu1 = theoryDao.findBySubjectTypeAndUpdateTimeGreaterThanAndIsDeletedOrderBySeqAsc(1,new Date(lastUpdateTime),0);
+			kemu4 = theoryDao.findBySubjectTypeAndUpdateTimeGreaterThanAndIsDeletedOrderBySeqAsc(4,new Date(lastUpdateTime),0);
 		}
-		model.addAttribute("theorys", list);
+		Date updateTime = theoryDao.findMaxUpdateTime();
+		model.addAttribute("kemu1", kemu1);
+		model.addAttribute("kemu4", kemu4);
+		model.addAttribute("updateTime", updateTime.getTime());
 		MessageUtil.success("获取成功", model);
 		return model;
 	}
+	
+	@ApiOperation(value = "最后更新时间", httpMethod = "GET", notes = "最后更新时间")
+	@RequestMapping(value = "/lastUpdateTime", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	public ResponseModel lastUpdateTime(Long lastUpdateTime,HttpServletRequest request) throws ParseException{
+		ResponseModel model = new ResponseModel();
+		Date updateTime = theoryDao.findMaxUpdateTime();
+		model.addAttribute("updateTime", updateTime.getTime());
+		MessageUtil.success("获取成功", model);
+		return model;
+	}
+	
+	
 
 }

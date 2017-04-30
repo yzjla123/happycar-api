@@ -49,14 +49,8 @@ public class HcSignup implements Serializable {
 	@Column(name="member_id")
 	private Integer memberId;
 
-	@Column(name="order_no")
-	private String orderNo;
-
 	@Column(name="pay_amount")
 	private Float payAmount;
-
-	@Column(name="pay_channel")
-	private Integer payChannel;
 
 	@Column(name="pay_type")
 	private Integer payType;
@@ -142,28 +136,12 @@ public class HcSignup implements Serializable {
 		this.memberId = memberId;
 	}
 
-	public String getOrderNo() {
-		return this.orderNo;
-	}
-
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
-	}
-
 	public Float getPayAmount() {
 		return this.payAmount;
 	}
 
 	public void setPayAmount(Float payAmount) {
 		this.payAmount = payAmount;
-	}
-
-	public Integer getPayChannel() {
-		return this.payChannel;
-	}
-
-	public void setPayChannel(Integer payChannel) {
-		this.payChannel = payChannel;
 	}
 
 	public Integer getPayType() {

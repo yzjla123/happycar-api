@@ -32,7 +32,7 @@ public class AuthenticationAspect {
      * 对Api进行安全和身份校验  
 	 * @throws Throwable 
      */
-    @Around(value="execution(* com.happycar.api.controller.*.*(..))")
+    @Around(value="execution(* com.happycar.api.controller.member.*.*(..))")
     public Object validIdentityAndSecure(ProceedingJoinPoint pjp) throws Throwable {
         
         MethodSignature joinPointObject=(MethodSignature) pjp.getSignature();
@@ -48,7 +48,7 @@ public class AuthenticationAspect {
         	String token = request.getParameter(Constant.KEY_ACCESS_TOKEN);
         	if(StringUtil.isNull(token))  throw new BussinessException("token参数不能为空");
         	//当前登录用户信息
-        	String pid = RedisUtil.getString(Constant.DATA_CACHE_PREFIX+token);
+        	String pid = RedisUtil.getString(Constant.KEY_ACCESS_TOKEN+token);
         	if(StringUtil.isNull(pid))  throw new BussinessException(ErrorCode.TOKEN_INVALID);
         	HcMember member = memberDao.findOne(Integer.parseInt(pid));
         	request.setAttribute(Constant.KEY_LOGIN_PASSENGER, member);

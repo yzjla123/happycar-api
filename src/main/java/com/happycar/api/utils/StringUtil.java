@@ -92,7 +92,7 @@ public class StringUtil {
 	}
 
 	public static boolean isNull(String str) {
-		if (str == null || str.trim().equals("")) {
+		if (str == null || str.trim().equals("") || str.trim().equals("null")) {
 			return true;
 		}
 		return false;

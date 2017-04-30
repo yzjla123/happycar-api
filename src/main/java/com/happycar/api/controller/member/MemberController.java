@@ -128,8 +128,8 @@ public class MemberController extends BaseController{
 		}
 		HcMemberVO memberVO = new HcMemberVO();
 		BeanUtils.copyNotNullProperties(memberVO, list.get(0));
-		String token = TokenProcessor.getInstance().generateToken(member.getPhone(), true);
-		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, member.getId() + "",24*60*60);
+		String token = TokenProcessor.getInstance().generateToken(memberVO.getPhone(), true);
+		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, memberVO.getId() + "",24*60*60);
 		model.addAttribute("member", memberVO);
 		model.addAttribute("token", token);
 		MessageUtil.success("操作成功", model);
