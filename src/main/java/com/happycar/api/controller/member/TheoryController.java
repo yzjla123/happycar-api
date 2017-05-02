@@ -54,13 +54,13 @@ public class TheoryController extends BaseController{
 		ResponseModel model = new ResponseModel();
 		List<HcTheory> kemu1 = null;
 		List<HcTheory> kemu4 = null;
-		if(lastUpdateTime==null){
+//		if(lastUpdateTime==null){
 			kemu1 = theoryDao.findBySubjectTypeAndIsDeletedOrderBySeqAsc(1, 0);
 			kemu4 = theoryDao.findBySubjectTypeAndIsDeletedOrderBySeqAsc(4, 0);
-		}else{
-			kemu1 = theoryDao.findBySubjectTypeAndUpdateTimeGreaterThanAndIsDeletedOrderBySeqAsc(1,new Date(lastUpdateTime),0);
-			kemu4 = theoryDao.findBySubjectTypeAndUpdateTimeGreaterThanAndIsDeletedOrderBySeqAsc(4,new Date(lastUpdateTime),0);
-		}
+//		}else{
+//			kemu1 = theoryDao.findBySubjectTypeAndUpdateTimeGreaterThanAndIsDeletedOrderBySeqAsc(1,new Date(lastUpdateTime),0);
+//			kemu4 = theoryDao.findBySubjectTypeAndUpdateTimeGreaterThanAndIsDeletedOrderBySeqAsc(4,new Date(lastUpdateTime),0);
+//		}
 		Date updateTime = theoryDao.findMaxUpdateTime();
 		model.addAttribute("kemu1", kemu1);
 		model.addAttribute("kemu4", kemu4);

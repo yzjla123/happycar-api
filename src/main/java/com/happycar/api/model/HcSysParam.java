@@ -27,15 +27,13 @@ public class HcSysParam implements Serializable {
 
 	private String ext2;
 
-	private String name;
+	private String code;
 
-	@Column(name="p_key")
-	private String key;
-
-	@Column(name="p_value")
 	private String value;
 
 	private Integer pid;
+	
+	private Integer seq;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="update_time")
@@ -76,14 +74,6 @@ public class HcSysParam implements Serializable {
 		this.ext2 = ext2;
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public Integer getPid() {
 		return this.pid;
 	}
@@ -100,20 +90,28 @@ public class HcSysParam implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
-
 	public String getValue() {
 		return value;
 	}
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Integer getSeq() {
+		return seq;
+	}
+
+	public void setSeq(Integer seq) {
+		this.seq = seq;
 	}
 
 }
