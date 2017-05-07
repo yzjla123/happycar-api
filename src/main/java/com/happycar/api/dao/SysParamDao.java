@@ -16,5 +16,5 @@ public interface SysParamDao extends JpaRepository<HcSysParam, Integer>,JpaSpeci
 	public HcSysParam findByCodeAndPid(String code,Integer pid);
 
 	public List<HcSysParam> findByPidOrderBySeqAsc(Integer pid);
-
+	
 }

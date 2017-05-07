@@ -4,6 +4,7 @@ public class Constant {
 	/************************************SYSTEM***************************************/
 	//KEY
 	public static final String KEY_LOGIN_PASSENGER="loginPassenger";
+	public static final String KEY_LOGIN_COACH="loginCoach";
 	public static final String KEY_ACCESS_TOKEN="accessToken";
 	public static final String DATA_CACHE_TYPE="redis";//验证码缓存Redis的key
 	public static final String DATA_CACHE_PREFIX="aircar_";//加密时候前缀
@@ -24,6 +25,6 @@ public class Constant {
 	public static final int SELFDRIVE_ORDER_STATUS_COMMENT=5;
 	public static final int SELFDRIVE_ORDER_STATUS_COMPLETE=6;
 	public static final int SELFDRIVE_ORDER_STATUS_TERMIN=7;
-	
-	
+	/************************************PARAM CODE***************************************/
+	public static final String PARAM_CODE_SCHEDULE_DURATION = "SCHEDULE_DURATION";
 }

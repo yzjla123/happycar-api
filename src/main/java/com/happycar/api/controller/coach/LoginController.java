@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiResponses;
 
 
 @Api(value = "教练登录管理")
-@RestController
+@RestController("CoachLoginController")
 @RequestMapping("/api/coach")	
 public class LoginController extends BaseController{
 	
