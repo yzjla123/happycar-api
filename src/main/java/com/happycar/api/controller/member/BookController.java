@@ -22,17 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.happycar.api.annotation.Authentication;
 import com.happycar.api.controller.BaseController;
 import com.happycar.api.dao.BookDao;
-import com.happycar.api.dao.BookDao;
-import com.happycar.api.model.HcBook;
+import com.happycar.api.dao.ScheduleDao;
 import com.happycar.api.model.HcBook;
 import com.happycar.api.model.HcMember;
-import com.happycar.api.utils.BeanUtils;
+import com.happycar.api.model.HcSchedule;
+import com.happycar.api.utils.BeanUtil;
 import com.happycar.api.utils.DateUtil;
-import com.happycar.api.utils.LocationUtils;
 import com.happycar.api.utils.MessageUtil;
 import com.happycar.api.vo.HcBookVO;
-import com.happycar.api.vo.HcBookVO;
-import com.happycar.api.vo.HcSchoolVO;
 import com.happycar.api.vo.ResponseModel;
 
 import io.swagger.annotations.Api;
@@ -52,6 +49,8 @@ public class BookController extends BaseController{
 	private Logger logger = Logger.getLogger(BookController.class);
 	@Resource
 	private BookDao bookDao;
+	@Resource
+	private ScheduleDao scheduleDao;
 	
 	@ApiOperation(value = "预约列表", httpMethod = "GET", notes = "预约列表")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -89,7 +88,7 @@ public class BookController extends BaseController{
 		List<HcBookVO> books = new ArrayList<HcBookVO>();
 		for (HcBook book : list) {
 			HcBookVO bookVO = new HcBookVO();
-			BeanUtils.copyNotNullProperties(bookVO, book);
+			BeanUtil.copyProperties(book, bookVO);
 			books.add(bookVO);
 		}
 		model.addAttribute("books", books);
@@ -102,25 +101,23 @@ public class BookController extends BaseController{
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ApiImplicitParams(value = {
 			@ApiImplicitParam(name = "scheduleIds", value = "排班id,多个用逗号隔开", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "date", value = "预约日期(yyyy-MM-dd)", required = true, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
 	})
 	@ApiResponses(value={
 			@ApiResponse(code = 200, message = "")
 	})
 	@Transactional
-	public ResponseModel add(final String scheduleIds,String date,HttpServletRequest request) throws ParseException{
+	public ResponseModel add(final String scheduleIds,HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
 		HcMember member = getLoginMember(request);
-		//删除这一天的全部预约
-		bookDao.deleteByDate(DateUtil.parseTime(date, DateUtil.YYYYMMDD));
 		String[] scheduleIdArray = scheduleIds.split(",");
 		for (String scheduleId : scheduleIdArray) {
+			HcSchedule schedule = scheduleDao.findOne(Integer.parseInt(scheduleId));
 			HcBook book = new HcBook();
 			book.setMemberId(member.getId());
 			book.setScheduleId(Integer.parseInt(scheduleId));
 			book.setStatus(0);
-			book.setDate(DateUtil.parseTime(date, DateUtil.YYYYMMDD));
+			book.setDate(schedule.getDate());
 			book.setAddTime(new Date());
 			bookDao.save(book);
 		}

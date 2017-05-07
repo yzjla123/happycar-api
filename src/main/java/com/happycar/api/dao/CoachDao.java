@@ -25,5 +25,7 @@ public interface CoachDao extends JpaRepository<HcCoach, Integer>,JpaSpecificati
 
 	public List<HcCoach> findAllByIsDeleted(int isDeleted);
 
+	public List<HcCoach> findByPhoneAndIsDeleted(String phone, int isDeleted);
+
 
 }

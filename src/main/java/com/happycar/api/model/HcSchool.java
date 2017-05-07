@@ -80,13 +80,7 @@ public class HcSchool implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public int getcoachNum() {
-		return coachNum;
-	}
-
-	public void setcoachNum(int coachNum) {
-		this.coachNum = coachNum;
-	}
+	
 
 	public Double getLat() {
 		return lat;

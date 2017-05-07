@@ -48,11 +48,36 @@ public class HcCoach implements Serializable {
 
 	@Column(name="car_num")
 	private Integer carNum;
+
+	private Integer star;
+	
+	@Column(name = "driving_license_type_id")
+	private Integer drivingLicenseTypeId;
+	
+	private Integer age;
+	
+	@Column(name = "passing_rate")
+	private Float passingRate;
+	
+	@Column(name = "license_plate")
+	private String licensePlate;
+	
+	@Column(name = "vehicle_brand")
+	private String vehicleBrand;
+	
+	private String addr;
+	
+	private String idcard;
 	
 	@OneToOne
 	@JoinColumn(name="school_id",insertable=false,updatable=false)
 	@NotFound(action=NotFoundAction.IGNORE)
 	private HcSchool school;
+	
+	@OneToOne
+	@JoinColumn(name="driving_license_type_id",insertable=false,updatable=false)
+	@NotFound(action=NotFoundAction.IGNORE)
+	private HcSysParam drivingLicenseType;
 	
 	@Transient
 	private Integer totalMember;
@@ -162,6 +187,78 @@ public class HcCoach implements Serializable {
 
 	public void setLearningMember(Integer learningMember) {
 		this.learningMember = learningMember;
+	}
+
+	public Integer getStar() {
+		return star;
+	}
+
+	public void setStar(Integer star) {
+		this.star = star;
+	}
+
+	public Integer getDrivingLicenseTypeId() {
+		return drivingLicenseTypeId;
+	}
+
+	public void setDrivingLicenseTypeId(Integer drivingLicenseTypeId) {
+		this.drivingLicenseTypeId = drivingLicenseTypeId;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public Float getPassingRate() {
+		return passingRate;
+	}
+
+	public void setPassingRate(Float passingRate) {
+		this.passingRate = passingRate;
+	}
+
+	public String getLicensePlate() {
+		return licensePlate;
+	}
+
+	public void setLicensePlate(String licensePlate) {
+		this.licensePlate = licensePlate;
+	}
+
+	public String getVehicleBrand() {
+		return vehicleBrand;
+	}
+
+	public void setVehicleBrand(String vehicleBrand) {
+		this.vehicleBrand = vehicleBrand;
+	}
+
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+	public String getIdcard() {
+		return idcard;
+	}
+
+	public void setIdcard(String idcard) {
+		this.idcard = idcard;
+	}
+
+	public HcSysParam getDrivingLicenseType() {
+		return drivingLicenseType;
+	}
+
+	public void setDrivingLicenseType(HcSysParam drivingLicenseType) {
+		this.drivingLicenseType = drivingLicenseType;
 	}
 
 }

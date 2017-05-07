@@ -36,43 +36,35 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 
-@Api(value = "学员管理")
+@Api(value = "学员登录管理")
 @RestController
 @RequestMapping("/api/member")	
-public class MemberController extends BaseController{
+public class LoginController extends BaseController{
 	
-	private Logger logger = Logger.getLogger(MemberController.class);
+	private Logger logger = Logger.getLogger(LoginController.class);
 	@Resource
 	private MemberDao memberDao;
 	@Resource
 	private CoachDao coachDao;
 	
-	@ApiOperation(value = "注册学员", httpMethod = "GET", notes = "注册学员")
-	@RequestMapping(value = "/reg", method = RequestMethod.POST)
+	
+	
+	@ApiOperation(value = "登录系统", httpMethod = "GET", notes = "登录系统")
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ApiImplicitParams(value = {
-			@ApiImplicitParam(name = "name", value = "用户名", required = true, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "phone", value = "手机号", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "idcard", value = "身价证", required = true, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "verifyCode", value = "验证码", required = true, dataType = "String", paramType = "query"),
 	})
 	@ApiResponses(value={
 			@ApiResponse(code = 200, message = "")
 	})
-	public ResponseModel reg(
+	public ResponseModel login(
 			HcMember member,
 			String verifyCode,
 			HttpServletRequest request){
 		ResponseModel model = new ResponseModel();
 		if(StringUtils.isEmpty(member.getPhone())){
 			MessageUtil.fail("手机号不能为空", model);
-			return model;
-		}
-		if(StringUtils.isEmpty(member.getName())){
-			MessageUtil.fail("真实姓名不能为空", model);
-			return model;
-		}
-		if(StringUtils.isEmpty(member.getIdcard())){
-			MessageUtil.fail("身价证不能为空", model);
 			return model;
 		}
 		if(StringUtils.isEmpty(verifyCode)){
@@ -85,48 +77,19 @@ public class MemberController extends BaseController{
 			return model;
 		}
 		List<HcMember> list = memberDao.findByPhoneAndIsDeleted(member.getPhone(),0);
-		if(list.size()>0){
-			MessageUtil.fail("手机号已注册", model);
+		if(list.size()==0){
+			MessageUtil.fail("手机号不存在", model);
 			return model;
 		}
-		member.setIsDeleted(0);
-		member.setProgress(0);
-		member.setAddTime(new Date());
-		member.setUpdateTime(new Date());
-		memberDao.save(member);
+		HcMemberVO memberVO = new HcMemberVO();
+		BeanUtil.copyProperties(list.get(0),memberVO);
+		String token = TokenProcessor.getInstance().generateToken(memberVO.getPhone(), true);
+		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, memberVO.getId() + "",24*60*60);
+		model.addAttribute("member", memberVO);
+		model.addAttribute("token", token);
 		MessageUtil.success("操作成功", model);
 		return model;
 	}
+
 	
-	@ApiOperation(value = "bindCoach", httpMethod = "POST", notes = "绑定教练")
-	@RequestMapping(value = "/bindCoach", method = RequestMethod.POST)
-	@ApiImplicitParams(value = {
-			@ApiImplicitParam(name = "coachId", value = "教练id", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
-	})
-	@ApiResponses(value={
-			@ApiResponse(code = 200, message = "")
-	})
-	@Authentication
-	public ResponseModel bindCoach(Integer coachId,
-			 HttpServletRequest request,
-			 HttpServletResponse response){
-		ResponseModel model = new ResponseModel();
-		HcMember member = getLoginMember(request);
-		if(member.getCoachId()!=null){
-			MessageUtil.fail("已绑定教练,不能再次绑定!", model);
-			return model;
-		}
-		HcCoach coach = coachDao.findOne(coachId);
-		if(coach==null||coach.getIsDeleted()==1){
-			MessageUtil.fail("未找到该教练!", model);
-			return model;
-		}
-		//绑定教练
-		member.setCoachId(coachId);
-		member.setUpdateTime(new Date());
-		memberDao.save(member);
-		MessageUtil.success("绑定成功!", model);
-		return model;
-	}
 }

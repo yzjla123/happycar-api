@@ -1,7 +1,6 @@
 package com.happycar.api.controller.member;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,14 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.happycar.api.controller.BaseController;
 import com.happycar.api.dao.TheoryDao;
-import com.happycar.api.model.HcCoach;
 import com.happycar.api.model.HcTheory;
-import com.happycar.api.utils.BeanUtils;
-import com.happycar.api.utils.DateUtil;
-import com.happycar.api.utils.LocationUtils;
 import com.happycar.api.utils.MessageUtil;
-import com.happycar.api.vo.HcCoachVO;
-import com.happycar.api.vo.HcSchoolVO;
 import com.happycar.api.vo.ResponseModel;
 
 import io.swagger.annotations.Api;

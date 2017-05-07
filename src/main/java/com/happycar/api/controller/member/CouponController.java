@@ -17,7 +17,7 @@ import com.happycar.api.controller.BaseController;
 import com.happycar.api.dao.CouponDao;
 import com.happycar.api.model.HcCoupon;
 import com.happycar.api.model.HcMember;
-import com.happycar.api.utils.BeanUtils;
+import com.happycar.api.utils.BeanUtil;
 import com.happycar.api.utils.MessageUtil;
 import com.happycar.api.vo.HcCouponVO;
 import com.happycar.api.vo.ResponseModel;
@@ -61,7 +61,7 @@ public class CouponController extends BaseController{
 		List<HcCouponVO> coupons = new ArrayList<HcCouponVO>();
 		for (HcCoupon coupon : list) {
 			HcCouponVO couponVO = new HcCouponVO();
-			BeanUtils.copyNotNullProperties(couponVO, coupon);
+			BeanUtil.copyProperties(coupon,couponVO);
 			coupons.add(couponVO);
 		}
 		model.addAttribute("coupons", coupons);
