@@ -129,4 +129,49 @@ public class MemberController extends BaseController{
 		MessageUtil.success("绑定成功!", model);
 		return model;
 	}
+	
+	@ApiOperation(value = "保存用户头像", httpMethod = "POST", notes = "保存用户头像")
+	@RequestMapping(value = "/pic", method = RequestMethod.POST)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "pic", value = "图片地址", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	@Authentication
+	public ResponseModel savePic(String pic,
+			 HttpServletRequest request,
+			 HttpServletResponse response){
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		if(pic==null){
+			MessageUtil.fail("图片地址不能为空!", model);
+			return model;
+		}
+		member.setPic(pic);
+		member.setUpdateTime(new Date());
+		memberDao.save(member);
+		MessageUtil.success("上传成功!", model);
+		return model;
+	}
+
+	@ApiOperation(value = "进度信息", httpMethod = "GET", notes = "进度信息")
+	@RequestMapping(value = "/progress", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	@Authentication
+	public ResponseModel progress(String pic,
+			 HttpServletRequest request,
+			 HttpServletResponse response){
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		model.addAttribute("progress", member.getProgress());
+		MessageUtil.success("操作成功!", model);
+		return model;
+	}
 }

@@ -26,4 +26,7 @@ public interface ScheduleDao extends JpaRepository<HcSchedule, Integer>,JpaSpeci
 	@Query(value="delete from HcSchedule where subjectType=? and date between ? and ?")
 	public int deleteBySubjectTypeAndDateBetweenBetween(Integer subjectType,Date from, Date to);
 
+	@Query(value="from HcSchedule where bookNum>=memberNum and id in ?1")
+	public List<HcSchedule> findFullBookByIdIn(List<Integer> scheduleIdArray);
+
 }

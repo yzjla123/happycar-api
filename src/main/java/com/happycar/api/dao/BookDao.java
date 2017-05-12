@@ -23,4 +23,6 @@ public interface BookDao extends JpaRepository<HcBook, Integer>,JpaSpecification
 	@Query(value="delete from HcBook where date=?")
 	public void deleteByDate(Date date);
 
+	public List<HcBook> findByMemberIdAndDate(Integer memberId, Date date);
+
 }

@@ -29,6 +29,8 @@ public class HcScheduleVO implements Serializable {
 	
 	private String time2;
 	
+	private Integer subjectType;
+	
 
 	public HcScheduleVO() {
 	}
@@ -104,5 +106,14 @@ public class HcScheduleVO implements Serializable {
 	public void setTime2(String time2) {
 		this.time2 = time2;
 	}
+
+	public Integer getSubjectType() {
+		return subjectType;
+	}
+
+	public void setSubjectType(Integer subjectType) {
+		this.subjectType = subjectType;
+	}
+
 
 }

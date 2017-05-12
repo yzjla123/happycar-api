@@ -69,4 +69,23 @@ public class CouponController extends BaseController{
 		return model;
 	}
 
+	@ApiOperation(value = "兑换优惠券", httpMethod = "POST", notes = "兑换优惠券")
+	@RequestMapping(value = "/charge", method = RequestMethod.POST)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "no", value = "优惠券序列号", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "accessToken", value = "token", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	public ResponseModel charge(String no,HttpServletRequest request){
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		HcCoupon coupon = couponDao.findByNoAndIsDeleted(no, 0);
+		HcCouponVO couponVO = new HcCouponVO();
+		BeanUtil.copyProperties(coupon,couponVO);
+//		model.addAttribute("coupons", coupons);
+		MessageUtil.success("获取成功", model);
+		return model;
+	}
 }

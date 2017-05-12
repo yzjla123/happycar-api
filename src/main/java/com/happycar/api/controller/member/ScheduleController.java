@@ -55,6 +55,8 @@ public class ScheduleController extends BaseController{
 	private Logger logger = Logger.getLogger(ScheduleController.class);
 	@Resource
 	private ScheduleDao scheduleDao;
+	@Resource
+	private BookDao bookDao;
 	
 	@ApiOperation(value = "排班列表", httpMethod = "GET", notes = "排班列表")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -79,7 +81,15 @@ public class ScheduleController extends BaseController{
 			BeanUtil.copyProperties(schedule, scheduleVO);
 			schedules.add(scheduleVO);
 		}
+		List<HcBook> books = bookDao.findByMemberIdAndDate(member.getId(),DateUtil.parseTime(date, DateUtil.YYYYMMDD));
+		List<HcBookVO> bookVOs = new ArrayList<HcBookVO>();
+		for (HcBook book : books) {
+			HcBookVO bookVO = new HcBookVO();
+			BeanUtil.copyProperties(book, bookVO);
+			bookVOs.add(bookVO);
+		}
 		model.addAttribute("schedules", schedules);
+		model.addAttribute("books", books);
 		MessageUtil.success("获取成功", model);
 		return model;
 	}

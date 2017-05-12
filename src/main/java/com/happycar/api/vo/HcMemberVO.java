@@ -22,6 +22,10 @@ public class HcMemberVO implements Serializable {
 	private Integer progress;
 
 	private Integer coachId;
+	
+	private String pic;
+	
+	private String idcard;
 
 	public Integer getId() {
 		return id;
@@ -69,6 +73,22 @@ public class HcMemberVO implements Serializable {
 
 	public void setCoachId(Integer coachId) {
 		this.coachId = coachId;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	public String getIdcard() {
+		return idcard;
+	}
+
+	public void setIdcard(String idcard) {
+		this.idcard = idcard;
 	}
 	
 

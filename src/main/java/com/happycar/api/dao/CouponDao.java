@@ -23,5 +23,7 @@ public interface CouponDao extends JpaRepository<HcCoupon, Integer>,JpaSpecifica
 	public List<HcCoupon>  findByMemberIdAndStatusAndValidDateGreaterThanAndIsDeletedOrderByValidDateAsc(int memberId, int status, Date validDate, int isDeleted);
 	public List<HcCoupon>  findByMemberIdAndStatusAndTypeAndValidDateGreaterThanAndIsDeletedOrderByValidDateAsc(int memberId, int status,int type, Date validDate, int isDeleted);
 
+	public HcCoupon findByNoAndIsDeleted(String no, int isDeleted);
+
 
 }

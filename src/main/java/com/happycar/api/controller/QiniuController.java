@@ -20,6 +20,7 @@ import com.happycar.api.model.HcArticle;
 import com.happycar.api.model.HcBook;
 import com.happycar.api.model.HcMember;
 import com.happycar.api.model.HcSysParam;
+import com.happycar.api.service.QiniuService;
 import com.happycar.api.utils.DateUtil;
 import com.happycar.api.utils.MessageUtil;
 import com.happycar.api.vo.ResponseModel;
@@ -32,47 +33,27 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 
-@Api(value = "文章管理")
+@Api(value = "七牛管理")
 @RestController
-@RequestMapping("/api/article")	
-public class ArticleController extends BaseController{
+@RequestMapping("/api/qiniu")	
+public class QiniuController extends BaseController{
 	
-	private Logger logger = Logger.getLogger(ArticleController.class);
+	private Logger logger = Logger.getLogger(QiniuController.class);
 	@Resource
-	private ArticleDao articleDao;
-	@Resource
-	private SysParamDao paramDao;
+	private QiniuService qiniuService;
 	
-	@ApiOperation(value = "文章列表", httpMethod = "GET", notes = "文章列表")
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	@ApiImplicitParams(value = {
-			@ApiImplicitParam(name = "subjectCode", value = "文章分类代码", required = true, dataType = "String", paramType = "query"),
-	})
-	@ApiResponses(value={
-			@ApiResponse(code = 200, message = "")
-	})
-	public ResponseModel list(String subjectCode,HttpServletRequest request){
-		ResponseModel model = new ResponseModel();
-		HcSysParam param = paramDao.findByCode(subjectCode);
-		List<HcArticle> articles = articleDao.findBySubjectIdOrderByUpdateTimeDesc(param.getId());
-		model.addAttribute("articles", articles);
-		MessageUtil.success("获取成功", model);
-		return model;
-	}
-	
-	
-	@ApiOperation(value = "获取文章", httpMethod = "GET", notes = "通过id获取文章")
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@ApiOperation(value = "获取uptoken", httpMethod = "GET", notes = "获取uptoken")
+	@RequestMapping(value = "/uptoken", method = RequestMethod.GET)
 	@ApiImplicitParams(value = {
 			@ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Integer", paramType = "query"),
 	})
 	@ApiResponses(value={
 			@ApiResponse(code = 200, message = "")
 	})
-	public ResponseModel getById(Integer id,HttpServletRequest request) throws ParseException{
+	public ResponseModel uptoken(HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
-		HcArticle article = articleDao.findOne(id);
-		model.addAttribute("article", article);
+		String uptoken = qiniuService.getUploadToken();
+		model.addAttribute("uptoken", uptoken);
 		MessageUtil.success("操作成功", model);
 		return model;
 	}

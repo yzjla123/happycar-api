@@ -49,7 +49,7 @@ public class LoginController extends BaseController{
 	
 	
 	
-	@ApiOperation(value = "登录系统", httpMethod = "GET", notes = "登录系统")
+	@ApiOperation(value = "登录系统", httpMethod = "POST", notes = "登录系统")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ApiImplicitParams(value = {
 			@ApiImplicitParam(name = "phone", value = "手机号", required = true, dataType = "String", paramType = "query"),
@@ -72,10 +72,10 @@ public class LoginController extends BaseController{
 			return model;
 		}
 		String verifyCode1 = RedisUtil.getString(Constant.REDIS_VERIFY_CODE+member.getPhone());
-		if(!verifyCode.equals(verifyCode1)){
-			MessageUtil.fail("验证码不正确", model);
-			return model;
-		}
+//		if(!verifyCode.equals(verifyCode1)){
+//			MessageUtil.fail("验证码不正确", model);
+//			return model;
+//		}
 		List<HcMember> list = memberDao.findByPhoneAndIsDeleted(member.getPhone(),0);
 		if(list.size()==0){
 			MessageUtil.fail("手机号不存在", model);
@@ -83,6 +83,11 @@ public class LoginController extends BaseController{
 		}
 		HcMemberVO memberVO = new HcMemberVO();
 		BeanUtil.copyProperties(list.get(0),memberVO);
+		if(memberVO.getIdcard()!=null&&memberVO.getIdcard().length()==18)
+			memberVO.setIdcard(memberVO.getIdcard().substring(0, 4)+"*********"+memberVO.getIdcard().substring(16, memberVO.getIdcard().length()));
+		else{
+			memberVO.setIdcard("");
+		}
 		String token = TokenProcessor.getInstance().generateToken(memberVO.getPhone(), true);
 		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, memberVO.getId() + "",24*60*60);
 		model.addAttribute("member", memberVO);

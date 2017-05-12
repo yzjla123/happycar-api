@@ -53,6 +53,11 @@ public class HcSchedule implements Serializable {
 	
 	@Column(name="subject_type")
 	private Integer subjectType;
+	
+	@OneToOne
+	@JoinColumn(name="coach_id",insertable=false,updatable=false)
+	@NotFound(action=NotFoundAction.IGNORE)
+	private HcCoach coach;
 
 	public HcSchedule() {
 	}
@@ -151,6 +156,14 @@ public class HcSchedule implements Serializable {
 
 	public void setSubjectType(Integer subjectType) {
 		this.subjectType = subjectType;
+	}
+
+	public HcCoach getCoach() {
+		return coach;
+	}
+
+	public void setCoach(HcCoach coach) {
+		this.coach = coach;
 	}
 
 }

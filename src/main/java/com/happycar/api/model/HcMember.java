@@ -53,6 +53,8 @@ public class HcMember implements Serializable {
 	
 	@Column(name="is_deleted")
 	private Integer isDeleted;
+	
+	private String pic;
 
 	public HcMember() {
 	}
@@ -151,6 +153,14 @@ public class HcMember implements Serializable {
 
 	public void setAmount(Float amount) {
 		this.amount = amount;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 
 }
