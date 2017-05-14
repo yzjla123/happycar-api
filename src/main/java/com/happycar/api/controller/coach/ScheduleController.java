@@ -25,6 +25,7 @@ import com.happycar.api.annotation.Authentication;
 import com.happycar.api.contant.Constant;
 import com.happycar.api.controller.BaseController;
 import com.happycar.api.dao.BookDao;
+import com.happycar.api.dao.CoachDao;
 import com.happycar.api.dao.ScheduleDao;
 import com.happycar.api.dao.SysParamDao;
 import com.happycar.api.dao.BookDao;
@@ -63,6 +64,8 @@ public class ScheduleController extends BaseController{
 	private ScheduleDao scheduleDao;
 	@Resource
 	private SysParamDao paramDao;
+	@Resource
+	private BookDao bookDao;
 	
 	@ApiOperation(value = "排班列表", httpMethod = "GET", notes = "排班列表")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -79,15 +82,23 @@ public class ScheduleController extends BaseController{
 			Integer subjectType,
 			HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
-		HcMember member = getLoginMember(request);
-		List<HcSchedule> list = scheduleDao.findByCoachIdAndDateAndSubjectTypeOrderByTime1Asc(member.getCoachId(),DateUtil.parseTime(date, DateUtil.YYYYMMDD),subjectType);
+		HcCoach coach = getLoginCoach(request);
+		List<HcSchedule> list = scheduleDao.findByCoachIdAndDateAndSubjectTypeOrderByTime1Asc(coach.getId(),DateUtil.parseTime(date, DateUtil.YYYYMMDD),subjectType);
 		List<HcScheduleVO> schedules = new ArrayList<HcScheduleVO>();
 		for (HcSchedule schedule : list) {
 			HcScheduleVO scheduleVO = new HcScheduleVO();
 			BeanUtil.copyProperties(schedule, scheduleVO);
 			schedules.add(scheduleVO);
 		}
+		List<HcBook> books = bookDao.findByCoachIdAndDate(coach.getId(),DateUtil.parseTime(date, DateUtil.YYYYMMDD));
+		List<HcBookVO> bookVOs = new ArrayList<HcBookVO>();
+		for (HcBook book : books) {
+			HcBookVO bookVO = new HcBookVO();
+			BeanUtil.copyProperties(book, bookVO);
+			bookVOs.add(bookVO);
+		}
 		model.addAttribute("schedules", schedules);
+		model.addAttribute("books", books);
 		MessageUtil.success("获取成功", model);
 		return model;
 	}

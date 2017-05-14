@@ -58,6 +58,9 @@ public class HcBook implements Serializable {
 	@Column(name="penalty_amount")
 	private Float penaltyAmount;
 	
+	@Column(name="coach_id")
+	private Integer coachId;
+	
 	@OneToOne
 	@JoinColumn(name="member_id",insertable=false,updatable=false)
 	@NotFound(action=NotFoundAction.IGNORE)
@@ -165,6 +168,14 @@ public class HcBook implements Serializable {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Integer getCoachId() {
+		return coachId;
+	}
+
+	public void setCoachId(Integer coachId) {
+		this.coachId = coachId;
 	}
 
 }

@@ -37,6 +37,8 @@ public class HcBookVO implements Serializable {
 
 	private Float penaltyAmount;
 	
+	private Integer coachId;
+	
 	private HcCoachVO coach; 
 	
 	private HcScheduleVO schedule; 
@@ -119,6 +121,14 @@ public class HcBookVO implements Serializable {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Integer getCoachId() {
+		return coachId;
+	}
+
+	public void setCoachId(Integer coachId) {
+		this.coachId = coachId;
 	}
 
 }

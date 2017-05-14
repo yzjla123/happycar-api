@@ -198,6 +198,7 @@ public class BookController extends BaseController{
 			book.setStatus(0);
 			book.setDate(schedule.getDate());
 			book.setAddTime(new Date());
+			book.setCoachId(schedule.getCoachId());
 			bookDao.save(book);
 			//预约人数加1
 			schedule.setBookNum(schedule.getBookNum()+1);
