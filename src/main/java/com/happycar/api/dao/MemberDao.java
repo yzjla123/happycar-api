@@ -17,10 +17,11 @@ public interface MemberDao extends JpaRepository<HcMember, Integer>,JpaSpecifica
 	@Query("update HcMember set isDeleted=1 where id=?")
 	public int deleteById(Integer id);
 
-
 	public List<HcMember> findByPhoneAndIsDeleted(String phone,int isDeleted);
 
 	public List<HcMember> findByCoachId(Integer coachId);
 	
 	public List<HcMember> findByCoachIdAndProgressLessThan(Integer coachId,Integer progress);
+
+	public List<HcMember> findAllByCoachIdAndProgressLessThanAndIsDeleted(int coachId,int progress,int isDeleted);
 }

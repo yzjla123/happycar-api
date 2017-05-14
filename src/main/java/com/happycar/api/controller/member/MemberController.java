@@ -20,6 +20,7 @@ import com.happycar.api.dao.CoachDao;
 import com.happycar.api.dao.MemberDao;
 import com.happycar.api.model.HcCoach;
 import com.happycar.api.model.HcMember;
+import com.happycar.api.service.ActivityService;
 import com.happycar.api.utils.BeanUtil;
 import com.happycar.api.utils.MessageUtil;
 import com.happycar.api.utils.RedisUtil;
@@ -46,8 +47,10 @@ public class MemberController extends BaseController{
 	private MemberDao memberDao;
 	@Resource
 	private CoachDao coachDao;
+	@Resource
+	private ActivityService activityService;
 	
-	@ApiOperation(value = "注册学员", httpMethod = "GET", notes = "注册学员")
+	@ApiOperation(value = "注册学员", httpMethod = "POST", notes = "注册学员")
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	@ApiImplicitParams(value = {
 			@ApiImplicitParam(name = "name", value = "用户名", required = true, dataType = "String", paramType = "query"),
@@ -89,11 +92,27 @@ public class MemberController extends BaseController{
 			MessageUtil.fail("手机号已注册", model);
 			return model;
 		}
+		member.setAmount(0f);
+		member.setCoachId(0);
 		member.setIsDeleted(0);
 		member.setProgress(0);
 		member.setAddTime(new Date());
 		member.setUpdateTime(new Date());
+		member.setPic(Constant.PIC_MEMBER);
 		memberDao.save(member);
+		//注册送活动
+		activityService.registerCoupon(member.getId());
+		HcMemberVO memberVO = new HcMemberVO();
+		BeanUtil.copyProperties(member,memberVO);
+		if(memberVO.getIdcard()!=null&&memberVO.getIdcard().length()==18)
+			memberVO.setIdcard(memberVO.getIdcard().substring(0, 4)+"*********"+memberVO.getIdcard().substring(16, memberVO.getIdcard().length()));
+		else{
+			memberVO.setIdcard("");
+		}
+		String token = TokenProcessor.getInstance().generateToken(memberVO.getPhone(), true);
+		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, memberVO.getId() + "",24*60*60);
+		model.addAttribute("member", memberVO);
+		model.addAttribute("token", token);
 		MessageUtil.success("操作成功", model);
 		return model;
 	}
@@ -113,8 +132,12 @@ public class MemberController extends BaseController{
 			 HttpServletResponse response){
 		ResponseModel model = new ResponseModel();
 		HcMember member = getLoginMember(request);
-		if(member.getCoachId()!=null){
+		if(member.getCoachId()!=null&&member.getCoachId()>0){
 			MessageUtil.fail("已绑定教练,不能再次绑定!", model);
+			return model;
+		}
+		if(member.getProgress()<2){
+			MessageUtil.fail("报名后才能绑定教练!", model);
 			return model;
 		}
 		HcCoach coach = coachDao.findOne(coachId);

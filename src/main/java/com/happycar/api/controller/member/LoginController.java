@@ -90,7 +90,7 @@ public class LoginController extends BaseController{
 		}
 		String token = TokenProcessor.getInstance().generateToken(memberVO.getPhone(), true);
 		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, memberVO.getId() + "",24*60*60);
-		model.addAttribute("member", memberVO);
+		model.addAttribute("loginInfo", memberVO);
 		model.addAttribute("token", token);
 		MessageUtil.success("操作成功", model);
 		return model;

@@ -12,7 +12,7 @@ public class HcCoachVO implements Serializable {
 
 	private Integer id;
 
-	private String imgUrl;
+	private String pic;
 
 	private String name;
 
@@ -52,14 +52,6 @@ public class HcCoachVO implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getImgUrl() {
-		return imgUrl;
-	}
-
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
 	}
 
 	public String getName() {
@@ -188,6 +180,14 @@ public class HcCoachVO implements Serializable {
 
 	public void setComments(List<HcCommentVO> comments) {
 		this.comments = comments;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 
 }

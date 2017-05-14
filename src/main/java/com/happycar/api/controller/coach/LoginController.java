@@ -75,7 +75,7 @@ public class LoginController extends BaseController{
 		BeanUtil.copyProperties(list.get(0),coachVO);
 		String token = TokenProcessor.getInstance().generateToken(coachVO.getPhone(), true);
 		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, coachVO.getId() + "",24*60*60);
-		model.addAttribute("coach", coachVO);
+		model.addAttribute("loginInfo", coachVO);
 		model.addAttribute("token", token);
 		MessageUtil.success("操作成功", model);
 		return model;

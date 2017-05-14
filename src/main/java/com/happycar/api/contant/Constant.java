@@ -27,4 +27,7 @@ public class Constant {
 	public static final int SELFDRIVE_ORDER_STATUS_TERMIN=7;
 	/************************************PARAM CODE***************************************/
 	public static final String PARAM_CODE_SCHEDULE_DURATION = "SCHEDULE_DURATION";
+	public static final String PARAM_CODE_ACTIVITY_REG_COUPON = "REGISTER_COUPON";
+	public static final String PIC_COACH = "http://ookxrria2.bkt.clouddn.com/hc-coach-avatar.png";
+	public static final String PIC_MEMBER = "http://ookxrria2.bkt.clouddn.com/hc-member-avatar.png";
 }

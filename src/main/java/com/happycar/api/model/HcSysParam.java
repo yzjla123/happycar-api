@@ -4,39 +4,46 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
-
 /**
  * The persistent class for the hc_sys_param database table.
  * 
  */
 @Entity
-@Table(name="hc_sys_param")
-@NamedQuery(name="HcSysParam.findAll", query="SELECT h FROM HcSysParam h")
+@Table(name = "hc_sys_param")
+@NamedQuery(name = "HcSysParam.findAll", query = "SELECT h FROM HcSysParam h")
 public class HcSysParam implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="add_time")
+	@Column(name = "add_time")
 	private Date addTime;
 
 	private String ext1;
 
 	private String ext2;
 
+	private String ext3;
+
+	private String ext4;
+
+	private String ext5;
+
+	private String remark;
+
 	private String code;
 
 	private String value;
 
 	private Integer pid;
-	
+
 	private Integer seq;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="update_time")
+	@Column(name = "update_time")
 	private Date updateTime;
 
 	public HcSysParam() {
@@ -112,6 +119,38 @@ public class HcSysParam implements Serializable {
 
 	public void setSeq(Integer seq) {
 		this.seq = seq;
+	}
+
+	public String getExt3() {
+		return ext3;
+	}
+
+	public void setExt3(String ext3) {
+		this.ext3 = ext3;
+	}
+
+	public String getExt4() {
+		return ext4;
+	}
+
+	public void setExt4(String ext4) {
+		this.ext4 = ext4;
+	}
+
+	public String getExt5() {
+		return ext5;
+	}
+
+	public void setExt5(String ext5) {
+		this.ext5 = ext5;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }

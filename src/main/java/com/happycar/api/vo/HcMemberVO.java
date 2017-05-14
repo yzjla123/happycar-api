@@ -26,6 +26,10 @@ public class HcMemberVO implements Serializable {
 	private String pic;
 	
 	private String idcard;
+	
+	private Integer signupId;
+	
+	private Date signupDate;
 
 	public Integer getId() {
 		return id;
@@ -89,6 +93,22 @@ public class HcMemberVO implements Serializable {
 
 	public void setIdcard(String idcard) {
 		this.idcard = idcard;
+	}
+
+	public Integer getSignupId() {
+		return signupId;
+	}
+
+	public void setSignupId(Integer signupId) {
+		this.signupId = signupId;
+	}
+
+	public Date getSignupDate() {
+		return signupDate;
+	}
+
+	public void setSignupDate(Date signupDate) {
+		this.signupDate = signupDate;
 	}
 	
 

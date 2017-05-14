@@ -187,11 +187,11 @@ public class SignupController extends BaseController{
 	    signupPayment.setAddTime(new Date());
 	    signupPaymentDao.save(signupPayment);
 		//学员信息
-		member.setName(member.getName());
-		member.setIdcard(member.getIdcard());
-		member.setProgress(0);
-		member.setUpdateTime(new Date());
-		memberDao.save(member);
+//		member.setName(member.getName());
+//		member.setIdcard(member.getIdcard());
+//		member.setProgress(0);
+//		member.setUpdateTime(new Date());
+//		memberDao.save(member);
 		//优惠券
 		if(coupon!=null){
 			coupon.setStatus(2);

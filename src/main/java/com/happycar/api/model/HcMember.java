@@ -46,6 +46,12 @@ public class HcMember implements Serializable {
 	@Column(name="coach_id")
 	private Integer coachId;
 	
+	@Column(name="signup_id")
+	private Integer signupId;
+	
+	@Column(name="signup_date")
+	private Date signupDate;
+	
 	@OneToOne
 	@JoinColumn(name="coach_id",insertable=false,updatable=false)
 	@NotFound(action=NotFoundAction.IGNORE)
@@ -162,5 +168,22 @@ public class HcMember implements Serializable {
 	public void setPic(String pic) {
 		this.pic = pic;
 	}
+
+	public Integer getSignupId() {
+		return signupId;
+	}
+
+	public void setSignupId(Integer signupId) {
+		this.signupId = signupId;
+	}
+
+	public Date getSignupDate() {
+		return signupDate;
+	}
+
+	public void setSignupDate(Date signupDate) {
+		this.signupDate = signupDate;
+	}
+
 
 }

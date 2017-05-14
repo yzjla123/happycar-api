@@ -26,9 +26,6 @@ public class HcCoach implements Serializable {
 	@Column(name="add_time")
 	private Date addTime;
 
-	@Column(name="img_url")
-	private String imgUrl;
-
 	private String name;
 
 	private String phone;
@@ -69,6 +66,8 @@ public class HcCoach implements Serializable {
 	
 	private String idcard;
 	
+	private String pic;
+	
 	@OneToOne
 	@JoinColumn(name="school_id",insertable=false,updatable=false)
 	@NotFound(action=NotFoundAction.IGNORE)
@@ -99,14 +98,6 @@ public class HcCoach implements Serializable {
 
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
-	}
-
-	public String getImgUrl() {
-		return this.imgUrl;
-	}
-
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
 	}
 
 	public String getName() {
@@ -259,6 +250,14 @@ public class HcCoach implements Serializable {
 
 	public void setDrivingLicenseType(HcSysParam drivingLicenseType) {
 		this.drivingLicenseType = drivingLicenseType;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 
 }
