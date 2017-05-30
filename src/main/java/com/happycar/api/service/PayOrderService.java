@@ -89,6 +89,8 @@ public class PayOrderService {
 			}else{
 				member.setProgress(2);
 			}
+			member.setSignupId(signup.getId());
+			member.setSignupDate(new Date());
 			memberDao.save(member);
 		}
 		return true;

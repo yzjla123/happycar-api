@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.happycar.api.contant.Constant;
 import com.happycar.api.utils.MessageUtil;
 import com.happycar.api.utils.RedisUtil;
+import com.happycar.api.utils.SMSUtil;
 import com.happycar.api.utils.StringUtil;
 import com.happycar.api.vo.ResponseModel;
 
@@ -35,14 +36,17 @@ public class UtilController extends BaseController {
 	public ResponseModel verifyCode(String phone, HttpServletRequest request, HttpServletResponse response) {
 		ResponseModel model = new ResponseModel();
 		String verifyCode = StringUtil.verifyCode();
+		//有效期5分钟
+		RedisUtil.setString(Constant.REDIS_VERIFY_CODE + phone, verifyCode, 60*5);
+//		boolean ret = SMSUtil.send(phone,verifyCode);
+		boolean ret = true;
 		System.out.println(verifyCode);
-		RedisUtil.setString(Constant.REDIS_VERIFY_CODE + phone, verifyCode, 60);
-		// boolean ret = SMSUtil.send(phone, "您好,您的验证码是:"+verifyCode);
-		// if(ret){
-		MessageUtil.success("发送成功!", model);
-		// }else{
-		// MessageUtil.fail("发送失败,稍候再试!", model);
-		// }
+		if (ret) {
+			model.addAttribute("verifyCode", verifyCode);
+			MessageUtil.success("发送成功!", model);
+		} else {
+			MessageUtil.fail("发送失败,稍候再试!", model);
+		}
 		return model;
 	}
 }

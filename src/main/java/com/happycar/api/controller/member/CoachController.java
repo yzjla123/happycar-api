@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 
-@Api(value = "司机管理")
+@Api(value = "教练管理")
 @RestController
 @RequestMapping("/api/member/coach")	
 public class CoachController extends BaseController{
@@ -44,7 +44,7 @@ public class CoachController extends BaseController{
 	@Resource
 	private CommentDao commentDao;
 	
-	@ApiOperation(value = "司机列表", httpMethod = "GET", notes = "司机列表")
+	@ApiOperation(value = "教练列表", httpMethod = "GET", notes = "教练列表")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ApiImplicitParams(value = {
 			
@@ -78,7 +78,7 @@ public class CoachController extends BaseController{
 	}
 	
 
-	@ApiOperation(value = "司机详情", httpMethod = "GET", notes = "司机详情")
+	@ApiOperation(value = "教练详情", httpMethod = "GET", notes = "教练详情")
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	@ApiImplicitParams(value = {
 			@ApiImplicitParam(name = "id", value = "教练id", required = false, dataType = "String", paramType = "query"),
@@ -102,7 +102,7 @@ public class CoachController extends BaseController{
 			}
 		}
 		coachVO.setDrivingLicenseType(coach.getDrivingLicenseType().getValue());
-		List<HcComment> list = commentDao.findByCoachIdAndIsDeleted(id,0);
+		List<HcComment> list = commentDao.findByCoachIdAndIsDeletedOrderByIdDesc(id);
 		List<HcCommentVO> commentVOs = new ArrayList<>();
 		for (HcComment comment : list) {
 			HcCommentVO commentVO = new HcCommentVO();

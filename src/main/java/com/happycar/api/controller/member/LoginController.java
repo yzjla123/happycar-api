@@ -72,10 +72,10 @@ public class LoginController extends BaseController{
 			return model;
 		}
 		String verifyCode1 = RedisUtil.getString(Constant.REDIS_VERIFY_CODE+member.getPhone());
-//		if(!verifyCode.equals(verifyCode1)){
-//			MessageUtil.fail("验证码不正确", model);
-//			return model;
-//		}
+		if(!verifyCode.equals(verifyCode1)){
+			MessageUtil.fail("验证码不正确", model);
+			return model;
+		}
 		List<HcMember> list = memberDao.findByPhoneAndIsDeleted(member.getPhone(),0);
 		if(list.size()==0){
 			MessageUtil.fail("手机号不存在", model);

@@ -82,7 +82,7 @@ public class BookController extends BaseController{
 	})
 	public ResponseModel list(final Integer scheduleId,final String date,HttpServletRequest request){
 		ResponseModel model = new ResponseModel();
-		HcCoach coach = getLoginCoach(request);
+		final HcCoach coach = getLoginCoach(request);
 		List<HcBook> list = bookDao.findAll(new Specification<HcBook>() {
 			
 			@Override

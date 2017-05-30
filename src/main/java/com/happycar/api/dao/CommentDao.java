@@ -17,7 +17,8 @@ import com.happycar.api.model.HcComment;
 @Repository
 public interface CommentDao extends JpaRepository<HcComment, Integer>,JpaSpecificationExecutor<HcComment>{
 
-	public List<HcComment> findByCoachIdAndIsDeleted(Integer coachId, int isDeleted);
+	@Query(value = "select * from hc_comment where coach_id=?1 and is_deleted=0 order by id desc limit 0,3",nativeQuery=true)
+	public List<HcComment> findByCoachIdAndIsDeletedOrderByIdDesc(Integer coachId);
 
 	public HcComment findByBookIdAndIsDeleted(Integer bookId, int isDeleted);
 

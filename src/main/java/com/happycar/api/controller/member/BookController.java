@@ -38,6 +38,7 @@ import com.happycar.api.model.HcSchedule;
 import com.happycar.api.utils.BeanUtil;
 import com.happycar.api.utils.DateUtil;
 import com.happycar.api.utils.MessageUtil;
+import com.happycar.api.utils.StringUtil;
 import com.happycar.api.vo.HcBookVO;
 import com.happycar.api.vo.HcCoachVO;
 import com.happycar.api.vo.HcCommentVO;
@@ -176,6 +177,10 @@ public class BookController extends BaseController{
 	public ResponseModel add(final String scheduleIds,HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
 		HcMember member = getLoginMember(request);
+		if(StringUtil.isNull(scheduleIds)){
+			MessageUtil.fail("请选择课程!", model);
+			return model;
+		}
 		String[] scheduleIdArray = scheduleIds.split(",");
 		List<Integer> list = new ArrayList<>();
 		for (String id : scheduleIdArray) {

@@ -19,6 +19,7 @@ import com.happycar.api.contant.Constant;
 import com.happycar.api.controller.BaseController;
 import com.happycar.api.dao.CouponDao;
 import com.happycar.api.dao.MemberDao;
+import com.happycar.api.dao.MemberRelationDao;
 import com.happycar.api.dao.SignupDao;
 import com.happycar.api.dao.SignupPaymentDao;
 import com.happycar.api.dao.TuitionDao;
@@ -27,6 +28,7 @@ import com.happycar.api.model.HcMember;
 import com.happycar.api.model.HcSignup;
 import com.happycar.api.model.HcSignupPayment;
 import com.happycar.api.model.HcTuition;
+import com.happycar.api.service.MemberRelationService;
 import com.happycar.api.utils.BeanUtil;
 import com.happycar.api.utils.MessageUtil;
 import com.happycar.api.utils.RedisUtil;
@@ -58,6 +60,8 @@ public class SignupController extends BaseController{
 	private MemberDao memberDao;
 	@Resource
 	private SignupPaymentDao signupPaymentDao;
+	@Resource
+	private MemberRelationService relationService;
 	
 	@ApiOperation(value = "报名", httpMethod = "POST", notes = "报名")
 	@RequestMapping(value = "", method = RequestMethod.POST)
@@ -91,14 +95,14 @@ public class SignupController extends BaseController{
 			MessageUtil.fail("套餐不能为空", model);
 			return model;
 		}
-		if(StringUtils.isEmpty(name)){
-			MessageUtil.fail("学员姓名不能为空", model);
-			return model;
-		}
-		if(StringUtils.isEmpty(idcard)){
-			MessageUtil.fail("学员身份证不能为空", model);
-			return model;
-		}
+//		if(StringUtils.isEmpty(name)){
+//			MessageUtil.fail("学员姓名不能为空", model);
+//			return model;
+//		}
+//		if(StringUtils.isEmpty(idcard)){
+//			MessageUtil.fail("学员身份证不能为空", model);
+//			return model;
+//		}
 		if(payType==null){
 			MessageUtil.fail("付款方式不能为空", model);
 			return model;
@@ -187,6 +191,15 @@ public class SignupController extends BaseController{
 	    signupPayment.setAddTime(new Date());
 	    signupPaymentDao.save(signupPayment);
 		//学员信息
+		if(signup.getPayAmount()==100){
+			member.setProgress(1);
+		}else{
+			member.setProgress(2);
+		}
+		member.setSignupId(signup.getId());
+		member.setSignupDate(new Date());
+		memberDao.save(member);
+		
 //		member.setName(member.getName());
 //		member.setIdcard(member.getIdcard());
 //		member.setProgress(0);
@@ -196,6 +209,10 @@ public class SignupController extends BaseController{
 		if(coupon!=null){
 			coupon.setStatus(2);
 			couponDao.save(coupon);
+		}
+		//生成学员关系表
+		if(StringUtils.isNotEmpty(refereePhone)){
+			relationService.add(member.getId(), refereePhone);
 		}
 		model.addAttribute("signupId", signup.getId());
 		MessageUtil.success("操作成功", model);
