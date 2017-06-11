@@ -54,8 +54,8 @@ public class SignupController extends BaseController{
 	private MemberDao memberDao;
 	@Resource
 	private SignupPaymentDao signupPaymentDao;
-	@Resource
-	private MemberRelationService relationService;
+//	@Resource
+//	private MemberRelationService relationService;
 	
 	@ApiOperation(value = "报名", httpMethod = "POST", notes = "报名")
 	@RequestMapping(value = "", method = RequestMethod.POST)
@@ -206,10 +206,10 @@ public class SignupController extends BaseController{
 			coupon.setStatus(2);
 			couponDao.save(coupon);
 		}
-		//生成学员关系表
-		if(StringUtils.isNotEmpty(refereePhone)){
-			relationService.add(member.getId(), refereePhone);
-		}
+//		//生成学员关系表
+//		if(StringUtils.isNotEmpty(refereePhone)){
+//			relationService.add(member.getId(), refereePhone);
+//		}
 		model.addAttribute("signupPaymentId", signupPayment.getId());
 		MessageUtil.success("操作成功", model);
 		return model;

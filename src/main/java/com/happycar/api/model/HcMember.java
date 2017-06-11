@@ -54,6 +54,9 @@ public class HcMember implements Serializable {
 	
 	private Float commission;
 	
+	@Column(name="referee_phone")
+	private String refereePhone;
+	
 	@OneToOne
 	@JoinColumn(name="coach_id",insertable=false,updatable=false)
 	@NotFound(action=NotFoundAction.IGNORE)
@@ -193,6 +196,14 @@ public class HcMember implements Serializable {
 
 	public void setCommission(Float commission) {
 		this.commission = commission;
+	}
+
+	public String getRefereePhone() {
+		return refereePhone;
+	}
+
+	public void setRefereePhone(String refereePhone) {
+		this.refereePhone = refereePhone;
 	}
 
 

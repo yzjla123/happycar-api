@@ -132,7 +132,7 @@ public class CommissionWithdrawController extends BaseController{
 			@ApiResponse(code = 200, message = "")
 	})
 	@Transactional
-	public ResponseModel add(
+	public ResponseModel cancel(
 			Integer id,
 			HttpServletRequest request,
 			@ApiIgnore Pageable pageable){
@@ -148,7 +148,7 @@ public class CommissionWithdrawController extends BaseController{
 			return model;
 		}
 		//取消提现
-		withdraw.setStatus(1);
+		withdraw.setStatus(2);
 		withdraw.setUpdateTime(new Date());
 		commissionWithdrawDao.save(withdraw);
 		//返还佣金

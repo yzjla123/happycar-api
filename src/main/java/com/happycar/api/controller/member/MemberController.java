@@ -21,6 +21,7 @@ import com.happycar.api.dao.MemberDao;
 import com.happycar.api.model.HcCoach;
 import com.happycar.api.model.HcMember;
 import com.happycar.api.service.ActivityService;
+import com.happycar.api.service.MemberRelationService;
 import com.happycar.api.utils.BeanUtil;
 import com.happycar.api.utils.MessageUtil;
 import com.happycar.api.utils.RedisUtil;
@@ -49,13 +50,15 @@ public class MemberController extends BaseController{
 	private CoachDao coachDao;
 	@Resource
 	private ActivityService activityService;
+	@Resource
+	private MemberRelationService relationService;
 	
 	@ApiOperation(value = "注册学员", httpMethod = "POST", notes = "注册学员")
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	@ApiImplicitParams(value = {
 			@ApiImplicitParam(name = "name", value = "用户名", required = true, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "phone", value = "手机号", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "idcard", value = "身价证", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "refereePhone", value = "推荐人", required = false, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "verifyCode", value = "验证码", required = true, dataType = "String", paramType = "query"),
 	})
 	@ApiResponses(value={
@@ -74,10 +77,10 @@ public class MemberController extends BaseController{
 			MessageUtil.fail("真实姓名不能为空", model);
 			return model;
 		}
-		if(StringUtils.isEmpty(member.getIdcard())){
-			MessageUtil.fail("身价证不能为空", model);
-			return model;
-		}
+//		if(StringUtils.isEmpty(member.getIdcard())){
+//			MessageUtil.fail("身价证不能为空", model);
+//			return model;
+//		}
 		if(StringUtils.isEmpty(verifyCode)){
 			MessageUtil.fail("验证码不能为空", model);
 			return model;
@@ -99,7 +102,13 @@ public class MemberController extends BaseController{
 		member.setAddTime(new Date());
 		member.setUpdateTime(new Date());
 		member.setPic(Constant.PIC_MEMBER);
+		member.setCommission(0f);
 		memberDao.save(member);
+		//是否有推荐人
+		//生成学员关系表
+		if(StringUtils.isNotEmpty(member.getRefereePhone())){
+			relationService.add(member.getId(), member.getRefereePhone());
+		}
 		//注册送活动
 		activityService.registerCoupon(member.getId());
 		HcMemberVO memberVO = new HcMemberVO();
