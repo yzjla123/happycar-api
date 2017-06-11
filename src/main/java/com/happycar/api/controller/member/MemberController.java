@@ -197,4 +197,25 @@ public class MemberController extends BaseController{
 		MessageUtil.success("操作成功!", model);
 		return model;
 	}
+	
+	@ApiOperation(value = "学员信息", httpMethod = "GET", notes = "学员信息")
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	@Authentication
+	public ResponseModel info(HttpServletRequest request,
+			 HttpServletResponse response){
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		HcMemberVO memberVO = new HcMemberVO();
+		BeanUtil.copyProperties(member, memberVO);
+		memberVO.setIdcard("");
+		model.addAttribute("member", memberVO);
+		MessageUtil.success("操作成功!", model);
+		return model;
+	}
 }

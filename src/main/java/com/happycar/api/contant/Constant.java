@@ -32,4 +32,5 @@ public class Constant {
 	public static final String PIC_MEMBER = "http://ookxrria2.bkt.clouddn.com/hc-member-avatar.png";
 	public static final String PARAM_CODE_BANNER = "BANNER";
 	public static final String PARAM_CODE_COMMISSION = "COMMISSION";
+	public static final String PARAM_CODE_SHARE = "SHARE";
 }

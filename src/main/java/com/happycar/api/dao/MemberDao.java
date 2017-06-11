@@ -24,4 +24,12 @@ public interface MemberDao extends JpaRepository<HcMember, Integer>,JpaSpecifica
 	public List<HcMember> findByCoachIdAndProgressLessThan(Integer coachId,Integer progress);
 
 	public List<HcMember> findAllByCoachIdAndProgressLessThanAndIsDeleted(int coachId,int progress,int isDeleted);
+
+	@Modifying
+	@Query("update HcMember set commission=commission+? where id=?")
+	public int addCommission(float commission,int memberId);
+	
+	@Modifying
+	@Query("update HcMember set commission=commission-? where id=?")
+	public int reduceCommission(float commission,int memberId);
 }

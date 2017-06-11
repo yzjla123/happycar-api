@@ -52,6 +52,8 @@ public class HcMember implements Serializable {
 	@Column(name="signup_date")
 	private Date signupDate;
 	
+	private Float commission;
+	
 	@OneToOne
 	@JoinColumn(name="coach_id",insertable=false,updatable=false)
 	@NotFound(action=NotFoundAction.IGNORE)
@@ -183,6 +185,14 @@ public class HcMember implements Serializable {
 
 	public void setSignupDate(Date signupDate) {
 		this.signupDate = signupDate;
+	}
+
+	public Float getCommission() {
+		return commission;
+	}
+
+	public void setCommission(Float commission) {
+		this.commission = commission;
 	}
 
 

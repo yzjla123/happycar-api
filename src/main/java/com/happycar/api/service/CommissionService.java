@@ -3,6 +3,7 @@ package com.happycar.api.service;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import com.happycar.api.dao.MemberRelationDao;
 import com.happycar.api.dao.SignupDao;
 import com.happycar.api.dao.SignupPaymentDao;
 import com.happycar.api.dao.SysParamDao;
+import com.happycar.api.model.HcCommissionLog;
 import com.happycar.api.model.HcMemberRelation;
 import com.happycar.api.model.HcSignup;
 import com.happycar.api.model.HcSignupPayment;
@@ -36,6 +38,7 @@ public class CommissionService {
 	@Resource
 	private MemberDao memberDao;
 	
+	@Transactional
 	public void allotBySignupPaymentId(int signupPaymentId){
 		HcSignupPayment payment = paymentDao.findOne(signupPaymentId);
 		if(payment==null){
@@ -57,16 +60,37 @@ public class CommissionService {
 		}
 		//根据各级分配佣金
 		for (HcMemberRelation relation : relations) {
-			int pid = relation.getPid();
 			float commission = 0;
+			float ratio = 0;
+			//每一级的分成
 			if(relation.getLevel()==1){
+				ratio = Float.parseFloat(param.getExt1());
 				commission = payment.getPayAmount()*Float.parseFloat(param.getExt1());
 			}else if(relation.getLevel()==2){
+				ratio = Float.parseFloat(param.getExt2());
 				commission = payment.getPayAmount()*Float.parseFloat(param.getExt2());
 			}else if(relation.getLevel()==3){
+				ratio = Float.parseFloat(param.getExt3());
 				commission = payment.getPayAmount()*Float.parseFloat(param.getExt3());
 			}
-//			memberDao.
+			HcCommissionLog commissionLog = new HcCommissionLog();
+			commissionLog.setCid(relation.getCid());
+			commissionLog.setPid(relation.getPid());
+			commissionLog.setAmount(commission);
+			commissionLog.setLevel(relation.getLevel());
+			commissionLog.setRatio(ratio);
+			commissionLog.setTotalAmount(payment.getPayAmount());
+			commissionLog.setType(1);
+			commissionLog.setStatus(0);
+			commissionLogDao.save(commissionLog);
 		}
+	}
+	
+	/**
+	 * 佣金结算,7天后佣金自动结算.
+	 */
+	public void commissionBattle(){
+//		memberDao.addCommission(commission,relation.getPid());
+//		logger.info("用户ID:"+relation.getPid()+"获得了"+commission+"佣金");
 	}
 }

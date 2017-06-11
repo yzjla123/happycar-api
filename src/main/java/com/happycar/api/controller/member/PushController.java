@@ -50,7 +50,7 @@ public class PushController extends BaseController{
 	@Transactional
 	public ResponseModel add(HcPushInfo pushInfo, HttpServletRequest request){
 		ResponseModel model = new ResponseModel();
-		pushInfoDao.deleteByPhoneAndType(pushInfo.getPhone(),pushInfo.getType());
+		pushInfoDao.deleteByClientIdAndType(pushInfo.getClientId(),pushInfo.getType());
 		pushInfo.setAddTime(new Date());
 		pushInfo.setUpdateTime(new Date());
 		pushInfoDao.save(pushInfo);

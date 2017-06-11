@@ -1,6 +1,7 @@
 package com.happycar.api.controller.member;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,17 +10,14 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.happycar.api.annotation.Authentication;
-import com.happycar.api.contant.Constant;
 import com.happycar.api.controller.BaseController;
 import com.happycar.api.dao.CouponDao;
 import com.happycar.api.dao.MemberDao;
-import com.happycar.api.dao.MemberRelationDao;
 import com.happycar.api.dao.SignupDao;
 import com.happycar.api.dao.SignupPaymentDao;
 import com.happycar.api.dao.TuitionDao;
@@ -29,11 +27,7 @@ import com.happycar.api.model.HcSignup;
 import com.happycar.api.model.HcSignupPayment;
 import com.happycar.api.model.HcTuition;
 import com.happycar.api.service.MemberRelationService;
-import com.happycar.api.utils.BeanUtil;
 import com.happycar.api.utils.MessageUtil;
-import com.happycar.api.utils.RedisUtil;
-import com.happycar.api.utils.TokenProcessor;
-import com.happycar.api.vo.HcMemberVO;
 import com.happycar.api.vo.ResponseModel;
 
 import io.swagger.annotations.Api;
@@ -173,15 +167,17 @@ public class SignupController extends BaseController{
 		//添加支付信息
 		HcSignupPayment signupPayment = new HcSignupPayment();
 		float couponAmount = signup.getCouponAmount()==null?0:signup.getCouponAmount();
-		float payAmount = signup.getAmount();
-		
-		if(signup.getPayType()==1){
+		float payAmount = 0;
+		if(signup.getPayType()==0){
+			payAmount = signup.getAmount();
+		}else if(signup.getPayType()==1){
 			//首付60%
-			payAmount = (int) (payAmount*0.6);
+			payAmount = (int) (signup.getAmount()*0.6);
 		}else if(signup.getPayType()==2){
 			//首付100元
 			payAmount = 100;
 		}
+		//减去优惠券
 	    payAmount = Math.max(payAmount - couponAmount,0);
 	    signupPayment.setPayAmount(payAmount);
 	    signupPayment.setPayChannel(payChannel);
@@ -191,13 +187,13 @@ public class SignupController extends BaseController{
 	    signupPayment.setAddTime(new Date());
 	    signupPaymentDao.save(signupPayment);
 		//学员信息
-		if(signup.getPayAmount()==100){
-			member.setProgress(1);
-		}else{
-			member.setProgress(2);
-		}
-		member.setSignupId(signup.getId());
-		member.setSignupDate(new Date());
+//		if(signup.getPayAmount()==100){
+//			member.setProgress(1);
+//		}else{
+//			member.setProgress(2);
+//		}
+//		member.setSignupId(signup.getId());
+//		member.setSignupDate(new Date());
 		memberDao.save(member);
 		
 //		member.setName(member.getName());
@@ -214,10 +210,92 @@ public class SignupController extends BaseController{
 		if(StringUtils.isNotEmpty(refereePhone)){
 			relationService.add(member.getId(), refereePhone);
 		}
-		model.addAttribute("signupId", signup.getId());
+		model.addAttribute("signupPaymentId", signupPayment.getId());
 		MessageUtil.success("操作成功", model);
 		return model;
 	}
 	
+	@ApiOperation(value = "取消未支付报名", httpMethod = "POST", notes = "取消未支付报名")
+	@RequestMapping(value = "/cancel", method = RequestMethod.POST)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "accessToken", value = "token", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	@Transactional
+	@Authentication
+	public ResponseModel cancel(HttpServletRequest request){
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		List<HcSignup> signups = signupDao.findByMemberIdAndStatusAndIsDeleted(member.getId(),0,0);
+		for (HcSignup hcSignup : signups) {
+			hcSignup.setIsDeleted(1);
+			signupDao.save(hcSignup);
+			//优惠券返还
+			if(hcSignup.getCouponId()!=null&&hcSignup.getCouponId()!=0){
+				HcCoupon coupon = couponDao.getOne(hcSignup.getCouponId());
+				if(coupon!=null){
+					coupon.setStatus(1);
+					couponDao.save(coupon);
+				}
+			}
+		}
+		MessageUtil.success("操作成功", model);
+		return model;
+	}
 
+	@ApiOperation(value = "报名信息", httpMethod = "GET", notes = "获取")
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "accessToken", value = "token", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	@Transactional
+	@Authentication
+	public ResponseModel info(HttpServletRequest request){
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		List<HcSignup> signups = signupDao.findByMemberIdAndStatusAndIsDeleted(member.getId(),1,0);
+		if(signups.size()>0){
+			model.addAttribute("signup", signups.get(0));
+		}
+		MessageUtil.success("操作成功", model);
+		return model;
+	}
+
+	@ApiOperation(value = "生成支付单", httpMethod = "POST", notes = "生成学费支付单")
+	@RequestMapping(value = "/payment", method = RequestMethod.POST)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "signupId", value = "报名信息Id", required = true, dataType = "Int", paramType = "query"),
+			@ApiImplicitParam(name = "payAmount", value = "支付金额", required = true, dataType = "Float", paramType = "query"),
+			@ApiImplicitParam(name = "payChannel", value = "支付渠道", required = true, dataType = "Int", paramType = "query"),
+			@ApiImplicitParam(name = "accessToken", value = "token", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	@Transactional
+	@Authentication
+	public ResponseModel payment(
+			Integer signupId,
+			Float payAmount,
+			Integer payChannel,
+			HttpServletRequest request){
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		HcSignupPayment signupPayment = new HcSignupPayment();
+	    signupPayment.setPayAmount(payAmount);
+	    signupPayment.setPayChannel(payChannel);
+	    signupPayment.setSignupId(signupId);
+	    signupPayment.setStatus(0);
+	    signupPayment.setIsDeleted(0);
+	    signupPayment.setAddTime(new Date());
+	    signupPaymentDao.save(signupPayment);
+	    model.addAttribute("signupPaymentId", signupPayment.getId());
+		MessageUtil.success("操作成功", model);
+		return model;
+	}
 }

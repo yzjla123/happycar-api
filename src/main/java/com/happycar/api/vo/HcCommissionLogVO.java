@@ -1,4 +1,4 @@
-package com.happycar.api.model;
+package com.happycar.api.vo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,47 +13,18 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+public class HcCommissionLogVO implements Serializable {
 
-/**
- * The persistent class for the hc_commission_log database table.
- * 
- */
-@Entity
-@Table(name="hc_commission_log")
-@NamedQuery(name="HcCommissionLog.findAll", query="SELECT h FROM HcCommissionLog h")
-public class HcCommissionLog implements Serializable {
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="add_time")
 	private Date addTime;
-
 	private Float amount;
-
 	private int cid;
-
 	private int level;
-
 	private int pid;
-
-	private Float ratio;
-
-	@Column(name="total_amount")
-	private Float totalAmount;
-
 	private int type;
-	
 	private int status;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="update_time")
-	private Date updateTime;
-
-	public HcCommissionLog() {
+	public HcCommissionLogVO() {
 	}
 
 	public int getId() {
@@ -104,36 +75,12 @@ public class HcCommissionLog implements Serializable {
 		this.pid = pid;
 	}
 
-	public Float getRatio() {
-		return this.ratio;
-	}
-
-	public void setRatio(Float ratio) {
-		this.ratio = ratio;
-	}
-
-	public Float getTotalAmount() {
-		return this.totalAmount;
-	}
-
-	public void setTotalAmount(Float totalAmount) {
-		this.totalAmount = totalAmount;
-	}
-
 	public int getType() {
 		return this.type;
 	}
 
 	public void setType(int type) {
 		this.type = type;
-	}
-
-	public Date getUpdateTime() {
-		return this.updateTime;
-	}
-
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
 	}
 
 	public int getStatus() {

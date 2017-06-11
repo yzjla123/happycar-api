@@ -19,4 +19,6 @@ public interface SignupDao extends JpaRepository<HcSignup, Integer>,JpaSpecifica
 	@Query("update HcSignup set isDeleted=1 where id=?")
 	public int deleteById(Integer id);
 
+	public List<HcSignup> findByMemberIdAndStatusAndIsDeleted(Integer id, int status, int isDeleted);
+
 }

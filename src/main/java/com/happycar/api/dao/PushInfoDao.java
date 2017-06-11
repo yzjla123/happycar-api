@@ -15,5 +15,9 @@ public interface PushInfoDao extends JpaRepository<HcPushInfo, Integer>,JpaSpeci
 	@Modifying
 	@Query(value="delete from HcPushInfo where phone=? and type=?")
 	public void deleteByPhoneAndType(String phone, String type);
+	
+	@Modifying
+	@Query(value="delete from HcPushInfo where clientId=? and type=?")
+	public void deleteByClientIdAndType(String clientId, String type);
 
 }

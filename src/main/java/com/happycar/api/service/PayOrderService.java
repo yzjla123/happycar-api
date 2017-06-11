@@ -35,6 +35,8 @@ public class PayOrderService {
 	private SignupPaymentDao signupPaymentDao;
 	@Autowired
 	private SignupDao signupDao;
+	@Autowired
+	private CommissionService commissionService;
 
 	@Transactional
 	public boolean pay(String orderNo, String amount, String memo) {
@@ -83,15 +85,19 @@ public class PayOrderService {
 			signupDao.save(signup);
 			signupPayment.setStatus(1);
 			signupPaymentDao.save(signupPayment);
-			//进度更新
-			if(signup.getPayAmount()==100){
-				member.setProgress(1);
-			}else{
-				member.setProgress(2);
+			if(member.getProgress()<=2){
+				//进度更新
+				if(signup.getPayAmount()==100){
+					member.setProgress(1);
+				}else{
+					member.setProgress(2);
+				}
 			}
 			member.setSignupId(signup.getId());
 			member.setSignupDate(new Date());
 			memberDao.save(member);
+			//分配佣金
+			commissionService.allotBySignupPaymentId(signupPayment.getId());
 		}
 		return true;
 	}

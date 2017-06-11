@@ -30,6 +30,8 @@ public class HcMemberVO implements Serializable {
 	private Integer signupId;
 	
 	private Date signupDate;
+	
+	private Float commission;
 
 	public Integer getId() {
 		return id;
@@ -109,6 +111,14 @@ public class HcMemberVO implements Serializable {
 
 	public void setSignupDate(Date signupDate) {
 		this.signupDate = signupDate;
+	}
+
+	public Float getCommission() {
+		return commission;
+	}
+
+	public void setCommission(Float commission) {
+		this.commission = commission;
 	}
 	
 
