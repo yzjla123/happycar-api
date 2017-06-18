@@ -24,7 +24,7 @@ import org.hibernate.annotations.NotFoundAction;
  * 
  */
 @Entity
-@Table(name="air_fund_log")
+@Table(name="hc_fund_log")
 public class HcFundLog implements Serializable {
 	private static final long serialVersionUID = 1L;
 

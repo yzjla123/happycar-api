@@ -60,7 +60,7 @@ import io.swagger.annotations.ApiResponses;
 @Authentication
 public class BookController extends BaseController{
 	
-	private Logger logger = Logger.getLogger(BookController.class);
+	private final Logger logger = Logger.getLogger(BookController.class);
 	@Resource
 	private BookDao bookDao;
 	@Resource
@@ -80,7 +80,10 @@ public class BookController extends BaseController{
 	@ApiResponses(value={
 			@ApiResponse(code = 200, message = "")
 	})
-	public ResponseModel list(final Integer scheduleId,final String date,HttpServletRequest request){
+	public ResponseModel list(
+			final Integer scheduleId,
+			final String date,
+			HttpServletRequest request){
 		ResponseModel model = new ResponseModel();
 		final HcCoach coach = getLoginCoach(request);
 		List<HcBook> list = bookDao.findAll(new Specification<HcBook>() {

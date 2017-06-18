@@ -14,7 +14,9 @@ import com.happycar.api.model.HcMemberRelation;
 @Repository
 public interface MemberRelationDao extends JpaRepository<HcMemberRelation, Integer>,JpaSpecificationExecutor<HcMemberRelation>{
 
-	public HcMemberRelation findByCidAndLevel(Integer id, int level);
+	public HcMemberRelation findByCidAndLevel(Integer cid, int level);
+	
+	public List<HcMemberRelation> findByPidAndLevel(Integer pid, int level);
 
 	@Modifying
 	@Query("delete from HcMemberRelation where cid=?")

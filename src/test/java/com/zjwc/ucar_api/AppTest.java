@@ -26,8 +26,8 @@ public class AppTest
     public AppTest( String testName )
     {
         super( testName );
-        final ApplicationContext applicationContext = SpringApplication.run(Api.class, new String[]{});
-    	SpringContextUtil.setApplicationContext(applicationContext);
+//        final ApplicationContext applicationContext = SpringApplication.run(Api.class, new String[]{});
+//    	SpringContextUtil.setApplicationContext(applicationContext);
     }
 
     /**
@@ -48,7 +48,7 @@ public class AppTest
     }
     
     public void testCommissionService(){
-    	CommissionService commissionService = SpringContextUtil.getApplicationContext().getBean(CommissionService.class);
-    	commissionService.allotBySignupPaymentId(20);
+//    	CommissionService commissionService = SpringContextUtil.getApplicationContext().getBean(CommissionService.class);
+//    	commissionService.allotBySignupPaymentId(20);
     }
 }

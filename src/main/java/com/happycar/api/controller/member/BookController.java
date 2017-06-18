@@ -14,8 +14,6 @@ import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
-import org.apache.commons.collections.ListUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.log4j.Logger;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -81,7 +79,7 @@ public class BookController extends BaseController{
 	})
 	public ResponseModel list(final String date,HttpServletRequest request){
 		ResponseModel model = new ResponseModel();
-		HcMember member = getLoginMember(request);
+		final HcMember member = getLoginMember(request);
 		List<HcBook> list = bookDao.findAll(new Specification<HcBook>() {
 			
 			@Override

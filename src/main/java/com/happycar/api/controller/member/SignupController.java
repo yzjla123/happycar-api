@@ -27,6 +27,7 @@ import com.happycar.api.model.HcSignup;
 import com.happycar.api.model.HcSignupPayment;
 import com.happycar.api.model.HcTuition;
 import com.happycar.api.service.MemberRelationService;
+import com.happycar.api.service.SignupService;
 import com.happycar.api.utils.MessageUtil;
 import com.happycar.api.vo.ResponseModel;
 
@@ -54,8 +55,8 @@ public class SignupController extends BaseController{
 	private MemberDao memberDao;
 	@Resource
 	private SignupPaymentDao signupPaymentDao;
-//	@Resource
-//	private MemberRelationService relationService;
+	@Resource
+	private SignupService signupService;
 	
 	@ApiOperation(value = "报名", httpMethod = "POST", notes = "报名")
 	@RequestMapping(value = "", method = RequestMethod.POST)
@@ -112,7 +113,6 @@ public class SignupController extends BaseController{
 			return model;
 		}
 		//学员验证
-		member = memberDao.findOne(member.getId());
 		if(member==null||member.getIsDeleted()==1){
 			MessageUtil.fail("学员不存在", model);
 			return model;
@@ -186,32 +186,19 @@ public class SignupController extends BaseController{
 	    signupPayment.setIsDeleted(0);
 	    signupPayment.setAddTime(new Date());
 	    signupPaymentDao.save(signupPayment);
-		//学员信息
-//		if(signup.getPayAmount()==100){
-//			member.setProgress(1);
-//		}else{
-//			member.setProgress(2);
-//		}
-//		member.setSignupId(signup.getId());
-//		member.setSignupDate(new Date());
-		memberDao.save(member);
-		
-//		member.setName(member.getName());
-//		member.setIdcard(member.getIdcard());
-//		member.setProgress(0);
-//		member.setUpdateTime(new Date());
-//		memberDao.save(member);
 		//优惠券
 		if(coupon!=null){
 			coupon.setStatus(2);
 			couponDao.save(coupon);
 		}
-//		//生成学员关系表
-//		if(StringUtils.isNotEmpty(refereePhone)){
-//			relationService.add(member.getId(), refereePhone);
-//		}
-		model.addAttribute("signupPaymentId", signupPayment.getId());
-		MessageUtil.success("操作成功", model);
+		//如果支付的金额为0.则直接调用支付方法
+		if(signupPayment.getPayAmount()==0){
+			signupService.pay(signupPayment.getId());
+			model.addAttribute("signupPaymentId", 0);
+		}else{
+			model.addAttribute("signupPaymentId", signupPayment.getId());
+		}
+		MessageUtil.success("报名成功", model);
 		return model;
 	}
 	
@@ -258,9 +245,9 @@ public class SignupController extends BaseController{
 	public ResponseModel info(HttpServletRequest request){
 		ResponseModel model = new ResponseModel();
 		HcMember member = getLoginMember(request);
-		List<HcSignup> signups = signupDao.findByMemberIdAndStatusAndIsDeleted(member.getId(),1,0);
-		if(signups.size()>0){
-			model.addAttribute("signup", signups.get(0));
+		if(member.getSignupId()!=null&&member.getSignupId()!=0){
+			HcSignup signup = signupDao.findOne(member.getSignupId());
+			model.addAttribute("signup", signup);
 		}
 		MessageUtil.success("操作成功", model);
 		return model;

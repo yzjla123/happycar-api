@@ -15,7 +15,7 @@ public class Constant {
 	public static final String RESOURCE_ROOT_LINUX="/home/ucar/api/resource";
 	public static final String RESOURCE_ROOT_MAC="/Users/zhengjianye/ucar/api/resource";
 	/************************************PAY TYPE***************************************/
-	public static final int PAY_TYPE_RECHARGE=1;//类型 1充值 2学费支付
+	public static final int PAY_TYPE_RECHARGE=1;//类型 1充值 2学费支付 3:推荐分成金
 	public static final int PAY_TYPE_TUITION=2;
 	/************************************ORDER STATUS***************************************/
 	public static final int SELFDRIVE_ORDER_STATUS_WAIT=1;//状态 1 待开始 2 执行中 3 已取消(乘客取消) 4 待结算 5 待评价 6 已完成7 已终止(平台取消)

@@ -2,6 +2,10 @@ package com.happycar.api.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import java.util.Date;
 
 
@@ -32,7 +36,17 @@ public class HcMemberRelation implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="update_time")
 	private Date updateTime;
-
+	
+	@OneToOne
+	@JoinColumn(name="cid",insertable=false,updatable=false)
+	@NotFound(action=NotFoundAction.IGNORE)
+	private HcMember childMember;
+	
+	@OneToOne
+	@JoinColumn(name="pid",insertable=false,updatable=false)
+	@NotFound(action=NotFoundAction.IGNORE)
+	private HcMember parentMember;
+	
 	public HcMemberRelation() {
 	}
 
@@ -82,6 +96,22 @@ public class HcMemberRelation implements Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public HcMember getChildMember() {
+		return childMember;
+	}
+
+	public void setChildMember(HcMember childMember) {
+		this.childMember = childMember;
+	}
+
+	public HcMember getParentMember() {
+		return parentMember;
+	}
+
+	public void setParentMember(HcMember parentMember) {
+		this.parentMember = parentMember;
 	}
 
 }
