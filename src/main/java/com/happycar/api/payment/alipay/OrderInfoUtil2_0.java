@@ -70,7 +70,7 @@ public class OrderInfoUtil2_0 {
 	public static Map<String, String> buildOrderParamMap(String subject,String body,String totalFee,String orderNo, boolean rsa2) {
 		Map<String, String> keyValues = new HashMap<String, String>();
 
-		keyValues.put("app_id", AlipayConfig.appid);
+		keyValues.put("app_id", AlipayConfig.getAppid());
 
 		keyValues.put("biz_content", "{\"timeout_express\":\"30m\",\"product_code\":\"QUICK_MSECURITY_PAY\",\"total_amount\":\""+totalFee+"\",\"subject\":\""+subject+"\",\"body\":\""+body+"\",\"out_trade_no\":\"" + orderNo +  "\"}");
 		
@@ -78,7 +78,7 @@ public class OrderInfoUtil2_0 {
 
 		keyValues.put("method", "alipay.trade.app.pay");
 		
-		keyValues.put("notify_url", AlipayConfig.ali_call_back_url);
+		keyValues.put("notify_url", AlipayConfig.getBackUrl());
 
 		keyValues.put("sign_type", rsa2 ? "RSA2" : "RSA");
 

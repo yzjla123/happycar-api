@@ -1,11 +1,45 @@
 package com.happycar.api.payment.alipay;
 
+import com.happycar.api.contant.Constant;
+import com.happycar.api.dao.SysParamDao;
+import com.happycar.api.model.HcSysParam;
+import com.happycar.api.utils.SpringContextUtil;
+
 public class AlipayConfig {
-	public static String input_charset = "utf-8";
-	public static String ali_public_key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDI6d306Q8fIfCOaTXyiUeJHkrIvYISRcc73s3vF1ZT7XN8RNPwJxo8pWaJMmvyTn9N4HQ632qJBVHf8sxHi/fEsraprwCtzvzQETrNRwVxLO5jVmRGi60j8Ue1efIlzPXV9je9mkjzOmdssymZkh2QhUrCmZYI/FCEa3/cNMW0QIDAQAB";
-	public static String partner = "2088721115956065";
-	public static String appid = "2017061707508532";
-	public static String seller = "pay@happycar-tech.com";
-	public static String ali_private_key = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAMOLnad59YthUZUp9iWS4Fhf4qSieknBXpQ8suTXNY6yA1hH+W+XSmq6NqYNtB3qPWY1MawLeHuCOKuNcm7gjgLDfVPdA/OGgny1QWT8I45c95lBfGhqP5sZmlLIGr8RTqRQ1fAKuITg1wKXCNUc8/PnT5Zwy8dwRxok1IlGPQRZAgMBAAECgYA0mnRYv0g8rHtj4xviU7aiT3kKzOKUwL4Opp2BThuMPXsE3qfNSyerulhFJ16SxZaqzhiErblFkGxqSezEwwewYj3NUq7qahRU4Rj20RsG2RRN5OeH4jOLT+84Txl9oSwDyKjfPWS0WGR+dIluJc+47AYHHOlYcGEMUgcJ/5kYGQJBAONX23CkqKdE7iO17UTwuDHuQ1ipiM8vgAKQeVOTJXm9w7/uCTe4PbP7dp8jIo1er8KqLJQ0Mew1sK2DqTQBxucCQQDcMayTHCluUQ8OVobCD/Vi1lqRTSBXyEOyjCeZ2c48CFb1Q3EOtgXfzG7TKVqibs4BozCbgPDxNou4JUij27K/AkEAi+39wT14GUySDyThH7fSh9kRVrcy3+NqtSlbpBdDz8T/gVjwD321bNxwTM8Ba2ZGZFj+C1J9D9iUIJiTQtF9LQJBAIfxTxc/wsBt4Pq8JtR238uWhTHByR8I7+qyptxQYQglKfKgIZOwgy3pW96YYHF6MUtHggHveFGjmF0m/5LSV6cCQFttu+9pnnioVUiCtGuEkfxF3sN1iuVNBus8mezb6HNAuRIyeZdUwu6rTS71+kyjp07+co5WfXStA+c0lvMzBbQ=";
-	public static String ali_call_back_url = "http://119.23.236.217:8081/api/alipay/notify";
+
+	public static String getPartner(){
+		SysParamDao paramDao = SpringContextUtil.getApplicationContext().getBean(SysParamDao.class);
+		HcSysParam param = paramDao.findByCode(Constant.PARAM_CODE_ALI_PARTNER);
+		return param.getExt1();
+	}
+	
+	public static String getAppid(){
+		SysParamDao paramDao = SpringContextUtil.getApplicationContext().getBean(SysParamDao.class);
+		HcSysParam param = paramDao.findByCode(Constant.PARAM_CODE_ALI_APPID);
+		return param.getExt1();
+	}	
+
+	public static String getSeller(){
+		SysParamDao paramDao = SpringContextUtil.getApplicationContext().getBean(SysParamDao.class);
+		HcSysParam param = paramDao.findByCode(Constant.PARAM_CODE_ALI_SELLER);
+		return param.getExt1();
+	}
+
+	public static String getPrivateKey(){
+		SysParamDao paramDao = SpringContextUtil.getApplicationContext().getBean(SysParamDao.class);
+		HcSysParam param = paramDao.findByCode(Constant.PARAM_CODE_ALI_PRI_KEY);
+		return param.getExt1();
+	}
+	
+	public static String getPubKey(){
+		SysParamDao paramDao = SpringContextUtil.getApplicationContext().getBean(SysParamDao.class);
+		HcSysParam param = paramDao.findByCode(Constant.PARAM_CODE_ALI_PUB_KEY);
+		return param.getExt1();
+	}
+
+	public static String getBackUrl(){
+		SysParamDao paramDao = SpringContextUtil.getApplicationContext().getBean(SysParamDao.class);
+		HcSysParam param = paramDao.findByCode(Constant.PARAM_CODE_ALI_BACK);
+		return param.getExt1();
+	}
 }

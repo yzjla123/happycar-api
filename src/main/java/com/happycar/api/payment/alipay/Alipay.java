@@ -12,7 +12,7 @@ public class Alipay {
 		Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(subject,body,price,orderNum,false);
 		String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
 //		System.out.println(orderParam);
-		String privateKey = AlipayConfig.ali_private_key;
+		String privateKey = AlipayConfig.getPrivateKey();
 		String sign = OrderInfoUtil2_0.getSign(params, privateKey, false);
 		final String orderInfo = orderParam + "&" + sign;
 		return orderInfo;

@@ -33,4 +33,11 @@ public class Constant {
 	public static final String PARAM_CODE_BANNER = "BANNER";
 	public static final String PARAM_CODE_COMMISSION = "COMMISSION";
 	public static final String PARAM_CODE_SHARE = "SHARE";
+	public static final String PARAM_CODE_SERVICE_PHONE = "SERVICE_PHONE";
+	public static final String PARAM_CODE_ALI_PARTNER = "ALI_PARTNER";
+	public static final String PARAM_CODE_ALI_APPID = "ALI_APPID";
+	public static final String PARAM_CODE_ALI_SELLER = "ALI_SELLER";
+	public static final String PARAM_CODE_ALI_PRI_KEY = "ALI_PRI_KEY";
+	public static final String PARAM_CODE_ALI_PUB_KEY = "ALI_PUB_KEY";
+	public static final String PARAM_CODE_ALI_BACK = "ALI_BACK";
 }

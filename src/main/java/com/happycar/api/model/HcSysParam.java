@@ -41,6 +41,9 @@ public class HcSysParam implements Serializable {
 	private Integer pid;
 
 	private Integer seq;
+	
+	@Column(name = "is_stop")
+	private String isStop;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "update_time")
@@ -151,6 +154,14 @@ public class HcSysParam implements Serializable {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getIsStop() {
+		return isStop;
+	}
+
+	public void setIsStop(String isStop) {
+		this.isStop = isStop;
 	}
 
 }

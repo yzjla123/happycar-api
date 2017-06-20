@@ -20,6 +20,7 @@ import com.happycar.api.model.HcMemberRelation;
 import com.happycar.api.service.MemberRelationService;
 import com.happycar.api.utils.BeanUtil;
 import com.happycar.api.utils.MessageUtil;
+import com.happycar.api.utils.StringUtil;
 import com.happycar.api.vo.HcMemberRelationVO;
 import com.happycar.api.vo.ResponseModel;
 
@@ -65,27 +66,27 @@ public class MemberRelationController extends BaseController{
 		for (HcMemberRelation hcMemberRelation : oneLevelRelations) {
 			HcMemberRelationVO relationVO = new HcMemberRelationVO();
 			BeanUtil.copyProperties(hcMemberRelation, relationVO);
-			relationVO.setChildName(hcMemberRelation.getChildMember().getName());
+			relationVO.setChildName(hideName(hcMemberRelation.getChildMember().getName()));
 			relationVO.setChildPic(hcMemberRelation.getChildMember().getPic());
-			relationVO.setParentName(hcMemberRelation.getParentMember().getName());
+			relationVO.setParentName(hideName(hcMemberRelation.getParentMember().getName()));
 			relationVO.setParentPic(hcMemberRelation.getParentMember().getPic());
 			oneLevelRelationsVO.add(relationVO);
 		}
 		for (HcMemberRelation hcMemberRelation : twoLevelRelations) {
 			HcMemberRelationVO relationVO = new HcMemberRelationVO();
 			BeanUtil.copyProperties(hcMemberRelation, relationVO);
-			relationVO.setChildName(hcMemberRelation.getChildMember().getName());
+			relationVO.setChildName(hideName(hcMemberRelation.getChildMember().getName()));
 			relationVO.setChildPic(hcMemberRelation.getChildMember().getPic());
-			relationVO.setParentName(hcMemberRelation.getParentMember().getName());
+			relationVO.setParentName(hideName(hcMemberRelation.getParentMember().getName()));
 			relationVO.setParentPic(hcMemberRelation.getParentMember().getPic());
 			twoLevelRelationsVO.add(relationVO);
 		}
 		for (HcMemberRelation hcMemberRelation : threeLevelRelations) {
 			HcMemberRelationVO relationVO = new HcMemberRelationVO();
 			BeanUtil.copyProperties(hcMemberRelation, relationVO);
-			relationVO.setChildName(hcMemberRelation.getChildMember().getName());
+			relationVO.setChildName(hideName(hcMemberRelation.getChildMember().getName()));
 			relationVO.setChildPic(hcMemberRelation.getChildMember().getPic());
-			relationVO.setParentName(hcMemberRelation.getParentMember().getName());
+			relationVO.setParentName(hideName(hcMemberRelation.getParentMember().getName()));
 			relationVO.setParentPic(hcMemberRelation.getParentMember().getPic());
 			threeLevelRelationsVO.add(relationVO);
 		}
@@ -94,5 +95,22 @@ public class MemberRelationController extends BaseController{
 		model.addAttribute("threeLevelRelations", threeLevelRelationsVO);
 		MessageUtil.success("操作成功", model);
 		return model;
+	}
+	
+	private String hideName(String name){
+		if(StringUtil.isNull(name)){
+			return "";
+		}
+		if(name.length()==1){
+			return name;
+		}
+		if(name.length()==2){
+			return name.substring(0, 1)+"*";
+		}
+		if(name.length()>2){
+			return name.substring(0, 1)+"*"+name.substring(name.length()-1, name.length());
+		}
+		return name;
+				 
 	}
 }

@@ -71,9 +71,13 @@ public class SignupService {
 		HcMember member = memberDao.findOne(signup.getMemberId());
 		if(member.getProgress()<=2){
 			//进度更新
-			if(signup.getPayAmount()==100){
+			if(signup.getPayType()==2){
 				member.setProgress(1);
 			}else{
+				member.setProgress(2);
+			}
+			//如果已完全支付,则进度更新为2
+			if(signup.getAmount()==(signup.getPayAmount()+signup.getCouponAmount())){
 				member.setProgress(2);
 			}
 		}

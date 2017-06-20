@@ -122,7 +122,7 @@ public class MemberController extends BaseController{
 		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, memberVO.getId() + "",24*60*60);
 		model.addAttribute("member", memberVO);
 		model.addAttribute("token", token);
-		MessageUtil.success("操作成功", model);
+		MessageUtil.success("注册成功", model);
 		return model;
 	}
 	
@@ -222,7 +222,11 @@ public class MemberController extends BaseController{
 		HcMember member = getLoginMember(request);
 		HcMemberVO memberVO = new HcMemberVO();
 		BeanUtil.copyProperties(member, memberVO);
-		memberVO.setIdcard("");
+		if(memberVO.getIdcard()!=null&&memberVO.getIdcard().length()==18)
+			memberVO.setIdcard(memberVO.getIdcard().substring(0, 4)+"*********"+memberVO.getIdcard().substring(16, memberVO.getIdcard().length()));
+		else{
+			memberVO.setIdcard("");
+		}
 		model.addAttribute("member", memberVO);
 		MessageUtil.success("操作成功!", model);
 		return model;

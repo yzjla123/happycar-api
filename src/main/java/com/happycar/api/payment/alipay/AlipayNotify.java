@@ -103,7 +103,7 @@ public class AlipayNotify {
 
 		boolean isSign = false;
 
-		isSign = RSA.verify(preSignStr, sign, AlipayConfig.ali_public_key, AlipayConfig.input_charset);
+		isSign = RSA.verify(preSignStr, sign, AlipayConfig.getPubKey(), "utf-8");
 
 		return isSign;
 
@@ -129,7 +129,7 @@ public class AlipayNotify {
 
 		// 获取远程服务器ATN结果，验证是否是支付宝服务器发来的请求
 
-		String partner = AlipayConfig.partner;
+		String partner = AlipayConfig.getPartner();
 
 		String veryfy_url = HTTPS_VERIFY_URL + "partner=" + partner + "&notify_id=" + notify_id;
 

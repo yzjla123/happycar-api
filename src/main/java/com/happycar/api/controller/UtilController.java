@@ -72,4 +72,18 @@ public class UtilController extends BaseController {
 		MessageUtil.success("操作成功!", model);
 		return model;
 	}
+	
+	@ApiOperation(value = "服务电话", httpMethod = "GET", notes = "获取服务电话")
+	@RequestMapping(value = "/servicePhone", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+	})
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "") })
+	public ResponseModel servicePhone(HttpServletRequest request, HttpServletResponse response) {
+		ResponseModel model = new ResponseModel();
+		SysParamDao paramDao = (SysParamDao) SpringContextUtil.getApplicationContext().getBean(SysParamDao.class);
+		HcSysParam param = paramDao.findByCode(Constant.PARAM_CODE_SERVICE_PHONE);
+		model.addAttribute("phone", param.getExt1());
+		MessageUtil.success("操作成功!", model);
+		return model;
+	}
 }
