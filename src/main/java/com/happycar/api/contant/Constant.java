@@ -40,4 +40,9 @@ public class Constant {
 	public static final String PARAM_CODE_ALI_PRI_KEY = "ALI_PRI_KEY";
 	public static final String PARAM_CODE_ALI_PUB_KEY = "ALI_PUB_KEY";
 	public static final String PARAM_CODE_ALI_BACK = "ALI_BACK";
+	public static final String PARAM_CODE_WX_PARTNER = "WX_APPID";
+	public static final String PARAM_CODE_WX_APPID = "WX_PARTNER";
+	public static final String PARAM_CODE_WX_PARTNER_KEY = "WX_PARTNER_KEY";
+	public static final String PARAM_CODE_WX_ORDER_URL = "WX_ORDER_URL";
+	public static final String PARAM_CODE_WX_NOTIFY_URL = "WX_NOTIFY_URL";
 }
