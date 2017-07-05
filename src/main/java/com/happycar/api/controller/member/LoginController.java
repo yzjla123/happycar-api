@@ -83,11 +83,11 @@ public class LoginController extends BaseController{
 		}
 		HcMemberVO memberVO = new HcMemberVO();
 		BeanUtil.copyProperties(list.get(0),memberVO);
-		if(memberVO.getIdcard()!=null&&memberVO.getIdcard().length()==18)
-			memberVO.setIdcard(memberVO.getIdcard().substring(0, 4)+"*********"+memberVO.getIdcard().substring(16, memberVO.getIdcard().length()));
-		else{
-			memberVO.setIdcard("");
-		}
+//		if(memberVO.getIdcard()!=null&&memberVO.getIdcard().length()==18)
+//			memberVO.setIdcard(memberVO.getIdcard().substring(0, 4)+"*********"+memberVO.getIdcard().substring(16, memberVO.getIdcard().length()));
+//		else{
+//			memberVO.setIdcard("");
+//		}
 		String token = TokenProcessor.getInstance().generateToken(memberVO.getPhone(), true);
 		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, memberVO.getId() + "",24*60*60);
 		model.addAttribute("loginInfo", memberVO);

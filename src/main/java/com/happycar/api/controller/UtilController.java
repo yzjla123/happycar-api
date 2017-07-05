@@ -42,8 +42,8 @@ public class UtilController extends BaseController {
 		String verifyCode = StringUtil.verifyCode();
 		//有效期5分钟
 		RedisUtil.setString(Constant.REDIS_VERIFY_CODE + phone, verifyCode, 60*5);
-//		boolean ret = SMSUtil.send(phone,verifyCode);
-		boolean ret = true;
+		boolean ret = SMSUtil.send(phone,verifyCode);
+//		boolean ret = true;
 		System.out.println(verifyCode);
 		if (ret) {
 			model.addAttribute("verifyCode", verifyCode);
@@ -83,6 +83,24 @@ public class UtilController extends BaseController {
 		SysParamDao paramDao = (SysParamDao) SpringContextUtil.getApplicationContext().getBean(SysParamDao.class);
 		HcSysParam param = paramDao.findByCode(Constant.PARAM_CODE_SERVICE_PHONE);
 		model.addAttribute("phone", param.getExt1());
+		MessageUtil.success("操作成功!", model);
+		return model;
+	}
+	
+	@ApiOperation(value = "是否开启三级分成", httpMethod = "GET", notes = "获取是否开启三级分成")
+	@RequestMapping(value = "/isCommissionOpen", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+	})
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "") })
+	public ResponseModel isCommissionOpen(HttpServletRequest request, HttpServletResponse response) {
+		ResponseModel model = new ResponseModel();
+		SysParamDao paramDao = (SysParamDao) SpringContextUtil.getApplicationContext().getBean(SysParamDao.class);
+		HcSysParam param = paramDao.findByCode(Constant.PARAM_CODE_COMMISSION);
+		if(param!=null){
+			model.addAttribute("isCommissionOpen", Integer.parseInt(param.getIsStop())==0?true:false);
+		}else{
+			model.addAttribute("isCommissionOpen", false);
+		}
 		MessageUtil.success("操作成功!", model);
 		return model;
 	}

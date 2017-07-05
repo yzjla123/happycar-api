@@ -6,13 +6,13 @@ import java.util.Date;
 
 
 /**
- * The persistent class for the hc_article database table.
+ * The persistent class for the hc_advertisement database table.
  * 
  */
 @Entity
-@Table(name="hc_article")
-@NamedQuery(name="HcArticle.findAll", query="SELECT h FROM HcArticle h")
-public class HcArticle implements Serializable {
+@Table(name="hc_advertisement")
+@NamedQuery(name="HcAdvertisement.findAll", query="SELECT h FROM HcAdvertisement h")
+public class HcAdvertisement implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,40 +23,27 @@ public class HcArticle implements Serializable {
 	@Column(name="add_time")
 	private Date addTime;
 
-	@Lob
 	private String content;
 
-	@Column(name="is_deleted")
-	private Integer isDeleted;
-
-	private String tag;
+	private String pic;
 
 	private String title;
+
+	private Integer type;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="update_time")
 	private Date updateTime;
-	
-	@Column(name="subject_id")
-	private Integer subjectId;
-	
-	private Integer type;
-	
-	private String code;
 
-	public HcArticle() {
+	private String url;
+	
+	@Column(name="is_deleted")
+	private Integer isDeleted;
+	
+	private String thumbnail;
+
+	public HcAdvertisement() {
 	}
-	
-	
-
-	public HcArticle(Integer id, String title, Integer subjectId) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.subjectId = subjectId;
-	}
-
-
 
 	public Integer getId() {
 		return this.id;
@@ -82,20 +69,12 @@ public class HcArticle implements Serializable {
 		this.content = content;
 	}
 
-	public Integer getIsDeleted() {
-		return this.isDeleted;
+	public String getPic() {
+		return this.pic;
 	}
 
-	public void setIsDeleted(Integer isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	public String getTag() {
-		return this.tag;
-	}
-
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 
 	public String getTitle() {
@@ -106,6 +85,14 @@ public class HcArticle implements Serializable {
 		this.title = title;
 	}
 
+	public Integer getType() {
+		return this.type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
 	public Date getUpdateTime() {
 		return this.updateTime;
 	}
@@ -114,36 +101,28 @@ public class HcArticle implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public Integer getSubjectId() {
-		return subjectId;
+	public String getUrl() {
+		return this.url;
 	}
 
-	public void setSubjectId(Integer subjectId) {
-		this.subjectId = subjectId;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-
-
-	public Integer getType() {
-		return type;
+	public Integer getIsDeleted() {
+		return isDeleted;
 	}
 
-
-
-	public void setType(Integer type) {
-		this.type = type;
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
-
-
-	public String getCode() {
-		return code;
+	public String getThumbnail() {
+		return thumbnail;
 	}
 
-
-
-	public void setCode(String code) {
-		this.code = code;
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 
 }

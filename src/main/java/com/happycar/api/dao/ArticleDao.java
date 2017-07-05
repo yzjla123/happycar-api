@@ -16,5 +16,7 @@ public interface ArticleDao extends JpaRepository<HcArticle, Integer>,JpaSpecifi
 
 	@Query(value="select new HcArticle(a.id,a.title,a.subjectId) from HcArticle a where subjectId=?")
 	List<HcArticle> findBySubjectIdOrderByUpdateTimeDesc(Integer subjectId);
+
+	public HcArticle findByCodeAndIsDeleted(String code, int isDeleted);
 	
 }

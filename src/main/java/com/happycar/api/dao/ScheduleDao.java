@@ -28,5 +28,7 @@ public interface ScheduleDao extends JpaRepository<HcSchedule, Integer>,JpaSpeci
 
 	@Query(value="from HcSchedule where bookNum>=memberNum and id in ?1")
 	public List<HcSchedule> findFullBookByIdIn(List<Integer> scheduleIdArray);
+	
+	public List<HcSchedule> findByIdIn(List<Integer> scheduleIdArray);
 
 }

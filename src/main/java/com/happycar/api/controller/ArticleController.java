@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,20 +62,46 @@ public class ArticleController extends BaseController{
 	}
 	
 	
-	@ApiOperation(value = "获取文章", httpMethod = "GET", notes = "通过id获取文章")
+	@ApiOperation(value = "获取文章", httpMethod = "GET", notes = "通过id或code获取文章")
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ApiImplicitParams(value = {
 			@ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Integer", paramType = "query"),
+			@ApiImplicitParam(name = "code", value = "文章code", required = false, dataType = "String", paramType = "query"),
 	})
 	@ApiResponses(value={
 			@ApiResponse(code = 200, message = "")
 	})
-	public ResponseModel getById(Integer id,HttpServletRequest request) throws ParseException{
+	public ResponseModel getById(
+			Integer id,
+			String code,
+			HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
-		HcArticle article = articleDao.findOne(id);
+		HcArticle article = null;
+		if(StringUtils.isNotEmpty(code)){
+			article = articleDao.findByCodeAndIsDeleted(code,0);
+		}else{
+			article = articleDao.findOne(id);
+		}
 		model.addAttribute("article", article);
 		MessageUtil.success("操作成功", model);
 		return model;
 	}
-
+	
+	@ApiOperation(value = "获取文章", httpMethod = "GET", notes = "通过code获取文章")
+	@RequestMapping(value = "/code", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "code", value = "文章code", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	public ResponseModel getByCode(
+			String code,
+			HttpServletRequest request) throws ParseException{
+		ResponseModel model = new ResponseModel();
+		HcArticle article = articleDao.findByCodeAndIsDeleted(code,0);
+		model.addAttribute("article", article);
+		MessageUtil.success("操作成功", model);
+		return model;
+	}
 }

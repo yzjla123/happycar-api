@@ -76,7 +76,6 @@ public class MemberController extends BaseController{
 		HcMember member = memberDao.findOne(id);	
 		HcMemberVO memberVO = new HcMemberVO();
 		BeanUtil.copyProperties(member, memberVO);
-		memberVO.setIdcard("");
 		model.addAttribute("member", memberVO);
 		MessageUtil.success("获取成功", model);
 		return model;

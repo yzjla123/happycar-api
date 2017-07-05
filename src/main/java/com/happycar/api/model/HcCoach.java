@@ -48,6 +48,8 @@ public class HcCoach implements Serializable {
 
 	private Integer star;
 	
+	private Float balance;
+	
 	@Column(name = "driving_license_type_id")
 	private Integer drivingLicenseTypeId;
 	
@@ -260,4 +262,11 @@ public class HcCoach implements Serializable {
 		this.pic = pic;
 	}
 
+	public Float getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Float balance) {
+		this.balance = balance;
+	}
 }

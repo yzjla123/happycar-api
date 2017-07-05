@@ -1,30 +1,18 @@
 package com.happycar.api.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 
 
 /**
- * The persistent class for the hc_taocan database table.
+ * The persistent class for the hc_consult_info database table.
  * 
  */
 @Entity
-@Table(name="hc_tuition")
-public class HcTuition implements Serializable {
+@Table(name="hc_consult_info")
+@NamedQuery(name="HcConsultInfo.findAll", query="SELECT h FROM HcConsultInfo h")
+public class HcConsultInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -35,9 +23,18 @@ public class HcTuition implements Serializable {
 	@Column(name="add_time")
 	private Date addTime;
 
-	private Float amount;
+	private String address;
+
+	@Column(name="is_read")
+	private Integer isRead;
+
+	private String message;
 
 	private String name;
+
+	private String phone;
+
+	private String result;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="update_time")
@@ -45,11 +42,8 @@ public class HcTuition implements Serializable {
 	
 	@Column(name="is_deleted")
 	private Integer isDeleted;
-	
-	private String city;
 
-
-	public HcTuition() {
+	public HcConsultInfo() {
 	}
 
 	public Integer getId() {
@@ -68,12 +62,28 @@ public class HcTuition implements Serializable {
 		this.addTime = addTime;
 	}
 
-	public Float getAmount() {
-		return this.amount;
+	public String getAddress() {
+		return this.address;
 	}
 
-	public void setAmount(Float amount) {
-		this.amount = amount;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Integer getIsRead() {
+		return this.isRead;
+	}
+
+	public void setIsRead(Integer isRead) {
+		this.isRead = isRead;
+	}
+
+	public String getMessage() {
+		return this.message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public String getName() {
@@ -82,6 +92,22 @@ public class HcTuition implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPhone() {
+		return this.phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getResult() {
+		return this.result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 	public Date getUpdateTime() {
@@ -99,14 +125,5 @@ public class HcTuition implements Serializable {
 	public void setIsDeleted(Integer isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 
 }

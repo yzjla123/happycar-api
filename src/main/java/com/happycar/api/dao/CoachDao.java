@@ -19,13 +19,17 @@ public interface CoachDao extends JpaRepository<HcCoach, Integer>,JpaSpecificati
 	@Query("update HcCoach set isDeleted=1 where id=?")
 	public int deleteById(Integer id);
 
-
 	public List<HcCoach> findByPhone(String phone);
-
 
 	public List<HcCoach> findAllByIsDeleted(int isDeleted);
 
 	public List<HcCoach> findByPhoneAndIsDeleted(String phone, int isDeleted);
 
-
+	@Modifying
+	@Query("update HcCoach set balance=balance+? where id=?")
+	public int addAmount(float amount,int coachId);
+	
+	@Modifying
+	@Query("update HcCoach set balance=balance-? where id=?")
+	public int reduceAmount(float amount,int coachId);
 }

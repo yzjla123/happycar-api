@@ -3,8 +3,10 @@ package com.happycar.api.controller.coach;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -39,6 +41,7 @@ import com.happycar.api.utils.BeanUtil;
 import com.happycar.api.utils.DateUtil;
 import com.happycar.api.utils.LocationUtils;
 import com.happycar.api.utils.MessageUtil;
+import com.happycar.api.utils.StringUtil;
 import com.happycar.api.vo.HcBookVO;
 import com.happycar.api.vo.HcScheduleVO;
 import com.happycar.api.vo.HcBookVO;
@@ -192,6 +195,52 @@ public class ScheduleController extends BaseController{
 				schedules.add(schedule);
 			}
 			startCal.add(Calendar.DATE, 1);
+		}
+		scheduleDao.save(schedules);
+		MessageUtil.success("操作成功", model);
+		return model;
+	}
+	
+
+	@ApiOperation(value = "更新排班", httpMethod = "POST", notes = "更新排班")
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "ids", value = "id,多个用逗号隔开", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "memberNums", value = "可预约人数,多个用逗号隔开", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "status", value = "状态,多个用逗号隔开", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	@Transactional
+	public ResponseModel update(
+			String ids,
+			String memberNums,
+			String status,
+			HttpServletRequest request) throws ParseException{
+		ResponseModel model = new ResponseModel();
+		HcCoach coach = getLoginCoach(request);
+		if(StringUtil.isNull(ids)){
+			MessageUtil.fail("排班信息不能为空", model);
+			return model;
+		}
+		String[] idsArray = ids.split(",");
+		List<Integer> list = new ArrayList<>();
+		for (String id : idsArray) {
+			list.add(Integer.parseInt(id));
+		}
+		List<HcSchedule> schedules = scheduleDao.findByIdIn(list);
+		String[] memberNumArr = memberNums.split(",");
+		String[] statusArr = status.split(",");
+		for (int i=0; i<schedules.size(); i++) {
+			HcSchedule hcSchedule = schedules.get(i);
+			if(hcSchedule.getCoachId().intValue()!=coach.getId()){
+				MessageUtil.fail("权限不足", model);
+				return model;
+			}
+			hcSchedule.setMemberNum(Integer.parseInt(memberNumArr[i]));
+			hcSchedule.setStatus(Integer.parseInt(statusArr[i]));
 		}
 		scheduleDao.save(schedules);
 		MessageUtil.success("操作成功", model);

@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -172,9 +174,17 @@ public class BookController extends BaseController{
 			@ApiResponse(code = 200, message = "")
 	})
 	@Transactional
-	public ResponseModel add(final String scheduleIds,HttpServletRequest request) throws ParseException{
+	public ResponseModel add(final String scheduleIds,Integer subjectType,HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
 		HcMember member = getLoginMember(request);
+		if(subjectType==2&&member.getProgress()!=6){
+			MessageUtil.fail("您的学习进度不是科目二", model);
+			return model;
+		}
+		if(subjectType==3&&member.getProgress()!=8){
+			MessageUtil.fail("您的学习进度不是科目三", model);
+			return model;
+		}
 		if(StringUtil.isNull(scheduleIds)){
 			MessageUtil.fail("请选择课程!", model);
 			return model;
@@ -187,11 +197,50 @@ public class BookController extends BaseController{
 		//是否有预约满
 		List<HcSchedule> fullSchedules = scheduleDao.findFullBookByIdIn(list);
 		if(fullSchedules.size()>0){
-			String subjectType = fullSchedules.get(0).getSubjectType()==2?"科目二":"科目三";
+			String subjectTypeStr = subjectType==2?"科目二":"科目三";
 			String date = new SimpleDateFormat("M/d").format(fullSchedules.get(0).getDate());
 			String timeDuration = fullSchedules.get(0).getTime1()+"-"+fullSchedules.get(0).getTime2();
-			MessageUtil.fail(subjectType+date+timeDuration+"已约满,不能预约!", model);
+			MessageUtil.fail(subjectTypeStr+date+timeDuration+"已约满,不能预约!", model);
 			return model;
+		}
+		//加载预约的排班表信息
+		List<HcSchedule> bookSchedules = scheduleDao.findByIdIn(list);
+		List<Date> bookDates = new ArrayList<>();
+		for (HcSchedule schedule : bookSchedules) {
+			bookDates.add(schedule.getDate());
+		}
+		//加载这些日期已预约的信息
+		List<HcBook> books = bookDao.findByMemberIdAndDateIn(member.getId(), bookDates);
+		//定义一个map,key 为预约日期,value 为预约的次数
+		Map<Long,Integer> dateTimes = new HashMap<>();
+		for (HcBook hcBook : books) {
+			Integer times = dateTimes.get(hcBook.getDate().getTime());
+			if(times==null){ times = 0; }
+			times += 1;
+			dateTimes.put(hcBook.getDate().getTime(), times);
+		}
+		for (HcSchedule schedule : bookSchedules) {
+			Integer times = dateTimes.get(schedule.getDate().getTime());
+			if(times==null){ times = 0; }
+			times += 1;
+			dateTimes.put(schedule.getDate().getTime(), times);
+		}
+		//遍历查看是否有超过次数的
+		for (Long dateKey : dateTimes.keySet()) {
+			Date date = new Date(dateKey);
+			//星期六或星期天只能预约一天
+			if(date.getDay()==0||date.getDay()==6){
+				if(dateTimes.get(dateKey)>1){
+					MessageUtil.fail("周末每天最多预约1个课时", model);
+					return model;
+				}
+			}else{
+				//平时最多预约两个课时
+				if(dateTimes.get(dateKey)>2){
+					MessageUtil.fail("平时每日最多预约2个课时", model);
+					return model;
+				}
+			}
 		}
 		for (String scheduleId : scheduleIdArray) {
 			HcSchedule schedule = scheduleDao.findOne(Integer.parseInt(scheduleId));

@@ -25,13 +25,10 @@ public class HcMemberVO implements Serializable {
 	
 	private String pic;
 	
-	private String idcard;
-	
 	private Integer signupId;
 	
 	private Date signupDate;
 	
-	private Float commission;
 
 	public Integer getId() {
 		return id;
@@ -89,14 +86,6 @@ public class HcMemberVO implements Serializable {
 		this.pic = pic;
 	}
 
-	public String getIdcard() {
-		return idcard;
-	}
-
-	public void setIdcard(String idcard) {
-		this.idcard = idcard;
-	}
-
 	public Integer getSignupId() {
 		return signupId;
 	}
@@ -112,14 +101,4 @@ public class HcMemberVO implements Serializable {
 	public void setSignupDate(Date signupDate) {
 		this.signupDate = signupDate;
 	}
-
-	public Float getCommission() {
-		return commission;
-	}
-
-	public void setCommission(Float commission) {
-		this.commission = commission;
-	}
-	
-
 }

@@ -15,6 +15,8 @@ public class HcSchoolVO implements Serializable {
 	private Double lon;
 
 	private String name;
+	
+	private String city;
 
 	public Integer getId() {
 		return id;
@@ -54,6 +56,14 @@ public class HcSchoolVO implements Serializable {
 
 	public void setLon(Double lon) {
 		this.lon = lon;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 

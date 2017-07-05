@@ -46,26 +46,26 @@ public class IndexController extends BaseController{
 	@Resource
 	private SysParamDao paramDao;
 	
-	@ApiOperation(value = "轮播图片列表", httpMethod = "GET", notes = "轮播图片列表")
-	@RequestMapping(value = "/banner", method = RequestMethod.GET)
-	@ApiImplicitParams(value = {
-			
-	})
-	@ApiResponses(value={
-			@ApiResponse(code = 200, message = "")
-	})
-	public ResponseModel banner(HttpServletRequest request){
-		ResponseModel model = new ResponseModel();
-		List<HcSysParam> list = paramDao.findByPCodeOrderBySeqAsc(Constant.PARAM_CODE_BANNER);
-		List<HcBannerVO> banners = new ArrayList<>(); 
-		for (HcSysParam hcSysParam : list) {
-			HcBannerVO banner = new HcBannerVO();
-			banner.setPic(hcSysParam.getValue());
-			banner.setHref(hcSysParam.getExt1());
-			banners.add(banner);
-		}
-		model.addAttribute("banners", banners);
-		MessageUtil.success("获取成功", model);
-		return model;
-	}
+//	@ApiOperation(value = "轮播图片列表", httpMethod = "GET", notes = "轮播图片列表")
+//	@RequestMapping(value = "/banner", method = RequestMethod.GET)
+//	@ApiImplicitParams(value = {
+//			
+//	})
+//	@ApiResponses(value={
+//			@ApiResponse(code = 200, message = "")
+//	})
+//	public ResponseModel banner(HttpServletRequest request){
+//		ResponseModel model = new ResponseModel();
+//		List<HcSysParam> list = paramDao.findByPCodeOrderBySeqAsc(Constant.PARAM_CODE_BANNER);
+//		List<HcBannerVO> banners = new ArrayList<>(); 
+//		for (HcSysParam hcSysParam : list) {
+//			HcBannerVO banner = new HcBannerVO();
+//			banner.setPic(hcSysParam.getValue());
+//			banner.setHref(hcSysParam.getExt1());
+//			banners.add(banner);
+//		}
+//		model.addAttribute("banners", banners);
+//		MessageUtil.success("获取成功", model);
+//		return model;
+//	}
 }

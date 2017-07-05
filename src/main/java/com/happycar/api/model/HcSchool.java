@@ -29,6 +29,8 @@ public class HcSchool implements Serializable {
 	private Double lon;
 
 	private String name;
+	
+	private String city;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="update_time")
@@ -104,6 +106,14 @@ public class HcSchool implements Serializable {
 
 	public void setCoachNum(int coachNum) {
 		this.coachNum = coachNum;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 }

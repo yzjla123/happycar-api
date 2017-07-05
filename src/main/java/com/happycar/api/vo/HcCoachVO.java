@@ -42,8 +42,6 @@ public class HcCoachVO implements Serializable {
 	
 	private String addr;
 	
-	private String idcard;
-	
 	private List<HcCommentVO> comments = new ArrayList<>();
 
 	public Integer getId() {
@@ -156,14 +154,6 @@ public class HcCoachVO implements Serializable {
 
 	public void setAddr(String addr) {
 		this.addr = addr;
-	}
-
-	public String getIdcard() {
-		return idcard;
-	}
-
-	public void setIdcard(String idcard) {
-		this.idcard = idcard;
 	}
 
 	public String getDrivingLicenseType() {

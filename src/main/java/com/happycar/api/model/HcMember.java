@@ -66,7 +66,7 @@ public class HcMember implements Serializable {
 	private Integer isDeleted;
 	
 	private String pic;
-
+	
 	public HcMember() {
 	}
 
@@ -205,6 +205,4 @@ public class HcMember implements Serializable {
 	public void setRefereePhone(String refereePhone) {
 		this.refereePhone = refereePhone;
 	}
-
-
 }

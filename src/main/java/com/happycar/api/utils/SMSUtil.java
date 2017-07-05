@@ -1,6 +1,7 @@
 package com.happycar.api.utils;
 
 import java.net.URLEncoder;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 
@@ -10,7 +11,7 @@ import com.happycar.api.model.HcSmsLog;
 
 public class SMSUtil {
 	public static String uid = "sms0594";//用户名
-	public static String verifyTemplate = "100006";//验证码模版
+	public static String verifyTemplate = "401895";//验证码模版
     public static String pwd = "2143de07e41cc0813d432004d26f7a51";// 序列号首次激活时自己设定
     public static Logger logger = Logger.getLogger(SMSUtil.class);
 	
@@ -36,6 +37,8 @@ public class SMSUtil {
 	    	smsLog.setContent(message);
 	    	smsLog.setPhone(phone);
 	    	smsLog.setStatus(Integer.parseInt(ret));
+	    	smsLog.setAddTime(new Date());
+	    	smsLog.setUpdateTime(new Date());
 	    	smsLogDao.save(smsLog);
 	    	if("100".equals(ret)){
 	    		return true;
