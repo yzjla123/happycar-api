@@ -67,6 +67,9 @@ public class HcMember implements Serializable {
 	
 	private String pic;
 	
+	@Column(name = "exam_phone")
+	private String examPhone;
+	
 	public HcMember() {
 	}
 
@@ -204,5 +207,13 @@ public class HcMember implements Serializable {
 
 	public void setRefereePhone(String refereePhone) {
 		this.refereePhone = refereePhone;
+	}
+
+	public String getExamPhone() {
+		return examPhone;
+	}
+
+	public void setExamPhone(String examPhone) {
+		this.examPhone = examPhone;
 	}
 }

@@ -29,6 +29,7 @@ public class HcMemberVO implements Serializable {
 	
 	private Date signupDate;
 	
+	private String examPhone;
 
 	public Integer getId() {
 		return id;
@@ -100,5 +101,13 @@ public class HcMemberVO implements Serializable {
 
 	public void setSignupDate(Date signupDate) {
 		this.signupDate = signupDate;
+	}
+
+	public String getExamPhone() {
+		return examPhone;
+	}
+
+	public void setExamPhone(String examPhone) {
+		this.examPhone = examPhone;
 	}
 }

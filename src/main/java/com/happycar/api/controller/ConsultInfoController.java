@@ -58,9 +58,9 @@ public class ConsultInfoController extends BaseController{
 		consultInfo.setAddTime(new Date());
 		consultInfo.setUpdateTime(new Date());
 		consultInfo.setIsDeleted(0);
-		consultInfo.setIsRead(0);
+		consultInfo.setStatus(0);
 		consultInfoDao.save(consultInfo);
-		MessageUtil.success("保存成功", model);
+		MessageUtil.success("提交成功,我们会尽快与你联系!", model);
 		return model;
 	}
 

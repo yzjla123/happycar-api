@@ -25,8 +25,7 @@ public class HcConsultInfo implements Serializable {
 
 	private String address;
 
-	@Column(name="is_read")
-	private Integer isRead;
+	private Integer status;
 
 	private String message;
 
@@ -42,6 +41,10 @@ public class HcConsultInfo implements Serializable {
 	
 	@Column(name="is_deleted")
 	private Integer isDeleted;
+	
+	private String lat;
+	
+	private String lon;
 
 	public HcConsultInfo() {
 	}
@@ -70,13 +73,6 @@ public class HcConsultInfo implements Serializable {
 		this.address = address;
 	}
 
-	public Integer getIsRead() {
-		return this.isRead;
-	}
-
-	public void setIsRead(Integer isRead) {
-		this.isRead = isRead;
-	}
 
 	public String getMessage() {
 		return this.message;
@@ -124,6 +120,30 @@ public class HcConsultInfo implements Serializable {
 
 	public void setIsDeleted(Integer isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLon() {
+		return lon;
+	}
+
+	public void setLon(String lon) {
+		this.lon = lon;
 	}
 
 }
