@@ -61,6 +61,28 @@ public class ModelTestController extends BaseController{
 		return model;
 	}
 	
+	@ApiOperation(value = "获取已练习考题", httpMethod = "GET", notes = "获取已练习考题")
+	@RequestMapping(value = "/doneTheoryIds", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	public ResponseModel doneTheoryIds(HttpServletRequest request){
+		ResponseModel model = new ResponseModel();
+		final HcMember member = getLoginMember(request);
+		List<HcModelTest> modelTests = modelTestDao.findByMemberIdAndIsDeleted(member.getId(),0);
+		List<Integer> modelTestIds = new ArrayList<>();
+		for (HcModelTest test : modelTests) {
+			modelTestIds.add(test.getId());
+		}
+		List<Object> list = modelTestQuestionDao.findDoneTheoryIds(modelTestIds);
+		model.addAttribute("doneTheoryIds", list); 
+		MessageUtil.success("获取成功", model);
+		return model;
+	}
+	
 	@ApiOperation(value = "提交考试成绩", httpMethod = "POST", notes = "提交考试成绩")
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	@ApiImplicitParams(value = {
@@ -87,10 +109,10 @@ public class ModelTestController extends BaseController{
 			HttpServletRequest request){
 		ResponseModel model = new ResponseModel();
 		HcMember member = getLoginMember(request);
-		if(StringUtils.isEmpty(answerCards)){
-			MessageUtil.fail("答题卡不能为空", model);
-			return model;
-		}
+//		if(StringUtils.isEmpty(answerCards)){
+//			MessageUtil.fail("答题卡不能为空", model);
+//			return model;
+//		}
 		HcModelTest modelTest = new HcModelTest();
 		modelTest.setSubjectType(subjectType);
 		modelTest.setMemberId(member.getId());
@@ -103,19 +125,21 @@ public class ModelTestController extends BaseController{
 		modelTest.setIsDeleted(0);
 		modelTest.setAddTime(new Date());
 		modelTestDao.save(modelTest);
-		String[] answerArr = answerCards.split(";");
-		List<HcModelTestQuestion> questions = new ArrayList();
-		for(String answerCard : answerArr){
-			String[] array = answerCard.split("#");
-			HcModelTestQuestion question = new HcModelTestQuestion();
-			question.setModelTestId(modelTest.getId());
-			question.setTheoryId(Integer.parseInt(array[0]));
-			question.setAnswer(array[1]);
-			question.setIsWrong(Integer.parseInt(array[2]));
-			question.setAddTime(new Date());
-			questions.add(question);
+		if(!StringUtils.isEmpty(answerCards)){
+			String[] answerArr = answerCards.split(";");
+			List<HcModelTestQuestion> questions = new ArrayList();
+			for(String answerCard : answerArr){
+				String[] array = answerCard.split("#");
+				HcModelTestQuestion question = new HcModelTestQuestion();
+				question.setModelTestId(modelTest.getId());
+				question.setTheoryId(Integer.parseInt(array[0]));
+				question.setAnswer(array[1]);
+				question.setIsWrong(Integer.parseInt(array[2]));
+				question.setAddTime(new Date());
+				questions.add(question);
+			}
+			modelTestQuestionDao.save(questions);
 		}
-		modelTestQuestionDao.save(questions);
 		MessageUtil.success("提交成功", model);
 		return model;
 	}
