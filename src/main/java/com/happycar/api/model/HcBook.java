@@ -61,6 +61,14 @@ public class HcBook implements Serializable {
 	@Column(name="coach_id")
 	private Integer coachId;
 	
+	private String remark;
+	
+	@Column(name="book_order_id")
+	private Integer bookOrderId;
+	
+	@Column(name="subject_type")
+	private Integer subjectType;
+	
 	@OneToOne
 	@JoinColumn(name="member_id",insertable=false,updatable=false)
 	@NotFound(action=NotFoundAction.IGNORE)
@@ -176,6 +184,30 @@ public class HcBook implements Serializable {
 
 	public void setCoachId(Integer coachId) {
 		this.coachId = coachId;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public Integer getSubjectType() {
+		return subjectType;
+	}
+
+	public void setSubjectType(Integer subjectType) {
+		this.subjectType = subjectType;
+	}
+
+	public Integer getBookOrderId() {
+		return bookOrderId;
+	}
+
+	public void setBookOrderId(Integer bookOrderId) {
+		this.bookOrderId = bookOrderId;
 	}
 
 }

@@ -53,7 +53,7 @@ public class PaymentController extends BaseController{
 	@ApiImplicitParams(value = {
 			@ApiImplicitParam(name = "rid", value = "相关业务订单id", required = true, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "amount", value = "金额", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "type", value = "类型 1充值 2自驾订单支付 3违章押金（保证金）4信用卡验证 5违章支付", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "type", value = "类型 1:充值,2:学费支付,3:推荐分成金,4:预约费用", required = true, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "channel", value = "支付通道 alipay 支付宝,yeepay 易宝,wxpay 微信,manage 管理员，epos 易宝无卡支付", required = true, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "source", value = "来源 1:微信小程序,2:微信公众号,3:安卓,4:iOS", required = true, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "accessToken", value = "token", required = true, dataType = "String", paramType = "query"),
@@ -94,6 +94,10 @@ public class PaymentController extends BaseController{
 			return "充值";
 		}else if(type==2){
 			return "学费支付";
+		}else if(type==2){
+			return "推荐金";
+		}else if(type==2){
+			return "预约费用";
 		}
 		return "充值";
 	}

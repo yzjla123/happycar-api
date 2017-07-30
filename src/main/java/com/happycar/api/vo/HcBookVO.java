@@ -41,7 +41,9 @@ public class HcBookVO implements Serializable {
 	
 	private HcCoachVO coach; 
 	
-	private HcScheduleVO schedule; 
+	private HcScheduleVO schedule; 	
+
+	private Integer subjectType;
 
 	public Integer getId() {
 		return id;
@@ -129,6 +131,14 @@ public class HcBookVO implements Serializable {
 
 	public void setCoachId(Integer coachId) {
 		this.coachId = coachId;
+	}
+
+	public Integer getSubjectType() {
+		return subjectType;
+	}
+
+	public void setSubjectType(Integer subjectType) {
+		this.subjectType = subjectType;
 	}
 
 }

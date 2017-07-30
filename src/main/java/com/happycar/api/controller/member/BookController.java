@@ -25,19 +25,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.happycar.api.annotation.Authentication;
+import com.happycar.api.contant.Constant;
 import com.happycar.api.controller.BaseController;
 import com.happycar.api.dao.BookDao;
+import com.happycar.api.dao.BookOrderDao;
 import com.happycar.api.dao.CoachDao;
 import com.happycar.api.dao.CommentDao;
+import com.happycar.api.dao.MemberDao;
+import com.happycar.api.dao.MemberHappyCoinLogDao;
 import com.happycar.api.dao.ScheduleDao;
+import com.happycar.api.dao.SysParamDao;
 import com.happycar.api.model.HcBook;
+import com.happycar.api.model.HcBookOrder;
 import com.happycar.api.model.HcCoach;
 import com.happycar.api.model.HcComment;
 import com.happycar.api.model.HcMember;
+import com.happycar.api.model.HcMemberHappyCoinLog;
 import com.happycar.api.model.HcSchedule;
+import com.happycar.api.model.HcSysParam;
 import com.happycar.api.utils.BeanUtil;
 import com.happycar.api.utils.DateUtil;
 import com.happycar.api.utils.MessageUtil;
+import com.happycar.api.utils.RandomUtil;
 import com.happycar.api.utils.StringUtil;
 import com.happycar.api.vo.HcBookVO;
 import com.happycar.api.vo.HcCoachVO;
@@ -69,6 +78,14 @@ public class BookController extends BaseController{
 	private CommentDao commentDao;
 	@Resource
 	private CoachDao coachDao;
+	@Resource
+	private SysParamDao paramDao;
+	@Resource
+	private MemberDao memberDao;
+	@Resource
+	private BookOrderDao orderDao;
+	@Resource
+	private MemberHappyCoinLogDao happyCoinLogDao;
 	
 	@ApiOperation(value = "预约列表", httpMethod = "GET", notes = "预约列表")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -168,23 +185,29 @@ public class BookController extends BaseController{
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ApiImplicitParams(value = {
 			@ApiImplicitParam(name = "scheduleIds", value = "排班id,多个用逗号隔开", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "payPappyCoin", value = "支付快乐币", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "payFee", value = "支付费用", required = true, dataType = "String", paramType = "query"),
 			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
 	})
 	@ApiResponses(value={
 			@ApiResponse(code = 200, message = "")
 	})
 	@Transactional
-	public ResponseModel add(final String scheduleIds,Integer subjectType,HttpServletRequest request) throws ParseException{
+	public ResponseModel add(
+			String scheduleIds,
+			Integer subjectType,
+			HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
 		HcMember member = getLoginMember(request);
-		if(subjectType==2&&member.getProgress()!=6){
-			MessageUtil.fail("您的学习进度不是科目二", model);
-			return model;
-		}
-		if(subjectType==3&&member.getProgress()!=8){
-			MessageUtil.fail("您的学习进度不是科目三", model);
-			return model;
-		}
+		Map<String,Integer> payInfo = calPayFee(member, subjectType, scheduleIds.split(",").length);
+//		if(subjectType==2&&member.getProgress()!=6){
+//			MessageUtil.fail("您的学习进度不是科目二", model);
+//			return model;
+//		}
+//		if(subjectType==3&&member.getProgress()!=8){
+//			MessageUtil.fail("您的学习进度不是科目三", model);
+//			return model;
+//		}
 		if(StringUtil.isNull(scheduleIds)){
 			MessageUtil.fail("请选择课程!", model);
 			return model;
@@ -242,6 +265,18 @@ public class BookController extends BaseController{
 				}
 			}
 		}
+		HcBookOrder order = new HcBookOrder();
+		order.setMemberId(member.getId());
+		order.setPayAmount(payInfo.get("payAmount"));
+		order.setPayHappyCoin(payInfo.get("payHappyCoin"));
+		order.setBookOrderNo("BO-"+new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+"-"+RandomUtil.generateOnlyNumber(5));
+		if(payInfo.get("payAmount")==0){
+			order.setStatus(1);
+		}else{
+			order.setStatus(0);
+		}
+		order.setAddTime(new Date());
+		orderDao.save(order);
 		for (String scheduleId : scheduleIdArray) {
 			HcSchedule schedule = scheduleDao.findOne(Integer.parseInt(scheduleId));
 			HcBook book = new HcBook();
@@ -251,12 +286,29 @@ public class BookController extends BaseController{
 			book.setDate(schedule.getDate());
 			book.setAddTime(new Date());
 			book.setCoachId(schedule.getCoachId());
+			book.setSubjectType(schedule.getSubjectType());
+			book.setBookOrderId(order.getId());
 			bookDao.save(book);
 			//预约人数加1
 			schedule.setBookNum(schedule.getBookNum()+1);
 			schedule.setUpdateTime(new Date());
 			scheduleDao.save(schedule);
 		}
+		//更新快乐币
+		member.setHappyCoin(member.getHappyCoin()-order.getPayHappyCoin());
+		member.setUpdateTime(new Date());
+		memberDao.save(member);
+		if(order.getPayHappyCoin() > 0){
+			HcMemberHappyCoinLog happyCoinLog = new HcMemberHappyCoinLog();
+			happyCoinLog.setMemberId(member.getId());
+			happyCoinLog.setQuantity(order.getPayHappyCoin());
+			happyCoinLog.setTotal(member.getHappyCoin());
+			happyCoinLog.setType(2);
+			happyCoinLog.setAddTime(new Date());
+			happyCoinLog.setRemark("预约单消费");
+			happyCoinLogDao.save(happyCoinLog);
+		}
+		model.addAttribute("bookOrder", order);
 		MessageUtil.success("预约成功", model);
 		return model;
 	}
@@ -361,4 +413,204 @@ public class BookController extends BaseController{
 		return model;
 	}
 
+	
+	@ApiOperation(value = "预约信息", httpMethod = "GET", notes = "预约信息")
+	@RequestMapping(value = "/bookInfo", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "subjectType", value = "科目类型 2:科目二,3:科目三", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	public ResponseModel bookInfo(
+			Integer subjectType,
+			HttpServletRequest request) throws ParseException{
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		List<HcBook> books = bookDao.findByMemberIdAndSubjectType(member.getId(),subjectType);
+		HcSysParam param = paramDao.findByCode(String.format(Constant.PARAM_CODE_SUBJECT_FEE,String.valueOf(subjectType)));
+		//免费次数
+		Integer freeTimes = Integer.parseInt(param.getExt1());
+		//课程费用
+		Integer courseFee = Integer.parseInt(param.getExt2());
+		//可抵用快乐币
+		Integer happyCoin = Integer.parseInt(param.getExt3());
+		Map<String,Object> map = new HashMap<>();
+		
+		map.put("bookedNum", books.size());
+		map.put("freeTimes", freeTimes);
+		map.put("courseFee", courseFee);
+		map.put("happyCoin", happyCoin);
+		map.put("myHappyCoin", member.getHappyCoin());
+		model.addAttribute("bookInfo", map);
+		MessageUtil.success("获取成功", model);
+		return model;
+	}
+	
+	@ApiOperation(value = "未支付订单", httpMethod = "GET", notes = "未支付订单")
+	@RequestMapping(value = "/unpayOrder", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	public ResponseModel unpayOrder(
+			HttpServletRequest request) throws ParseException{
+		ResponseModel model = new ResponseModel();
+		//是否有未支付订单
+		List<HcBookOrder> list1 = orderDao.findByStatus(0);
+		if(list1.size()>0){
+			model.addAttribute("bookOrder", list1.get(0));
+			MessageUtil.success("获取成功", model);
+			return model;
+		}else{
+			MessageUtil.fail("没有未支付的订单", model);
+		}
+		return model;
+	}
+	
+	@ApiOperation(value = "取消订单", httpMethod = "POST", notes = "取消订单")
+	@RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "bookOrderId", value = "预约订单", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	@Transactional
+	public ResponseModel cancelOrder(
+			Integer bookOrderId,
+			HttpServletRequest request) throws ParseException{
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		HcBookOrder bookOrder = orderDao.findOne(bookOrderId);
+		if(bookOrder.getStatus()!=0){
+			MessageUtil.fail("订单状态不是待支付状态", model);
+			return model;
+		}
+		bookOrder.setStatus(2);
+		orderDao.save(bookOrder);
+		List<HcBook> books = bookDao.findByBookOrderId(bookOrder.getId());
+		for(HcBook book : books){
+			HcSchedule schedule = scheduleDao.findOne(book.getScheduleId());
+			//预约人数还原
+			schedule.setBookNum(schedule.getBookNum()-1);
+			schedule.setUpdateTime(new Date());
+			scheduleDao.save(schedule);
+		}
+		//删除相关的预约
+		bookDao.deleteByBookOrderId(bookOrder.getId());
+		
+		if(bookOrder.getPayHappyCoin()>0){
+			//更新快乐币
+			member.setHappyCoin(member.getHappyCoin()+bookOrder.getPayHappyCoin());
+			member.setUpdateTime(new Date());
+			memberDao.save(member);
+			HcMemberHappyCoinLog happyCoinLog = new HcMemberHappyCoinLog();
+			happyCoinLog.setMemberId(bookOrder.getMemberId());
+			happyCoinLog.setQuantity(bookOrder.getPayHappyCoin());
+			happyCoinLog.setTotal(member.getHappyCoin());
+			happyCoinLog.setType(1);
+			happyCoinLog.setAddTime(new Date());
+			happyCoinLog.setRemark("预约单取消");
+			happyCoinLogDao.save(happyCoinLog);
+		}
+		MessageUtil.success("取消成功", model);
+		return model;
+	}
+	
+	@ApiOperation(value = "支付成功", httpMethod = "POST", notes = "支付成功")
+	@RequestMapping(value = "/orderPaySuccess", method = RequestMethod.POST)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "bookOrderId", value = "预约订单", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	@Transactional
+	public ResponseModel orderPaySuccess(
+			Integer bookOrderId,
+			HttpServletRequest request) throws ParseException{
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		HcBookOrder bookOrder = orderDao.findOne(bookOrderId);
+		if(bookOrder.getStatus()!=0){
+			MessageUtil.fail("订单状态不是待支付状态", model);
+			return model;
+		}
+		bookOrder.setStatus(1);
+		orderDao.save(bookOrder);
+		List<HcBook> books = bookDao.findByBookOrderId(bookOrder.getId());
+		for(HcBook book : books){
+			book.setStatus(0);
+			book.setUpdateTime(new Date());
+			bookDao.save(book);
+		}
+		MessageUtil.success("预约成功", model);
+		return model;
+	}
+	
+	@ApiOperation(value = "计算支付费用", httpMethod = "GET", notes = "计算支付费用")
+	@RequestMapping(value = "/payFee", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "subjectType", value = "科目类型", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "bookNum", value = "预约数量", required = true, dataType = "String", paramType = "query"),
+			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	public ResponseModel payFee(
+			Integer subjectType,
+			Integer bookNum,
+			HttpServletRequest request) throws ParseException{
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		Map<String,Integer> map = calPayFee(member,subjectType,bookNum);
+		model.addAttribute("payInfo", map); 
+		MessageUtil.success("取消成功", model);
+		return model;
+	}
+	
+	private Map<String,Integer> calPayFee(HcMember member,Integer subjectType,
+			Integer bookNum){
+		List<HcBook> books = bookDao.findByMemberIdAndSubjectType(member.getId(),subjectType);
+		HcSysParam param = paramDao.findByCode(String.format(Constant.PARAM_CODE_SUBJECT_FEE,String.valueOf(subjectType)));
+		//免费次数
+		Integer freeTimes = Integer.parseInt(param.getExt1());
+		//课程费用
+		Integer courseFee = Integer.parseInt(param.getExt2());
+		//可抵用快乐币
+		Integer happyCoin = Integer.parseInt(param.getExt3());
+		
+		int payBookNum = 0;//需要支付的预约数
+		int payHappyCoin = 0;
+		int payAmount = 0;
+		int totalFee = 0;
+		//如果预约已超过免费次数
+		if(books.size()>=freeTimes){
+			payBookNum = bookNum;
+		}else if((books.size()+bookNum)>=freeTimes){
+			//如果已预约未超过免费次数,但本次加起来超过免费次数
+			payBookNum = freeTimes - (books.size()+bookNum);
+		}else{
+			//没有超过免费次数,
+		}
+		if(payBookNum>0){
+			//计算支付费用
+			totalFee = payBookNum*courseFee;
+			payHappyCoin = payBookNum*happyCoin;//支付的快乐币个数;
+			if(payHappyCoin>member.getHappyCoin()) payHappyCoin = member.getHappyCoin();
+			payAmount = totalFee - payHappyCoin;
+		}
+		Map<String, Integer> map = new HashMap();
+		map.put("totalAmount",totalFee);
+		map.put("payHappyCoin",payHappyCoin);
+		map.put("payAmount",payAmount);
+		return map;
+	}
 }

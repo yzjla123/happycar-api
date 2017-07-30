@@ -79,5 +79,25 @@ public class AdvertisementController extends BaseController{
 		}
 		return model;
 	}
-
+	
+	
+	@ApiOperation(value = "首页弹出广告", httpMethod = "GET", notes = "首页弹出广告")
+	@RequestMapping(value = "/indexPopAd", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "city", value = "所属城市", required = false, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	public ResponseModel indexPopAd(String city,HttpServletRequest request){
+		ResponseModel model = new ResponseModel();
+		List<HcAdvertisement> messageCenterAds = advertisementDao.findByTypeAndIsDeleted(2,0);
+		if(messageCenterAds.size()>0){
+			model.addAttribute("popAd", messageCenterAds.get(0));
+			MessageUtil.success("获取成功", model);
+		}else{
+			MessageUtil.fail("暂无广告信息", model);
+		}
+		return model;
+	}
 }

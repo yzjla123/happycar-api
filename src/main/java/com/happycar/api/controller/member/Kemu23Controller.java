@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ import com.happycar.api.model.HcKemu23Comment;
 import com.happycar.api.model.HcMember;
 import com.happycar.api.utils.BeanUtil;
 import com.happycar.api.utils.MessageUtil;
+import com.happycar.api.utils.RandomUtil;
 import com.happycar.api.vo.HcKemu23CommentVO;
 import com.happycar.api.vo.ResponseModel;
 
@@ -82,6 +84,8 @@ public class Kemu23Controller extends BaseController{
 	public ResponseModel getById(Integer id,HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
 		HcKemu23 kemu23 = kemu23Dao.findOne(id);
+		kemu23.setWatchTimes(kemu23.getWatchTimes()+new Random().nextInt(10));
+		kemu23Dao.save(kemu23);
 		Pageable pageable = new PageRequest(0,10,Direction.DESC,"addTime");
 		Page<HcKemu23Comment> page = comment1Dao.findByKemu23Id(id,pageable);
 		List<HcKemu23Comment> list = page.getContent();

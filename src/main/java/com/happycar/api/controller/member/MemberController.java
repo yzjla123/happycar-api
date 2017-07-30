@@ -17,8 +17,10 @@ import com.happycar.api.annotation.Authentication;
 import com.happycar.api.contant.Constant;
 import com.happycar.api.controller.BaseController;
 import com.happycar.api.dao.CoachDao;
+import com.happycar.api.dao.LearnProgressDao;
 import com.happycar.api.dao.MemberDao;
 import com.happycar.api.model.HcCoach;
+import com.happycar.api.model.HcLearnProgress;
 import com.happycar.api.model.HcMember;
 import com.happycar.api.service.ActivityService;
 import com.happycar.api.service.MemberRelationService;
@@ -52,6 +54,8 @@ public class MemberController extends BaseController{
 	private ActivityService activityService;
 	@Resource
 	private MemberRelationService relationService;
+	@Resource
+	private LearnProgressDao learnProgressDao;
 	
 	@ApiOperation(value = "注册学员", httpMethod = "POST", notes = "注册学员")
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
@@ -103,6 +107,7 @@ public class MemberController extends BaseController{
 		member.setUpdateTime(new Date());
 		member.setPic(Constant.PIC_MEMBER);
 		member.setCommission(0f);
+		member.setHappyCoin(0);
 		memberDao.save(member);
 		//是否有推荐人
 		//生成学员关系表
@@ -118,8 +123,16 @@ public class MemberController extends BaseController{
 //		else{
 //			memberVO.setIdcard("");
 //		}
+		HcLearnProgress learnProgress = new HcLearnProgress();
+		learnProgress.setMemberId(member.getId());
+		learnProgress.setSubject1(0);
+		learnProgress.setSubject2(0);
+		learnProgress.setSubject3(0);
+		learnProgress.setSubject4(0);
+		learnProgress.setAddTime(new Date());
+		learnProgressDao.save(learnProgress);
 		String token = TokenProcessor.getInstance().generateToken(memberVO.getPhone(), true);
-		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, memberVO.getId() + "",24*60*60);
+		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, memberVO.getId() + "",365*24*60*60);
 		model.addAttribute("member", memberVO);
 		model.addAttribute("token", token);
 		MessageUtil.success("注册成功", model);
@@ -203,6 +216,27 @@ public class MemberController extends BaseController{
 		ResponseModel model = new ResponseModel();
 		HcMember member = getLoginMember(request);
 		model.addAttribute("progress", member.getProgress());
+		MessageUtil.success("操作成功!", model);
+		return model;
+	}
+	
+	@ApiOperation(value = "进度信息", httpMethod = "GET", notes = "进度信息")
+	@RequestMapping(value = "/learnProgress", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "accessToken", value = "accessToken", required = true, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	@Authentication
+	public ResponseModel learnProgress(
+			 HttpServletRequest request,
+			 HttpServletResponse response){
+		ResponseModel model = new ResponseModel();
+		HcMember member = getLoginMember(request);
+		HcLearnProgress progress = learnProgressDao.findByMemberId(member.getId());
+		if(progress==null) progress = new HcLearnProgress();
+		model.addAttribute("progress", progress);
 		MessageUtil.success("操作成功!", model);
 		return model;
 	}

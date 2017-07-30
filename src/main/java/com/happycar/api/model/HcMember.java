@@ -70,6 +70,9 @@ public class HcMember implements Serializable {
 	@Column(name = "exam_phone")
 	private String examPhone;
 	
+	@Column(name = "happy_coin")
+	private Integer happyCoin;
+	
 	public HcMember() {
 	}
 
@@ -215,5 +218,13 @@ public class HcMember implements Serializable {
 
 	public void setExamPhone(String examPhone) {
 		this.examPhone = examPhone;
+	}
+
+	public Integer getHappyCoin() {
+		return happyCoin;
+	}
+
+	public void setHappyCoin(Integer happyCoin) {
+		this.happyCoin = happyCoin;
 	}
 }

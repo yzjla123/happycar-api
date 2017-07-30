@@ -43,11 +43,24 @@ public class HcArticle implements Serializable {
 	private Integer type;
 	
 	private String code;
+	
+	@Column(name="share_title")
+	private String shareTitle;
+	
+	@Column(name="share_content")
+	private String shareContent;
+	
+	@Column(name="share_pic")
+	private String sharePic;
+	
+	@Column(name="share_happy_coin")
+	private Integer shareHappyCoin;
+	
+	@Column(name="share_day_times")
+	private Integer shareDayTimes;
 
 	public HcArticle() {
 	}
-	
-	
 
 	public HcArticle(Integer id, String title, Integer subjectId) {
 		super();
@@ -55,8 +68,6 @@ public class HcArticle implements Serializable {
 		this.title = title;
 		this.subjectId = subjectId;
 	}
-
-
 
 	public Integer getId() {
 		return this.id;
@@ -122,28 +133,60 @@ public class HcArticle implements Serializable {
 		this.subjectId = subjectId;
 	}
 
-
-
 	public Integer getType() {
 		return type;
 	}
-
-
 
 	public void setType(Integer type) {
 		this.type = type;
 	}
 
-
-
 	public String getCode() {
 		return code;
 	}
-
-
-
+	
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getShareTitle() {
+		return shareTitle;
+	}
+
+	public void setShareTitle(String shareTitle) {
+		this.shareTitle = shareTitle;
+	}
+
+	public String getShareContent() {
+		return shareContent;
+	}
+
+	public void setShareContent(String shareContent) {
+		this.shareContent = shareContent;
+	}
+
+	public String getSharePic() {
+		return sharePic;
+	}
+
+	public void setSharePic(String sharePic) {
+		this.sharePic = sharePic;
+	}
+
+	public Integer getShareHappyCoin() {
+		return shareHappyCoin;
+	}
+
+	public void setShareHappyCoin(Integer shareHappyCoin) {
+		this.shareHappyCoin = shareHappyCoin;
+	}
+
+	public Integer getShareDayTimes() {
+		return shareDayTimes;
+	}
+
+	public void setShareDayTimes(Integer shareDayTimes) {
+		this.shareDayTimes = shareDayTimes;
 	}
 
 }

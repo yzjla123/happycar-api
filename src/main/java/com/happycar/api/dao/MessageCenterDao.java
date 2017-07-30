@@ -17,7 +17,7 @@ import com.happycar.api.model.HcMessageCenter;
 @Repository
 public interface MessageCenterDao extends JpaRepository<HcMessageCenter, Integer>,JpaSpecificationExecutor<HcMessageCenter>{
 
-	public List<HcMessageCenter> findByMemberIdAndIsReadAndIsDeleted(int memberId,int isRead, int isDeleted);
+	public List<HcMessageCenter> findByMemberIdAndIsReadAndIsDeletedOrderByAddTimeDesc(int memberId,int isRead, int isDeleted);
 	
 	@Query(value="select count(*) from hc_message_center where member_id=? and is_read=0 and is_deleted=0",nativeQuery=true)
 	public Integer isUnreadMessage(int memberId);

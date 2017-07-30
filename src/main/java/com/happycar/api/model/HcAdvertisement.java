@@ -42,6 +42,21 @@ public class HcAdvertisement implements Serializable {
 	
 	private String thumbnail;
 
+	@Column(name="share_title")
+	private String shareTitle;
+	
+	@Column(name="share_content")
+	private String shareContent;
+	
+	@Column(name="share_pic")
+	private String sharePic;
+	
+	@Column(name="share_happy_coin")
+	private Integer shareHappyCoin;
+	
+	@Column(name="share_day_times")
+	private Integer shareDayTimes;
+	
 	public HcAdvertisement() {
 	}
 
@@ -123,6 +138,46 @@ public class HcAdvertisement implements Serializable {
 
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+
+	public String getShareTitle() {
+		return shareTitle;
+	}
+
+	public void setShareTitle(String shareTitle) {
+		this.shareTitle = shareTitle;
+	}
+
+	public String getShareContent() {
+		return shareContent;
+	}
+
+	public void setShareContent(String shareContent) {
+		this.shareContent = shareContent;
+	}
+
+	public String getSharePic() {
+		return sharePic;
+	}
+
+	public void setSharePic(String sharePic) {
+		this.sharePic = sharePic;
+	}
+
+	public Integer getShareHappyCoin() {
+		return shareHappyCoin;
+	}
+
+	public void setShareHappyCoin(Integer shareHappyCoin) {
+		this.shareHappyCoin = shareHappyCoin;
+	}
+
+	public Integer getShareDayTimes() {
+		return shareDayTimes;
+	}
+
+	public void setShareDayTimes(Integer shareDayTimes) {
+		this.shareDayTimes = shareDayTimes;
 	}
 
 }

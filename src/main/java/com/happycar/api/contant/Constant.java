@@ -45,4 +45,6 @@ public class Constant {
 	public static final String PARAM_CODE_WX_PARTNER_KEY = "WX_PARTNER_KEY";
 	public static final String PARAM_CODE_WX_ORDER_URL = "WX_ORDER_URL";
 	public static final String PARAM_CODE_WX_NOTIFY_URL = "WX_NOTIFY_URL";
+	public static final String PARAM_CODE_SUBJECT_FEE = "SUBJECT_FEE_%s";
+	
 }

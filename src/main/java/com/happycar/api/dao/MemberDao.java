@@ -32,4 +32,12 @@ public interface MemberDao extends JpaRepository<HcMember, Integer>,JpaSpecifica
 	@Modifying
 	@Query("update HcMember set commission=commission-? where id=?")
 	public int reduceCommission(float commission,int memberId);
+
+	@Modifying
+	@Query("update HcMember set happy_coin=happy_coin+? where id=?")
+	public int addHappyCoin(float happyCoin,int memberId);
+	
+	@Modifying
+	@Query("update HcMember set happy_coin=happy_coin-? where id=?")
+	public int reduceHappyCoin(float happyCoin,int memberId);
 }

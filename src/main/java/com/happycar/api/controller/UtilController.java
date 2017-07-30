@@ -1,5 +1,8 @@
 package com.happycar.api.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,7 +45,9 @@ public class UtilController extends BaseController {
 		String verifyCode = StringUtil.verifyCode();
 		//有效期5分钟
 		RedisUtil.setString(Constant.REDIS_VERIFY_CODE + phone, verifyCode, 60*5);
-		boolean ret = SMSUtil.send(phone,verifyCode);
+		Map<String,String> paramMap = new HashMap();
+		paramMap.put("code", verifyCode);
+		boolean ret = SMSUtil.send(phone,SMSUtil.TPL_VERIFY,paramMap);
 //		boolean ret = true;
 		System.out.println(verifyCode);
 		if (ret) {

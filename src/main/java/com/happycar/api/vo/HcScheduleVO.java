@@ -31,6 +31,8 @@ public class HcScheduleVO implements Serializable {
 	
 	private Integer subjectType;
 	
+	private Integer disable;//是否禁用,0:否,1:是
+	
 
 	public HcScheduleVO() {
 	}
@@ -113,6 +115,14 @@ public class HcScheduleVO implements Serializable {
 
 	public void setSubjectType(Integer subjectType) {
 		this.subjectType = subjectType;
+	}
+
+	public Integer getDisable() {
+		return disable;
+	}
+
+	public void setDisable(Integer disable) {
+		this.disable = disable;
 	}
 
 

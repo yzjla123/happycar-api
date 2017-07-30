@@ -54,7 +54,10 @@ public class HcTheory implements Serializable {
 	private Integer isDeleted;
 	
 	private Integer seq;
-
+	
+	@Column(name="category_id")
+	private Integer categoryId;
+	
 	public Integer getId() {
 		return this.id;
 	}
@@ -173,6 +176,14 @@ public class HcTheory implements Serializable {
 
 	public void setSeq(Integer seq) {
 		this.seq = seq;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 }
