@@ -74,7 +74,7 @@ public class ScheduleController extends BaseController{
 			HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
 		HcMember member = getLoginMember(request);
-		List<HcSchedule> list = scheduleDao.findByCoachIdAndDateAndSubjectTypeOrderByTime1Asc(member.getCoachId(),DateUtil.parseTime(date, DateUtil.YYYYMMDD),subjectType);
+		List<HcSchedule> list = scheduleDao.findByCoachIdAndDateAndSubjectTypeAndDrivingLicenseTypeOrderByTime1Asc(member.getCoachId(),DateUtil.parseTime(date, DateUtil.YYYYMMDD),subjectType,member.getDrivingLicenseType());
 		/**
 		 * 科目三考试时间为7月10号 该学员的预约则从7月5日开放到7月8日总共四天，
 		 * 最多可预约到四个课时，考试后合格，后台关闭预约，不合格后台根据预约考试申请继续开放预约

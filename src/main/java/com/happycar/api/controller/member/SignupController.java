@@ -129,6 +129,7 @@ public class SignupController extends BaseController{
 		signup.setPayType(payType);
 		signup.setCouponId(couponId);
 		signup.setAmount(tuition.getAmount());
+		signup.setDrivingLicenseType(tuition.getDrivingLicenseType());
 		HcCoupon coupon = null;
 		if(couponId!=null&&couponId!=0){
 			coupon = couponDao.getOne(couponId);

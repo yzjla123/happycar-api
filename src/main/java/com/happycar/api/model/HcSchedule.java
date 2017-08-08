@@ -58,7 +58,9 @@ public class HcSchedule implements Serializable {
 	@JoinColumn(name="coach_id",insertable=false,updatable=false)
 	@NotFound(action=NotFoundAction.IGNORE)
 	private HcCoach coach;
-
+	
+	@Column(name="driving_license_type")
+	private String drivingLicenseType;
 	public HcSchedule() {
 	}
 
@@ -164,6 +166,14 @@ public class HcSchedule implements Serializable {
 
 	public void setCoach(HcCoach coach) {
 		this.coach = coach;
+	}
+
+	public String getDrivingLicenseType() {
+		return drivingLicenseType;
+	}
+
+	public void setDrivingLicenseType(String drivingLicenseType) {
+		this.drivingLicenseType = drivingLicenseType;
 	}
 
 }

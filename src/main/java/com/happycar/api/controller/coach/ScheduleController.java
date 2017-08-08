@@ -83,10 +83,11 @@ public class ScheduleController extends BaseController{
 	public ResponseModel list(
 			String date,
 			Integer subjectType,
+			String drivingLicenseType,
 			HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
 		HcCoach coach = getLoginCoach(request);
-		List<HcSchedule> list = scheduleDao.findByCoachIdAndDateAndSubjectTypeOrderByTime1Asc(coach.getId(),DateUtil.parseTime(date, DateUtil.YYYYMMDD),subjectType);
+		List<HcSchedule> list = scheduleDao.findByCoachIdAndDateAndSubjectTypeAndDrivingLicenseTypeOrderByTime1Asc(coach.getId(),DateUtil.parseTime(date, DateUtil.YYYYMMDD),subjectType,drivingLicenseType);
 		List<HcScheduleVO> schedules = new ArrayList<HcScheduleVO>();
 		for (HcSchedule schedule : list) {
 			HcScheduleVO scheduleVO = new HcScheduleVO();
@@ -117,10 +118,11 @@ public class ScheduleController extends BaseController{
 	})
 	public ResponseModel lastScheduleDate(
 			Integer subjectType,
+			String drivingLicenseType,
 			HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
 		HcCoach coach = getLoginCoach(request);
-		Date lastScheduleDate = scheduleDao.findLastScheduleDateByCoachIdAndDateAndSubjectType(coach.getId(),subjectType);
+		Date lastScheduleDate = scheduleDao.findLastScheduleDateByCoachIdAndDateAndSubjectTypeAndDrivingLicenseType(coach.getId(),subjectType,drivingLicenseType);
 		if(lastScheduleDate!=null){
 			model.addAttribute("lastScheduleDate", new SimpleDateFormat("yyyy-MM-dd").format(lastScheduleDate));
 		}else{
@@ -150,6 +152,7 @@ public class ScheduleController extends BaseController{
 			Integer carNum,
 			Integer memberNum,
 			Integer subjectType,
+			String drivingLicenseType,
 			HttpServletRequest request) throws ParseException{
 		ResponseModel model = new ResponseModel();
 		HcCoach coach = getLoginCoach(request);
@@ -165,13 +168,13 @@ public class ScheduleController extends BaseController{
 			MessageUtil.fail("开始时间不能小于当前时间", model);
 			return model;
 		}
-		List<Date> bookDates = scheduleDao.findBookDate(startCal.getTime(),endCal.getTime(),coach.getId(),subjectType);
+		List<Date> bookDates = scheduleDao.findBookDate(startCal.getTime(),endCal.getTime(),coach.getId(),subjectType,drivingLicenseType);
 		if(bookDates.size()>0){
 			MessageUtil.fail("日期："+new SimpleDateFormat("yyyy-MM-dd").format(bookDates.get(0))+"已有学员预约,不能重新排班", model);
 			return model;
 		}
 		//删除已有的排班
-		scheduleDao.deleteBySubjectTypeAndDateBetweenBetween(subjectType,startCal.getTime(),endCal.getTime());
+		scheduleDao.deleteBySubjectTypeAndDateBetweenBetweenAndDrivingLicenseType(subjectType,startCal.getTime(),endCal.getTime(),drivingLicenseType);
 		//加载时间段
 		HcSysParam parentParam = paramDao.findByCode(Constant.PARAM_CODE_SCHEDULE_DURATION);
 		List<HcSysParam> timeParams = paramDao.findByPidOrderBySeqAsc(parentParam.getId());
@@ -192,6 +195,7 @@ public class ScheduleController extends BaseController{
 				schedule.setUpdateTime(new Date());
 				schedule.setTime1(timeArr[0]);
 				schedule.setTime2(timeArr[1]);
+				schedule.setDrivingLicenseType(drivingLicenseType);
 				schedules.add(schedule);
 			}
 			startCal.add(Calendar.DATE, 1);

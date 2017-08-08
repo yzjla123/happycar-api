@@ -100,4 +100,44 @@ public class AdvertisementController extends BaseController{
 		}
 		return model;
 	}
+	
+	@ApiOperation(value = "报名咨询广告", httpMethod = "GET", notes = "报名咨询广告")
+	@RequestMapping(value = "/consultAdImg", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "city", value = "所属城市", required = false, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	public ResponseModel consultAdImg(String city,HttpServletRequest request){
+		ResponseModel model = new ResponseModel();
+		List<HcAdvertisement> consultAds = advertisementDao.findByTypeAndIsDeleted(3,0);
+		if(consultAds.size()>0){
+			model.addAttribute("consultAd", consultAds.get(0));
+			MessageUtil.success("获取成功", model);
+		}else{
+			MessageUtil.fail("暂无广告信息", model);
+		}
+		return model;
+	}
+	
+	@ApiOperation(value = "首页底部广告", httpMethod = "GET", notes = "首页底部广告")
+	@RequestMapping(value = "/indexBottomAd", method = RequestMethod.GET)
+	@ApiImplicitParams(value = {
+			@ApiImplicitParam(name = "city", value = "所属城市", required = false, dataType = "String", paramType = "query"),
+	})
+	@ApiResponses(value={
+			@ApiResponse(code = 200, message = "")
+	})
+	public ResponseModel indexBottomAd(String city,HttpServletRequest request){
+		ResponseModel model = new ResponseModel();
+		List<HcAdvertisement> indexBottomAds = advertisementDao.findByTypeAndIsDeleted(4,0);
+		if(indexBottomAds.size()>0){
+			model.addAttribute("indexBottomAd", indexBottomAds.get(0));
+			MessageUtil.success("获取成功", model);
+		}else{
+			MessageUtil.fail("暂无广告信息", model);
+		}
+		return model;
+	}
 }

@@ -67,6 +67,9 @@ public class HcSignup implements Serializable {
 	@Column(name="is_deleted")
 	private Integer isDeleted;
 	
+	@Column(name="driving_license_type")
+	private String drivingLicenseType;
+	
 	@OneToOne
 	@JoinColumn(name="member_id",insertable=false,updatable=false)
 	@NotFound(action=NotFoundAction.IGNORE)
@@ -200,6 +203,14 @@ public class HcSignup implements Serializable {
 
 	public void setIsDeleted(Integer isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+
+	public String getDrivingLicenseType() {
+		return drivingLicenseType;
+	}
+
+	public void setDrivingLicenseType(String drivingLicenseType) {
+		this.drivingLicenseType = drivingLicenseType;
 	}
 
 }

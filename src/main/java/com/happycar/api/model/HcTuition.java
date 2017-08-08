@@ -47,7 +47,9 @@ public class HcTuition implements Serializable {
 	private Integer isDeleted;
 	
 	private String city;
-
+	
+	@Column(name="driving_license_type")
+	private String drivingLicenseType;
 
 	public HcTuition() {
 	}
@@ -106,6 +108,14 @@ public class HcTuition implements Serializable {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getDrivingLicenseType() {
+		return drivingLicenseType;
+	}
+
+	public void setDrivingLicenseType(String drivingLicenseType) {
+		this.drivingLicenseType = drivingLicenseType;
 	}
 
 

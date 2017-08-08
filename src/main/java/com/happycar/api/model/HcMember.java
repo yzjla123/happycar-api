@@ -73,6 +73,8 @@ public class HcMember implements Serializable {
 	@Column(name = "happy_coin")
 	private Integer happyCoin;
 	
+	@Column(name="driving_license_type")
+	private String drivingLicenseType;
 	public HcMember() {
 	}
 
@@ -226,5 +228,13 @@ public class HcMember implements Serializable {
 
 	public void setHappyCoin(Integer happyCoin) {
 		this.happyCoin = happyCoin;
+	}
+
+	public String getDrivingLicenseType() {
+		return drivingLicenseType;
+	}
+
+	public void setDrivingLicenseType(String drivingLicenseType) {
+		this.drivingLicenseType = drivingLicenseType;
 	}
 }

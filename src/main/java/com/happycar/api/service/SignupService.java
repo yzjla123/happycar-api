@@ -83,6 +83,7 @@ public class SignupService {
 		}
 		member.setSignupId(signup.getId());
 		member.setSignupDate(new Date());
+		member.setDrivingLicenseType(signup.getDrivingLicenseType());
 		member.setUpdateTime(new Date());
 		memberDao.save(member);
 		//分配佣金

@@ -49,8 +49,7 @@ public class TuitionController extends BaseController{
 		ResponseModel model = new ResponseModel();
 		List<HcTuition> list = tuitionDao.findAll();
 		if(list.size()>0){
-			HcTuition tuition = list.get(0);
-			model.addAttribute("tuition", tuition);
+			model.addAttribute("tuitions", list);
 			MessageUtil.success("获取成功", model);
 		}else{
 			MessageUtil.fail("没有套餐数据", model);

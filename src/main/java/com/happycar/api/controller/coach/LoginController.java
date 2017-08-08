@@ -74,7 +74,7 @@ public class LoginController extends BaseController{
 		HcCoachVO coachVO = new HcCoachVO();
 		BeanUtil.copyProperties(list.get(0),coachVO);
 		String token = TokenProcessor.getInstance().generateToken(coachVO.getPhone(), true);
-		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, coachVO.getId() + "",24*60*60);
+		RedisUtil.setString(Constant.KEY_ACCESS_TOKEN + token, coachVO.getId() + "",360*24*60*60);
 		model.addAttribute("loginInfo", coachVO);
 		model.addAttribute("token", token);
 		MessageUtil.success("操作成功", model);
